@@ -1,3 +1,4 @@
+local USE_SPRITES = minetest.settings:get_bool("mobs.use_sprites", false)
 
 mobs:register_mob("mobs:sheep", {
     type = "animal",
@@ -12,11 +13,19 @@ mobs:register_mob("mobs:sheep", {
     lava_damage = 5,
     light_damage = 0,
 
-    visual = "upright_sprite",
-    drawtype = "side",
+    visual = USE_SPRITES and "upright_sprite" or "mesh",
+    drawtype = USE_SPRITES and "side" or "front",
+    mesh = "mobs_sheep.x",
     visual_size = {x=2, y=1.25},
-    collisionbox = {-0.6, -0.625, -0.6, 0.6, 0.625, 0.6},
-    textures = {"mobs_sheep.png", "mobs_sheep.png"},
+    collisionbox = USE_SPRITES and {-0.6, -0.625, -0.6, 0.6, 0.625, 0.6} or {-0.4, 0, -0.4, 0.4, 1, 0.4},
+    textures = USE_SPRITES and {"mobs_sheep.png", "mobs_sheep.png"} or {"mobs_sheep_mesh.png"},
+    animation = not USE_SPRITES and {
+        speed_normal = 10,
+        stand_start = 0,
+        stand_end = 59,
+        walk_start = 81,
+        walk_end = 100,
+    },
 
     sounds = {
         random = "mobs_sheep",
@@ -54,7 +63,8 @@ mobs:register_mob("mobs:sheep", {
                     self.food = 0
                     self.naked = false
                     self.object:set_properties({
-                        textures = {"mobs_sheep.png", "mobs_sheep.png"},
+                        textures = USE_SPRITES and {"mobs_sheep.png", "mobs_sheep.png"} or {"mobs_sheep_mesh.png"},
+                        mesh = "mobs_sheep.x",
                     })
                 end
             end
@@ -66,7 +76,8 @@ mobs:register_mob("mobs:sheep", {
                 clicker:get_inventory():add_item("main", ItemStack("wool:white "..math.random(1,3)))
             end
             self.object:set_properties({
-                textures = {"mobs_sheep_naked.png", "mobs_sheep_naked.png"},
+                textures = USE_SPRITES and {"mobs_sheep_naked.png", "mobs_sheep_naked.png"} or {"mobs_sheep_shaved.png"},
+                mesh = "mobs_sheep_shaved.x",
             })
         end
     end,

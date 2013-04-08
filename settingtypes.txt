@@ -1,5 +1,8 @@
 # TODO bad_meat and pet_cages configuration options
 
+#   Use old sprites instead of 3D Meshes
+mobs.use_sprites (Use Sprites) bool false
+
 #   Notify players of mob spawns
 mobs.display_mob_spawn (Notify of Spawns) bool false
 

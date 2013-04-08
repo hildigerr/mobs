@@ -30,6 +30,7 @@ KNOWN BUGS:
 
 License:
 Sourcecode: WTFPL (see below)
+Models: WTFPL (by Pavel_S)
 Grahpics: WTFPL (unless otherwise noted)
 The cow texture was created by rinoux <http://minetest.net/forum/profile.php?id=1128>.
 I retrieved it from the mobf mod by sapier. <http://minetest.net/forum/viewtopic.php?id=629>.

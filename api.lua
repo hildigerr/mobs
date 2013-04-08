@@ -23,6 +23,8 @@ function mobs:register_mob(name, def)
         visual_size = def.visual_size,
         collisionbox = def.collisionbox,
         textures = def.textures,
+		mesh = def.mesh,
+		animation = def.animation,
 
         sounds = def.sounds,
         makes_footstep_sound = def.makes_footstep_sound,
@@ -57,6 +59,64 @@ function mobs:register_mob(name, def)
             local v = self.object:get_velocity()
             return (v.x^2 + v.z^2)^(0.5)
         end,
+
+		set_animation = function(self, type)
+			if not self.animation then
+				return
+			end
+			if not self.animation.current then
+				self.animation.current = ""
+			end
+			if type == "stand" and self.animation.current ~= "stand" then
+				if
+					self.animation.stand_start
+					and self.animation.stand_end
+					and self.animation.speed_normal
+				then
+					self.object:set_animation(
+						{x=self.animation.stand_start,y=self.animation.stand_end},
+						self.animation.speed_normal, 0
+					)
+					self.animation.current = "stand"
+				end
+			elseif type == "walk" and self.animation.current ~= "walk"  then
+				if
+					self.animation.walk_start
+					and self.animation.walk_end
+					and self.animation.speed_normal
+				then
+					self.object:set_animation(
+						{x=self.animation.walk_start,y=self.animation.walk_end},
+						self.animation.speed_normal, 0
+					)
+					self.animation.current = "walk"
+				end
+			elseif type == "run" and self.animation.current ~= "run"  then
+				if
+					self.animation.run_start
+					and self.animation.run_end
+					and self.animation.speed_run
+				then
+					self.object:set_animation(
+						{x=self.animation.run_start,y=self.animation.run_end},
+						self.animation.speed_run, 0
+					)
+					self.animation.current = "run"
+				end
+			elseif type == "punch" and self.animation.current ~= "punch"  then
+				if
+					self.animation.punch_start
+					and self.animation.punch_end
+					and self.animation.speed_normal
+				then
+					self.object:set_animation(
+						{x=self.animation.punch_start,y=self.animation.punch_end},
+						self.animation.speed_normal, 0
+					)
+					self.animation.current = "punch"
+				end
+			end
+		end,
 
         on_step = function(self, dtime)
             local pos = self.object:get_pos()
@@ -164,13 +224,14 @@ function mobs:register_mob(name, def)
 
             if self.state == "chase" then
                 if not self.target.player
-                    or not self.target.player:is_player() 
+                    or not self.target.player:is_player()
                     or (self.follow and not self.follow(self.target.player:get_wielded_item():get_name()))
                     or (self.type == "monster" and self.target.player:get_hp() <= 0)
                 then
                     self.state = "stand"
                     self.v_start = false
                     self.set_velocity(self, 0)
+                    self:set_animation("stand")
                     self.target = {player=nil, pos=nil, dist=nil}
                 else
                     local s = pos
@@ -180,6 +241,7 @@ function mobs:register_mob(name, def)
                         self.state = "stand"
                         self.v_start = false
                         self.set_velocity(self, 0)
+                        self:set_animation("stand")
                         self.target = {player=nil, pos=nil, dist=nil}
                     else
                         self.target.pos = p
@@ -225,9 +287,11 @@ function mobs:register_mob(name, def)
                     self.object:set_yaw(self.object:get_yaw()+((math.random(0,360)-180)/180*math.pi))
                 end
                 self.set_velocity(self, 0)
+                self.set_animation(self, "stand")
                 if math.random(1, 100) <= 50 then
                     self.set_velocity(self, self.walk_velocity)
                     self.state = "walk"
+                    self.set_animation(self, "walk")
                 end
             elseif self.state == "walk" then
                 if math.random(1, 100) <= 30 then
@@ -239,9 +303,11 @@ function mobs:register_mob(name, def)
                     self.object:set_velocity(v)
                 end
                 self.set_velocity(self, self.walk_velocity)
+                self.set_animation(self, "walk")
                 if math.random(1, 100) <= 10 then
                     self.set_velocity(self, 0)
                     self.state = "stand"
+                    self.set_animation(self, "stand")
                 end
             elseif self.state == "chase" then
                 local s = pos
@@ -259,6 +325,7 @@ function mobs:register_mob(name, def)
                     if not self.v_start then
                         self.v_start = true
                         self.set_velocity(self, self.run_velocity)
+                        self:set_animation("run")
                     else
                         if self.get_velocity(self) <= 0.5 and self.object:get_velocity().y == 0 then
                             local v = self.object:get_velocity()
@@ -266,18 +333,22 @@ function mobs:register_mob(name, def)
                             self.object:set_velocity(v)
                         end
                         self.set_velocity(self, self.run_velocity)
+                        self:set_animation("run")
                     end
                 else
                     self.v_start = false
                     self.set_velocity(self, 0)
+                    self:set_animation("stand")
                     if self.arrow then -- "shoot"
                         if self.timer > self.shoot_interval and math.random(1, 100) <= 60 then
                             self.timer = 0
+                            self:set_animation("punch")
                             mobs:shoot(self.arrow,pos, self.target.pos, self.sounds)
                         end
                     elseif self.type == "monster" then -- "dogfight"
                         if self.timer > 1 then
                             self.timer = 0
+                            self:set_animation("punch")
                             if self.sounds and self.sounds.attack then
                                 minetest.sound_play(self.sounds.attack, {object = self.object})
                             end
