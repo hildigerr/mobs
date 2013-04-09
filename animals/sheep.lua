@@ -20,9 +20,9 @@ mobs:register_mob("mobs:sheep", {
     collisionbox = USE_SPRITES and {-0.6, -0.625, -0.6, 0.6, 0.625, 0.6} or {-0.4, 0, -0.4, 0.4, 1, 0.4},
     textures = USE_SPRITES and {"mobs_sheep.png", "mobs_sheep.png"} or {"mobs_sheep_mesh.png"},
     animation = not USE_SPRITES and {
-        speed_normal = 10,
+        speed_normal = 15,
         stand_start = 0,
-        stand_end = 59,
+        stand_end = 80,
         walk_start = 81,
         walk_end = 100,
     },
