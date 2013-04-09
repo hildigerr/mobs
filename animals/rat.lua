@@ -1,3 +1,4 @@
+local USE_SPRITES = minetest.settings:get_bool("mobs.use_sprites", false)
 
 mobs:register_mob("mobs:rat", {
     type = "animal",
@@ -11,11 +12,12 @@ mobs:register_mob("mobs:rat", {
     lava_damage = 1,
     light_damage = 0,
 
-    visual = "upright_sprite",
+    visual = USE_SPRITES and "upright_sprite" or "mesh",
     drawtype = "front",
+    mesh = "mobs_rat.x",
     visual_size = {x=0.7, y=0.35},
-    collisionbox = {-0.25, -0.175, -0.25, 0.25, 0.33, 0.25},
-    textures = {"mobs_rat.png", "mobs_rat.png"},
+    collisionbox = USE_SPRITES and {-0.25, -0.175, -0.25, 0.25, 0.33, 0.25} or {-0.2, 0, -0.2, 0.2, 0.2, 0.2},
+    textures = USE_SPRITES and {"mobs_rat.png", "mobs_rat.png"} or {"mobs_rat_mesh.png"},
 
     makes_footstep_sound = false,
 
