@@ -1,3 +1,4 @@
+local USE_SPRITES = minetest.settings:get_bool("mobs.use_sprites", false)
 
 mobs:register_mob("mobs:oerkki", {
     type = "monster",
@@ -14,11 +15,22 @@ mobs:register_mob("mobs:oerkki", {
     light_damage = 0,
     light_resistant = true,
 
-    visual = "upright_sprite",
+    visual = USE_SPRITES and "upright_sprite" or "mesh",
     drawtype = "front",
-    visual_size = {x=1, y=2},
-    collisionbox = {-0.4, -1, -0.4, 0.4, 1, 0.4},
-    textures = {"mobs_oerkki.png", "mobs_oerkki_back.png"},
+    mesh = "mobs_oerkki.x",
+    visual_size = USE_SPRITES and {x=1, y=2} or {x=5, y=5},
+    collisionbox = USE_SPRITES and {-0.4, -1, -0.4, 0.4, 1, 0.4} or {-0.4, 0, -0.4, 0.4, 2, 0.4},
+    textures = USE_SPRITES and {"mobs_oerkki.png", "mobs_oerkki_back.png"} or {"mobs_oerkki_mesh.png"},
+    animation = not USE_SPRITES and {
+        stand_start = 1,
+        stand_end = 11,
+        walk_start = 25,
+        walk_end = 36,
+        run_start = 38,
+        run_end = 49,
+        speed_normal = 15,
+        speed_run = 15,
+    },
 
     makes_footstep_sound = false,
 
