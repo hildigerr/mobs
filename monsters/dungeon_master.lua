@@ -1,3 +1,4 @@
+local USE_SPRITES = minetest.settings:get_bool("mobs.use_sprites", false)
 
 mobs:register_mob("mobs:dungeon_master", {
     type = "monster",
@@ -12,11 +13,22 @@ mobs:register_mob("mobs:dungeon_master", {
     lava_damage = 1,
     light_damage = 0,
 
-    visual = "upright_sprite",
+    visual = USE_SPRITES and "upright_sprite" or "mesh",
     drawtype = "front",
-    visual_size = {x=1.875, y=2.4375},
-    collisionbox = {-0.8, -1.21875, -0.8, 0.8, 1.21875, 0.8},
-    textures = {"mobs_dungeon_master.png", "mobs_dungeon_master_back.png"},
+    mesh = "mobs_dungeon_master.x",
+    visual_size = USE_SPRITES and {x=1.875, y=2.4375} or {x=8, y=8},
+    collisionbox = USE_SPRITES and {-0.8, -1.21875, -0.8, 0.8, 1.21875, 0.8} or {-0.7, -0.01, -0.7, 0.7, 2.6, 0.7},
+    textures = USE_SPRITES and {"mobs_dungeon_master.png", "mobs_dungeon_master_back.png"} or {"mobs_dungeon_master_mesh.png"},
+    animation = not USE_SPRITES and {
+        stand_start = 0,
+        stand_end = 19,
+        walk_start = 20,
+        walk_end = 35,
+        punch_start = 36,
+        punch_end = 48,
+        speed_normal = 15,
+        speed_run = 15,
+    },
 
     sounds = {
         attack = "mobs_fireball",
@@ -34,7 +46,11 @@ mobs:register_mob("mobs:dungeon_master", {
     attack_method = function(self, target)
         local shoot_interval = 2.5
         if self.timer > shoot_interval and math.random(1, 100) <= 60 then
-            mobs:shoot("mobs:fireball", self.object:get_pos(), target.pos)
+            local p = self.object:get_pos()
+            if not USE_SPRITES then
+               p.y = p.y + (self.collisionbox[2]+self.collisionbox[5])/2
+            end
+            mobs:shoot("mobs:fireball", p, target.pos)
             self.timer = 0
             return true
         end
