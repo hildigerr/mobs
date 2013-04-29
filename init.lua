@@ -113,6 +113,7 @@ mobs:register_mob("mobs:tree_monster", {
 	water_damage = 1,
 	lava_damage = 5,
 	light_damage = 2,
+	disable_fall_damage = true,
 	attack_type = "dogfight",
 })
 mobs:register_spawn("mobs:tree_monster", {"default:leaves", "default:jungleleaves"}, 3, -1, 7000, 3, 31000)
