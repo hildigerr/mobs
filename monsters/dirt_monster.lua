@@ -1,3 +1,4 @@
+local USE_SPRITES = minetest.settings:get_bool("mobs.use_sprites", false)
 
 mobs:register_mob("mobs:dirt_monster", {
     type = "monster",
@@ -12,11 +13,24 @@ mobs:register_mob("mobs:dirt_monster", {
     lava_damage = 5,
     light_damage = 2,
 
-    visual = "upright_sprite",
+    visual = USE_SPRITES and "upright_sprite" or "mesh",
     drawtype = "front",
-    visual_size = {x=1, y=2},
-    collisionbox = {-0.4, -1, -0.4, 0.4, 1, 0.4},
-    textures = {"mobs_dirt_monster.png", "mobs_dirt_monster_back.png"},
+    mesh = "mobs_stone_monster.x",
+    visual_size = USE_SPRITES and {x=1, y=2} or {x=3, y=2.6},
+    collisionbox = USE_SPRITES and {-0.4, -1, -0.4, 0.4, 0.9, 0.4} or {-0.4, -0.01, -0.4, 0.4, 1.9, 0.4},
+    textures = USE_SPRITES and {"mobs_dirt_monster.png", "mobs_dirt_monster_back.png"} or {"mobs_dirt_monster_mesh.png"},
+    animation = not USE_SPRITES and {
+        speed_normal = 15,
+        speed_run = 15,
+        stand_start = 0,
+        stand_end = 14,
+        walk_start = 15,
+        walk_end = 38,
+        run_start = 40,
+        run_end = 63,
+        punch_start = 40,
+        punch_end = 63,
+    },
 
     makes_footstep_sound = true,
 
