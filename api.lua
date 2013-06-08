@@ -28,6 +28,7 @@ function mobs:register_mob(name, def)
         sounds = def.sounds,
         makes_footstep_sound = def.makes_footstep_sound,
         follow = def.follow,
+        jump = def.jump or true,
 
         drops = def.drops,
 
@@ -295,7 +296,7 @@ function mobs:register_mob(name, def)
                 if math.random(1, 100) <= 30 then
                     self.object:set_yaw(self.object:get_yaw()+((math.random(0,360)-180)/180*math.pi))
                 end
-                if self.get_velocity(self) <= 0.5 and self.object:get_velocity().y == 0 then
+                if self.jump and self.get_velocity(self) <= 0.5 and self.object:get_velocity().y == 0 then
                     local v = self.object:get_velocity()
                     v.y = 5
                     self.object:set_velocity(v)
@@ -325,7 +326,7 @@ function mobs:register_mob(name, def)
                         self.set_velocity(self, self.run_velocity)
                         self:set_animation("run")
                     else
-                        if self.get_velocity(self) <= 0.5 and self.object:get_velocity().y == 0 then
+                        if self.jump and self.get_velocity(self) <= 0.5 and self.object:get_velocity().y == 0 then
                             local v = self.object:get_velocity()
                             v.y = 5
                             self.object:set_velocity(v)
