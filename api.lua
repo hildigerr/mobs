@@ -1,4 +1,10 @@
 mobs = {}
+function mobs.jump(object)
+    local v = object:get_velocity()
+    v.y = 5
+    object:set_velocity(v)
+end
+
 function mobs:register_mob(name, def)
     minetest.register_entity(name, {
         type = def.type,
@@ -297,9 +303,7 @@ function mobs:register_mob(name, def)
                     self.object:set_yaw(self.object:get_yaw()+((math.random(0,360)-180)/180*math.pi))
                 end
                 if self.jump and self.get_velocity(self) <= 0.5 and self.object:get_velocity().y == 0 then
-                    local v = self.object:get_velocity()
-                    v.y = 5
-                    self.object:set_velocity(v)
+                    mobs.jump(self.object)
                 end
                 self.set_velocity(self, self.walk_velocity)
                 self.set_animation(self, "walk")
@@ -327,9 +331,7 @@ function mobs:register_mob(name, def)
                         self:set_animation("run")
                     else
                         if self.jump and self.get_velocity(self) <= 0.5 and self.object:get_velocity().y == 0 then
-                            local v = self.object:get_velocity()
-                            v.y = 5
-                            self.object:set_velocity(v)
+                            mobs.jump(self.object)
                         end
                         self.set_velocity(self, self.run_velocity)
                         self:set_animation("run")
