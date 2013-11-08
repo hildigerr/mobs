@@ -1,5 +1,11 @@
+local rabbit_setting = minetest.settings:get("mobs.rabbits") or "mesh"
+local USE_SPRITES = rabbit_setting ~= "mesh"
 
-mobs:register_mob("rabbit", {
+local rabbit_colors = { "white", "grey", "brown" }
+minetest.register_alias( "mobs:rabbit", "mobs:rabbit_white" )
+
+for i,v in ipairs( rabbit_colors ) do
+mobs:register_mob("rabbit_"..v, {
     type = "animal",
 
     hp_max = 12,
@@ -18,11 +24,19 @@ mobs:register_mob("rabbit", {
 
     damage = {water = 1, lava = 1, light = 0},
 
-    visual = "upright_sprite",
-    drawtype = "front",
-    visual_size = {x=0.7, y=0.7},
-    collisionbox = {-0.25, -0.33, -0.25, 0.25, 0.33, 0.25},
-    textures = {"mobs_rabbit.png", "mobs_rabbit.png"},
+    visual = USE_SPRITES and "upright_sprite" or "mesh",
+    drawtype = USE_SPRITES and "front" or "side",
+    mesh = "mobs_rabbit.x",
+    visual_size = USE_SPRITES and {x=0.7, y=0.7} or {x=0.5, y=0.5},
+    collisionbox = USE_SPRITES and {-0.25, -0.33, -0.25, 0.25, 0.33, 0.25} or {-0.2, -0.01, -0.2, 0.2, 0.4, 0.2},
+    textures = USE_SPRITES and {"mobs_rabbit_"..v..".png", "mobs_rabbit_"..v..".png"} or {"mobs_rabbit_"..v.."_mesh.png"},
+    animation = {
+        speed_normal = 15,
+        stand_start = 0,
+        stand_end = 30,
+        walk_start = 40,
+        walk_end = 60,
+    },
 
     makes_footstep_sound = false,
     follow = function(item)
@@ -86,19 +100,19 @@ mobs:register_mob("rabbit", {
                 self.state = "stand"
             end
         elseif clicker:is_player() and clicker:get_inventory() then
-            clicker:get_inventory():add_item("main", "mobs:rabbit")
+            clicker:get_inventory():add_item("main", "mobs:rabbit_"..v)
             self.object:remove()
         end
     end,
-})
+}, rabbit_setting == "disabled")
 
-minetest.register_craftitem(":mobs:rabbit", {
-    description = "Rabbit",
-    inventory_image = "mobs_rabbit.png",
+minetest.register_craftitem(":mobs:rabbit_"..v, {
+    description = "Rabbit ("..v..")",
+    inventory_image = "mobs_rabbit_"..v..".png",
 
     on_place = function(itemstack, placer, pointed_thing)
         if pointed_thing.above then
-            minetest.add_entity(pointed_thing.above, "mobs:rabbit")
+            minetest.add_entity(pointed_thing.above, "mobs:rabbit_"..v)
             itemstack:take_item()
         end
         return itemstack
@@ -108,5 +122,6 @@ minetest.register_craftitem(":mobs:rabbit", {
 minetest.register_craft({
     type = "cooking",
     output = "mobs:meat",
-    recipe = "mobs:rabbit",
+    recipe = "mobs:rabbit_"..v,
 })
+end

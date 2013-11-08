@@ -21,7 +21,7 @@ Upstream contributions have been included from:
 
 ### Animals ###
  - [x] Cow (and milk)
- - [x] **Rabbits** are cute little critters that you can pick up. They are tasty when cooked. They like carrots, but are shy and get spooked easy.
+ - [x] **Rabbits** are cute little critters that you can pick up. They are tasty when cooked. They like carrots, but are shy and get spooked easy. They can be white, grey, or brown.
  - [x] Racoon
  - [x] Rat
  - [x] Sheep
