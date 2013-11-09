@@ -25,7 +25,7 @@ mobs:register_mob("rabbit_"..v, {
     damage = {water = 4, lava = 12, light = 0},
 
     visual = USE_SPRITES and "upright_sprite" or "mesh",
-    drawtype = USE_SPRITES and "front" or "side",
+    drawtype = "front",
     mesh = "mobs_rabbit.x",
     visual_size = USE_SPRITES and {x=0.7, y=0.7} or {x=0.5, y=0.5},
     collisionbox = USE_SPRITES and {-0.25, -0.33, -0.25, 0.25, 0.33, 0.25} or {-0.2, -0.01, -0.2, 0.2, 0.4, 0.2},
