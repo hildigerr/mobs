@@ -43,6 +43,7 @@ There are also these additional setting options:
  - [x] **Rats** are cute little critters that you can pick up. They are tasty when cooked.
  - [x] **Sheep** produce wool--when well fed--that can be harvested. They are tasty when killed and cooked. They like wheat.
  - [x] **Swans** are birds that float around on water.
+ - [ ] **Turtles**
 
 ### Monsters ###
  - [x] Dirt Monster
