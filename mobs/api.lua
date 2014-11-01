@@ -300,7 +300,7 @@ function mobs:register_mob(name, def, disabled)
                     local s = pos
                     local p = player:get_pos()
                     local dist = ((p.x-s.x)^2 + (p.y-s.y)^2 + (p.z-s.z)^2)^0.5
-                    if dist < self.view_range and minetest.line_of_sight(s, p) then
+                    if dist < self.view_range and minetest.line_of_sight({x=s.x, y=s.y+1, z=s.z}, p) then
                         if not self.target.dist or self.target.dist < dist then
                             self.state = "chase"
                             self.target.player = player
