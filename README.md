@@ -8,6 +8,7 @@ Since the [original](https://github.com/PilzAdam/mobs) mod is no longer maintain
  - [ ] Anyone should be able to add a customized mob as a drop in.
 
 Contributions have been included from:
+ - [Casimir](https://github.com/CasimirKaPazi)
  - [cnelsonsic](https://github.com/cnelsonsic)
  - [CSPS-HaydenWoods](https://github.com/CSPS-HaydenWoods)
  - [David Corking](https://github.com/dcorking)
