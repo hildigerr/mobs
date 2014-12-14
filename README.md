@@ -10,6 +10,7 @@ Since the [original](https://github.com/PilzAdam/mobs) mod is no longer maintain
 Contributions have been included from:
  - [cnelsonsic](https://github.com/cnelsonsic)
  - [CSPS-HaydenWoods](https://github.com/CSPS-HaydenWoods)
+ - [David Corking](https://github.com/dcorking)
  - [ElectricSolstice](https://github.com/ElectricSolstice)
  - [MirceaKitsune](https://github.com/MirceaKitsune)
  - [Sokomine](https://github.com/Sokomine)
