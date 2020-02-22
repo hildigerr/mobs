@@ -12,6 +12,7 @@ Contributions have been included from:
  - [CSPS-HaydenWoods](https://github.com/CSPS-HaydenWoods)
  - [David Corking](https://github.com/dcorking)
  - [ElectricSolstice](https://github.com/ElectricSolstice)
+ - [Jacob Gustafson](https://github.com/poikilos)
  - [MirceaKitsune](https://github.com/MirceaKitsune)
  - [Sokomine](https://github.com/Sokomine)
 
