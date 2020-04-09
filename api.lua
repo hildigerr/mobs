@@ -372,10 +372,10 @@ function mobs:register_spawn(name, nodes, max_light, min_light, chance, mobs_per
 				return
 			elseif obj:get_luaentity() and obj:get_luaentity().name == name then
 				count = count+1
+				if count > mobs_per_30_block_radius then
+					return
+				end
 			end
-		end
-		if count > mobs_per_30_block_radius then
-			return
 		end
 		
 		if minetest.setting_getbool("display_mob_spawn") then
