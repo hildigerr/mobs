@@ -145,7 +145,7 @@ minetest.register_craft({
 mobs:register_mob("mobs:rat", {
 	type = "animal",
 	hp_max = 1,
-	collisionbox = {-0.25, -0.175, -0.25, 0.25, 0.1, 0.25},
+	collisionbox = {-0.25, -0.175, -0.25, 0.25, 0.33, 0.25},
 	visual = "upright_sprite",
 	visual_size = {x=0.7, y=0.35},
 	textures = {"mobs_rat.png", "mobs_rat.png"},
@@ -153,7 +153,7 @@ mobs:register_mob("mobs:rat", {
 	walk_velocity = 1,
 	armor = 3,
 	drops = {},
-	drawtype = "side",
+	drawtype = "front",
 	water_damage = 0,
 	lava_damage = 1,
 	light_damage = 0,
