@@ -69,7 +69,8 @@ function mobs:register_mob(name, def)
 					self.old_y = self.object:getpos().y
 				else
 					local d = self.old_y - self.object:getpos().y
-					if d > 5 then
+					local pos_node_name = minetest.env:get_node(pos).name
+					if d > 5 and pos_node_name ~= "default:water_source" and pos_node_name ~= "default:water_flowing" then
 						local damage = d-5
 						self.object:punch(self.object, 1.0, {
 							full_punch_interval=1.0,
