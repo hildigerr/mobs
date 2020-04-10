@@ -47,29 +47,29 @@ local USE_CAGES = true
 
 --------------------------------ANIMALS-----------------------------------------
 if USE_COWS then
-	dofile(minetest.get_modpath("my_mobs").."/animals/cow.lua")
+	dofile(minetest.get_modpath("mobs").."/animals/cow.lua")
 end
 
 if USE_RABBITS then
-	dofile(minetest.get_modpath("my_mobs").."/animals/rabbit.lua")
+	dofile(minetest.get_modpath("mobs").."/animals/rabbit.lua")
 end
 
 if USE_RACOONS then
-dofile(minetest.get_modpath("my_mobs").."/animals/racoon.lua")
+dofile(minetest.get_modpath("mobs").."/animals/racoon.lua")
 end
 
 ----------------------------------MSC-------------------------------------------
 --	These files generally have further config options
 if ALLOW_OVER_COOKING then
-	dofile(minetest.get_modpath("my_mobs").."/msc/overcook.lua")
+	dofile(minetest.get_modpath("mobs").."/msc/overcook.lua")
 end
 
 if MEAT_ROTS then
-	dofile(minetest.get_modpath("my_mobs").."/msc/bad_meat.lua")
+	dofile(minetest.get_modpath("mobs").."/msc/bad_meat.lua")
 end
 
 if USE_CAGES then
-	dofile(minetest.get_modpath("my_mobs").."/msc/pet_cages.lua")
+	dofile(minetest.get_modpath("mobs").."/msc/pet_cages.lua")
 end
 
 -------------------------------------EOF----------------------------------------

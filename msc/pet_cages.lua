@@ -14,7 +14,7 @@ local THIRST_LIMIT = DRINKING_TIME --DEFAULT: DRINKING_TIME
 local GESTATION = DRINKING_TIME + EATING_TIME --DEFAULT: DRINKING_TIME + EATING_TIME
 --------------------------------------------------------------------------------
 
-minetest.register_node("my_mobs:cage_empty", {
+minetest.register_node("mobs:cage_empty", {
 	description = "Rodent Cage",
 	
 --		drawtype = "normal",
@@ -22,9 +22,9 @@ minetest.register_node("my_mobs:cage_empty", {
 ----	drawtype = "allfaces_optional",
 ----	drawtype = "allfaces",	
 	
---	tiles = {"my_mobs_cage_top.png", "my_mobs_cage_bottom.png", "my_mobs_cage_empty_side.png",
---		"my_mobs_cage_empty_side.png", "my_mobs_cage_empty_side.png", "my_mobs_cage_empty_side.png"},
-	tiles = {"my_mobs_cage_empty.png"},
+--	tiles = {"mobs_cage_top.png", "mobs_cage_bottom.png", "mobs_cage_empty_side.png",
+--		"mobs_cage_empty_side.png", "mobs_cage_empty_side.png", "mobs_cage_empty_side.png"},
+	tiles = {"mobs_cage_empty.png"},
 --	paramtype2 = "facedir",
 	sunlight_propagates = true,
 --	light_source = 1,
@@ -62,7 +62,7 @@ minetest.register_node("my_mobs:cage_empty", {
 })
 
 minetest.register_craft({
-	output = 'my_mobs:cage_empty',
+	output = 'mobs:cage_empty',
 	recipe = {
 		{'group:wood', 'group:wood', 'group:wood'},
 		{'default:steel_ingot', 'default:steel_ingot', 'default:steel_ingot'},
@@ -70,13 +70,13 @@ minetest.register_craft({
 	}
 })
 
-minetest.register_node("my_mobs:cage_rat", {
+minetest.register_node("mobs:cage_rat", {
 	description = "Rodent Cage",
  	drawtype = "glasslike",
-	tiles = {"my_mobs_cage_rat.png"},
+	tiles = {"mobs_cage_rat.png"},
 --	paramtype2 = "facedir",
 	sunlight_propagates = true,
-	drop = "my_mobs:cage_empty",
+	drop = "mobs:cage_empty",
 	groups = {snappy=2,cracky=2,oddly_breakable_by_hand=2, not_in_creative_inventory=1},
 	legacy_facedir_simple = true,
 	sounds = {},
@@ -109,13 +109,13 @@ minetest.register_node("my_mobs:cage_rat", {
 	end,
 })
 
-minetest.register_node("my_mobs:cage_rabbit", {
+minetest.register_node("mobs:cage_rabbit", {
 	description = "Rodent Cage",
  	drawtype = "glasslike",
-	tiles = {"my_mobs_cage_rabbit.png"},
+	tiles = {"mobs_cage_rabbit.png"},
 --	paramtype2 = "facedir",
 	sunlight_propagates = true,
-	drop = "my_mobs:cage_empty",
+	drop = "mobs:cage_empty",
 	groups = {snappy=2,cracky=2,oddly_breakable_by_hand=2, not_in_creative_inventory=1},
 	legacy_facedir_simple = true,
 	sounds = {},
@@ -149,16 +149,16 @@ minetest.register_node("my_mobs:cage_rabbit", {
 })
 
 minetest.register_abm({
-	nodenames = {"my_mobs:cage_empty"},
+	nodenames = {"mobs:cage_empty"},
 	interval = 1.0,
 	chance = 1,
 	action = function(pos, node)
 		local meta = minetest.env:get_meta(pos) 
 		local inv = meta:get_inventory()
-		if inv:contains_item("house", "my_mobs:rabbit") then
-			hacky_swap_node(pos,"my_mobs:cage_rabbit")
+		if inv:contains_item("house", "mobs:rabbit") then
+			hacky_swap_node(pos,"mobs:cage_rabbit")
 		elseif inv:contains_item("house", "mobs:rat") then
-			hacky_swap_node(pos,"my_mobs:cage_rat")
+			hacky_swap_node(pos,"mobs:cage_rat")
 -- 		else --DOESNT WORK
 -- 			for i, name in ipairs({
 -- 				"breeding_totaltime",
@@ -177,7 +177,7 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-	nodenames = {"my_mobs:cage_rabbit","my_mobs:cage_rat"},
+	nodenames = {"mobs:cage_rabbit","mobs:cage_rat"},
 	interval = 1.0,
 	chance = 1,
 	action = function(pos, node)
@@ -199,12 +199,12 @@ minetest.register_abm({
 		local inv = meta:get_inventory()
 		local occupant = nil
 		
-		if inv:contains_item("house", "my_mobs:rabbit") then
-			occupant = "my_mobs:rabbit"
+		if inv:contains_item("house", "mobs:rabbit") then
+			occupant = "mobs:rabbit"
 		elseif inv:contains_item("house", "mobs:rat") then
 			occupant = "mobs:rat"
 		else -- no occupant
-			hacky_swap_node(pos,"my_mobs:cage_empty")
+			hacky_swap_node(pos,"mobs:cage_empty")
 		end -- if animal occupant
 		
 		if occupant then
@@ -240,7 +240,7 @@ minetest.register_abm({
 						for i=1,inv:get_size("house") do
 							local item = inv:get_stack("house", i)
 							if item:get_name() == occupant then 
-								item:replace({name = "my_mobs:meat_rotten", count = item:get_count(), wear=0, metadata=""})
+								item:replace({name = "mobs:meat_rotten", count = item:get_count(), wear=0, metadata=""})
 								inv:set_stack("house", i, item)
 							end -- if dead animal exists here
 						end -- for each inventory slot
@@ -286,7 +286,7 @@ minetest.register_abm({
 						for i=1,inv:get_size("house") do
 							local item = inv:get_stack("house", i)
 							if item:get_name() == occupant then 
-								item:replace({name = "my_mobs:meat_rotten", count = item:get_count(), wear=0, metadata=""})
+								item:replace({name = "mobs:meat_rotten", count = item:get_count(), wear=0, metadata=""})
 								inv:set_stack("house", i, item)
 							end -- if starved animal exists here
 						end -- for each inventory slot
@@ -326,7 +326,7 @@ minetest.register_abm({
 -- 			end -- breeding if
 				
 		else -- empty house (redundant)
---			hacky_swap_node(pos,"my_mobs:cage_empty")
+--			hacky_swap_node(pos,"mobs:cage_empty")
 		end
 	end,
 })

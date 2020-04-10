@@ -17,9 +17,9 @@ local POCKET_TIMER = 720 --DEFAULT:720 [12 min]
 local STORAGE_TIMER = 720 --DEFAULT:720 [12 min]
 --------------------------------------------------------------------------------
 
-minetest.register_craftitem("my_mobs:meat_rotten", {
+minetest.register_craftitem("mobs:meat_rotten", {
 	description = "Rotten Meat",
-	image = "my_mobs_meat_rotten.png",
+	image = "mobs_meat_rotten.png",
 	on_use = minetest.item_eat(-6),
 	groups = { meat=1, eatable=1 },
 })
@@ -27,7 +27,7 @@ minetest.register_craftitem("my_mobs:meat_rotten", {
 minetest.register_craft({
 	type = "cooking",
 	output = "scorched_stuff",
-	recipe = "my_mobs:meat_rotten",
+	recipe = "mobs:meat_rotten",
 })
 
 
@@ -50,15 +50,15 @@ function spoil_meat( inv, title, chance, warn, owner )
 			end -- end count rotten portion of stack
 			if rotted ~= 0 then
 				if rotted < qt then
-					if inv:room_for_item(title, ItemStack{name = "my_mobs:meat_rotten", count = rotted, wear=0, metadata=""}) then
+					if inv:room_for_item(title, ItemStack{name = "mobs:meat_rotten", count = rotted, wear=0, metadata=""}) then
 						item:take_item(rotted)
-						inv:add_item(title, ItemStack({name = "my_mobs:meat_rotten", count = rotted, wear=0, metadata=""}))
+						inv:add_item(title, ItemStack({name = "mobs:meat_rotten", count = rotted, wear=0, metadata=""}))
 					else -- not enough room
 						--so rot it all:
-						item:replace({name = "my_mobs:meat_rotten", count = qt, wear=0, metadata=""})
+						item:replace({name = "mobs:meat_rotten", count = qt, wear=0, metadata=""})
 					end -- room for nu_stack if
 				else -- rotted == qt
-					item:replace({name = "my_mobs:meat_rotten", count = qt, wear=0, metadata=""})
+					item:replace({name = "mobs:meat_rotten", count = qt, wear=0, metadata=""})
 				end -- if rotted < qt
 				inv:set_stack(title, i, item)
 				if warn then
@@ -76,7 +76,7 @@ end -- spoil_meat func
 if not minetest.get_modpath("homedecor") then
 	minetest.register_abm({
 		nodenames = {  "default:chest", "default:chest_locked",
-							"my_mobs:cage_empty", "my_mobs:cage_rat", "my_mobs:cage_rabbit",
+							"mobs:cage_empty", "mobs:cage_rat", "mobs:cage_rabbit",
 						}, 
 		interval = STORAGE_TIMER, -- (operation interval)
 		chance = 1, -- (chance of trigger is 1.0/this)
@@ -113,7 +113,7 @@ else
 							"homedecor:kitchen_cabinet_with_sink", "homedecor:nightstand_oak_one_drawer",
 							"homedecor:nightstand_oak_two_drawers", "homedecor:nightstand_mahogany_one_drawer",
 							"homedecor:nightstand_mahogany_two_drawers",
-							"my_mobs:cage_empty", "my_mobs:cage_rat", "my_mobs:cage_rabbit",
+							"mobs:cage_empty", "mobs:cage_rat", "mobs:cage_rabbit",
 						},
 		interval = STORAGE_TIMER, -- (operation interval)
 		chance = 1, -- (chance of trigger is 1.0/this)
@@ -182,13 +182,13 @@ minetest.register_abm({
 				if k then
 					local str = k.itemstring
 					if str ~= nil then
--- 						if str == "my_mobs:meat_rotten" then -- add fresh meat and reimplement
+-- 						if str == "mobs:meat_rotten" then -- add fresh meat and reimplement
 -- 							objs[i]:remove()
 -- 						else
 						if str == "mobs:meat_raw" then
 							if math.random(1,100) > ROT_ON_GROUND_CHANCE then -- about 1/3 chance --TESTING
 								objs[i]:remove()
-								minetest.env:add_item(pos, "my_mobs:meat_rotten")
+								minetest.env:add_item(pos, "mobs:meat_rotten")
 							end -- if by chance
 						end -- if is meat
 					end -- itemstring exists
@@ -217,13 +217,13 @@ minetest.register_abm({
 				if k then
 					local str = k.itemstring
 					if str ~= nil then
--- 						if str == "my_mobs:meat_rotten" then
+-- 						if str == "mobs:meat_rotten" then
 -- 							objs[i]:remove()
 -- 						else
 						if str == "mobs:meat_raw" then
 							if math.random(1,100) > ROT_IN_WATER_CHANCE then
 								objs[i]:remove()
-								minetest.env:add_item(pos, "my_mobs:meat_rotten")
+								minetest.env:add_item(pos, "mobs:meat_rotten")
 							end -- if by chance
 						end -- if is meat
 					end -- itemstring exists

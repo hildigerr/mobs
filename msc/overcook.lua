@@ -2,7 +2,7 @@
 minetest.register_craft({
 	type = "cooking",
 	output = "scorched_stuff",
-	recipe = "my_mobs:rabbit_cooked",
+	recipe = "mobs:rabbit_cooked",
 	cooktime = 2,
 })
 
