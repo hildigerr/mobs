@@ -33,7 +33,7 @@ function mobs:register_mob(name, def)
 		v_start = false,
 		old_y = nil,
 		lifetimer = 600,
-		
+		tamed = false,
 		
 		set_velocity = function(self, v)
 			local yaw = self.object:getyaw()
@@ -56,7 +56,7 @@ function mobs:register_mob(name, def)
 			end
 			
 			self.lifetimer = self.lifetimer - dtime
-			if self.lifetimer <= 0 then
+			if self.lifetimer <= 0 and not self.tamed then
 				local player_count = 0
 				for _,obj in ipairs(minetest.env:get_objects_inside_radius(self.object:getpos(), 20)) do
 					if obj:is_player() then
@@ -314,8 +314,11 @@ function mobs:register_mob(name, def)
 				if tmp and tmp.lifetimer then
 					self.lifetimer = tmp.lifetimer - dtime_s
 				end
+				if tmp and tmp.tamed then
+					self.tamed = tmp.tamed
+				end
 			end
-			if self.lifetimer <= 0 then
+			if self.lifetimer <= 0 and not self.tamed then
 				self.object:remove()
 			end
 		end,
@@ -323,6 +326,7 @@ function mobs:register_mob(name, def)
 		get_staticdata = function(self)
 			local tmp = {
 				lifetimer = self.lifetimer,
+				tamed = self.tamed,
 			}
 			return minetest.serialize(tmp)
 		end,
