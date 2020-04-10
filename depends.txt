@@ -1,2 +1,5 @@
 default
 fire
+bucket
+vessels
+dye

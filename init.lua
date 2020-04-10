@@ -1,4 +1,5 @@
 dofile(minetest.get_modpath("mobs").."/api.lua")
+dofile(minetest.get_modpath("mobs").."/init-additional.lua")
 
 mobs:register_mob("mobs:dirt_monster", {
 	type = "monster",

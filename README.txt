@@ -4,27 +4,48 @@ by PilzAdam
 Inroduction:
 This mod adds some basic hostile and friendly mobs to the game.
 
-How to install:
-Unzip the archive an place it in minetest-base-directory/mods/minetest/
-if you have a windows client or a linux run-in-place client. If you have
-a linux system-wide instalation place it in ~/.minetest/mods/minetest/.
-If you want to install this mod only in one world create the folder
-worldmods/ in your worlddirectory.
-For further information or help see:
-http://wiki.minetest.com/wiki/Installing_Mods
+This MOD includes additional mobs to extend upon PilzAdam's Simple Mobs.
+<http://minetest.net/forum/viewtopic.php?id=3063>.
+The additional mobs were originally provided in another mod called my_mobs.
+<https://forum.minetest.net/viewtopic.php?pid=57041>.
 
-How to use the mod:
-See https://github.com/PilzAdam/mobs/wiki
+It Includes:
+		Animals:
+			Cow (and milk),
+			Rabbit
+		Overcooking and using the result to make dye
+		Meat spoilage if it remains uncooked
 
-For developers:
-The API documentation is moved to https://github.com/PilzAdam/mobs/wiki/API
+Raw meet can be preserved through "cheating" or using a refridgerator provided by VanessaE's Home Decor Mod
+<http://minetest.net/forum/viewtopic.php?id=2041>. 
+
+KNOWN BUGS:
+	If you drink milk from a stack of vessels, you will not recieve the empty vessel.
+
+
+
+==ETHICAL DISCLOSURE==
 
 License:
 Sourcecode: WTFPL (see below)
-Grahpics: WTFPL (see below)
+Grahpics: WTFPL (unless otherwise noted)
+The cow texture was created by rinoux <http://minetest.net/forum/profile.php?id=1128>.
+I retrieved it from the mobf mod by sapier. <http://minetest.net/forum/viewtopic.php?id=629>.
+The cow's dry-up sound came from there too, which reports that the graphic is under WTFPL and
+the sound is from <http://commons.wikimedia.org/wiki/Category:Mudchute_Park_and_Farm>
+and created by Secretlondon <http://commons.wikimedia.org/wiki/User:Secretlondon>
 
-See also:
-http://minetest.net/
+The rabbit texture was acquired from cornernote's critters modpack.
+<http://minetest.net/forum/viewtopic.php?id=3337>
+It's README.txt reports:
+	Artist: Martin Berube (Available for custom work)
+	Iconset Homepage: http://www.graphics-and-desktop-icons.com/animal-icons.html
+	License: Freeware
+	Commercial usage: Allowed
+	Readme file: textures/terms-of-use.txt -->[ I include it, but renamed to rabbit_terms-of-use.txt  ]
+
+The rest of the sounds were found at various locations that I don't recall.
+If you own one of them, I will remove it and delete all copies of it at you're request.
 
          DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
                     Version 2, December 2004
