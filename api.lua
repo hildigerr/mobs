@@ -70,7 +70,7 @@ function mobs:register_mob(name, def)
 				else
 					local d = self.old_y - self.object:getpos().y
 					local pos_node_name = minetest.env:get_node(pos).name
-					if d > 5 and pos_node_name ~= "default:water_source" and pos_node_name ~= "default:water_flowing" then
+					if d > 5 and minetest.get_item_group(pos_node_name, "water") == 0 then
 						local damage = d-5
 						self.object:punch(self.object, 1.0, {
 							full_punch_interval=1.0,
@@ -101,14 +101,18 @@ function mobs:register_mob(name, def)
 					}, nil)
 				end
 				
-				if self.water_damage and self.water_damage ~= 0 and string.find(minetest.env:get_node(self.object:getpos()).name, "default:water") then
+				if self.water_damage and self.water_damage ~= 0 and
+					minetest.get_item_group(minetest.env:get_node(self.object:getpos()).name, "water") ~= 0
+				then
 					self.object:punch(self.object, 1.0, {
 						full_punch_interval=1.0,
 						damage_groups = {fleshy=self.water_damage/(self.armor/100)}
 					}, nil)
 				end
 				
-				if self.lava_damage and self.lava_damage ~= 0 and string.find(minetest.env:get_node(self.object:getpos()).name, "default:lava") then
+				if self.lava_damage and self.lava_damage ~= 0 and
+					minetest.get_item_group(minetest.env:get_node(self.object:getpos()).name, "lava") ~= 0
+				then
 					self.object:punch(self.object, 1.0, {
 						full_punch_interval=1.0,
 						damage_groups = {fleshy=self.lava_damage/(self.armor/100)}
