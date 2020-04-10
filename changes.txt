@@ -10,3 +10,8 @@ V0.1-->0.2:
 -refactored redundant code into a function spoil_meat()
 -added abm for meat in furnace/oven to rot too
 -stacks of meat may now be divided if there is room for only part of it to rot
+
+v0.2-->0.3:
+-Commented out residual debug barf line
+-moved cow right-click sound effects to only sound with poper tool
+-added cages for pet rodents, require apples for food and buckets of water to drink

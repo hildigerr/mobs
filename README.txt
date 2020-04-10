@@ -15,12 +15,15 @@ It Includes:
 			Rabbit
 		Overcooking and using the result to make dye
 		Meat spoilage if it remains uncooked
+		Cages for Pet Rodents
+			They must be fed apples and have a bucket of water available to survive
 
 Raw meet can be preserved through "cheating" or using a refridgerator provided
  by VanessaE's Home Decor Mod <http://minetest.net/forum/viewtopic.php?id=2041>. 
 
 KNOWN BUGS:
 	If you drink milk from a stack of vessels, you will not recieve the empty vessel.
+	The cage is sometimes placed sideways or upside down
 
 
 
