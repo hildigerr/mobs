@@ -141,6 +141,8 @@ mobs:register_mob("mobs:sheep", {
 	sounds = {
 		random = "mobs_sheep",
 	},
+	follow = "farming:wheat",
+	view_range = 5,
 	
 	on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()

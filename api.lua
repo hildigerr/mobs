@@ -25,6 +25,7 @@ function mobs:register_mob(name, def)
 		arrow = def.arrow,
 		shoot_interval = def.shoot_interval,
 		sounds = def.sounds,
+		follow = def.follow,
 		
 		timer = 0,
 		env_damage_timer = 0, -- only if state = "attack"
@@ -171,6 +172,59 @@ function mobs:register_mob(name, def)
 							self.attack.player = player
 							self.attack.dist = dist
 						end
+					end
+				end
+			end
+			
+			if self.follow ~= "" and not self.following then
+				for _,player in pairs(minetest.get_connected_players()) do
+					local s = self.object:getpos()
+					local p = player:getpos()
+					local dist = ((p.x-s.x)^2 + (p.y-s.y)^2 + (p.z-s.z)^2)^0.5
+					if self.view_range and dist < self.view_range then
+						self.following = player
+					end
+				end
+			end
+			
+			if self.following and self.following:is_player() then
+				if self.following:get_wielded_item():get_name() ~= self.follow then
+					self.following = nil
+					self.v_start = false
+				else
+					local s = self.object:getpos()
+					local p = self.following:getpos()
+					local dist = ((p.x-s.x)^2 + (p.y-s.y)^2 + (p.z-s.z)^2)^0.5
+					if dist > self.view_range then
+						self.following = nil
+						self.v_start = false
+					else
+						local vec = {x=p.x-s.x, y=p.y-s.y, z=p.z-s.z}
+						local yaw = math.atan(vec.z/vec.x)+math.pi/2
+						if self.drawtype == "side" then
+							yaw = yaw+(math.pi/2)
+						end
+						if p.x > s.x then
+							yaw = yaw+math.pi
+						end
+						self.object:setyaw(yaw)
+						if dist > 2 then
+							if not self.v_start then
+								self.v_start = true
+								self.set_velocity(self, self.walk_velocity)
+							else
+								if self.get_velocity(self) <= 0.5 and self.object:getvelocity().y == 0 then
+									local v = self.object:getvelocity()
+									v.y = 5
+									self.object:setvelocity(v)
+								end
+								self.set_velocity(self, self.walk_velocity)
+							end
+						else
+							self.v_start = false
+							self.set_velocity(self, 0)
+						end
+						return
 					end
 				end
 			end
