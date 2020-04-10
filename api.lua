@@ -74,9 +74,7 @@ function mobs:register_mob(name, def)
 						local damage = d-5
 						self.object:punch(self.object, 1.0, {
 							full_punch_interval=1.0,
-							groupcaps={
-								fleshy={times={[self.armor]=1/damage}},
-							}
+							damage_groups = {fleshy=damage/(self.armor/100)}
 						}, nil)
 					end
 					self.old_y = self.object:getpos().y
@@ -99,27 +97,21 @@ function mobs:register_mob(name, def)
 				if self.light_damage and self.light_damage ~= 0 and self.object:getpos().y>0 and minetest.env:get_node_light(self.object:getpos()) and minetest.env:get_node_light(self.object:getpos()) > 3 and minetest.env:get_timeofday() > 0.2 and minetest.env:get_timeofday() < 0.8 then
 					self.object:punch(self.object, 1.0, {
 						full_punch_interval=1.0,
-						groupcaps={
-							fleshy={times={[self.armor]=1/self.light_damage}},
-						}
+						damage_groups = {fleshy=self.light_damage/(self.armor/100)}
 					}, nil)
 				end
 				
 				if self.water_damage and self.water_damage ~= 0 and string.find(minetest.env:get_node(self.object:getpos()).name, "default:water") then
 					self.object:punch(self.object, 1.0, {
 						full_punch_interval=1.0,
-						groupcaps={
-							fleshy={times={[self.armor]=1/self.water_damage}},
-						}
+						damage_groups = {fleshy=self.water_damage/(self.armor/100)}
 					}, nil)
 				end
 				
 				if self.lava_damage and self.lava_damage ~= 0 and string.find(minetest.env:get_node(self.object:getpos()).name, "default:lava") then
 					self.object:punch(self.object, 1.0, {
 						full_punch_interval=1.0,
-						groupcaps={
-							fleshy={times={[self.armor]=1/self.lava_damage}},
-						}
+						damage_groups = {fleshy=self.lava_damage/(self.armor/100)}
 					}, nil)
 				end
 			end
@@ -217,26 +209,12 @@ function mobs:register_mob(name, def)
 					self.v_start = false
 					if self.timer > 1 then
 						self.timer = 0
-						local d1 = 10
-						local d2 = 10
-						local d3 = 10
-						if self.damage > 0 then
-							d3 = 1/self.damage
-						end
-						if self.damage > 1 then
-							d2 = 1/(self.damage-1)
-						end
-						if self.damage > 2 then
-							d1 = 1/(self.damage-2)
-						end
 						if self.sounds and self.sounds.attack then
 							minetest.sound_play(self.sounds.attack, {object = self.object})
 						end
 						self.attack.player:punch(self.object, 1.0,  {
 							full_punch_interval=1.0,
-							groupcaps={
-								fleshy={times={[1]=d1, [2]=d2, [3]=d3}},
-							}
+							damage_groups = {fleshy=self.damage}
 						}, vec)
 					end
 				end
