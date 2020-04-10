@@ -163,6 +163,7 @@ function mobs:register_mob(name, def)
 				if math.random(1, 4) == 1 then
 					self.object:setyaw(self.object:getyaw()+((math.random(0,360)-180)/180*math.pi))
 				end
+				self.set_velocity(self, 0)
 				if math.random(1, 100) <= 50 then
 					self.set_velocity(self, self.walk_velocity)
 					self.state = "walk"
@@ -170,16 +171,16 @@ function mobs:register_mob(name, def)
 			elseif self.state == "walk" then
 				if math.random(1, 100) <= 30 then
 					self.object:setyaw(self.object:getyaw()+((math.random(0,360)-180)/180*math.pi))
-					self.set_velocity(self, self.get_velocity(self))
-				end
-				if math.random(1, 100) <= 10 then
-					self.set_velocity(self, 0)
-					self.state = "stand"
 				end
 				if self.get_velocity(self) <= 0.5 and self.object:getvelocity().y == 0 then
 					local v = self.object:getvelocity()
 					v.y = 5
 					self.object:setvelocity(v)
+				end
+				self.set_velocity(self, self.walk_velocity)
+				if math.random(1, 100) <= 10 then
+					self.set_velocity(self, 0)
+					self.state = "stand"
 				end
 			elseif self.state == "attack" and self.attack_type == "dogfight" then
 				if not self.attack.player or not self.attack.player:is_player() then
