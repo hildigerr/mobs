@@ -38,6 +38,7 @@
 --Animals:
 local USE_COWS = true
 local USE_RABBITS = true
+local USE_RACOONS = true
 --Msc:
 local MEAT_ROTS = true
 local ALLOW_OVER_COOKING = true
@@ -51,6 +52,10 @@ end
 
 if USE_RABBITS then
 	dofile(minetest.get_modpath("my_mobs").."/animals/rabbit.lua")
+end
+
+if USE_RACOONS then
+dofile(minetest.get_modpath("my_mobs").."/animals/racoon.lua")
 end
 
 ----------------------------------MSC-------------------------------------------

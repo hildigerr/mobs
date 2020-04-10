@@ -1,4 +1,39 @@
 ----Rabbit:
+if minetest.get_modpath("food") ~= nil then
+	rabbit_droppings = {
+		name = "food:carrot",
+		chance = 4,
+		min = 1,
+		max = 1,
+	}
+elseif minetest.get_modpath("farming_plus") ~= nil then
+	rabbit_droppings = {
+		name = "farming_plus:carrot_item",
+		chance = 4,
+		min = 1,
+		max = 1,
+	}
+elseif minetest.get_modpath("docfarming") ~= nil then
+	rabbit_droppings = {
+		name = "docfarming:carrot",
+		chance = 4,
+		min = 1,
+		max = 1,
+	}
+else
+	minetest.register_craftitem("my_mobs:carrot", {
+		description = "Carrot",
+		inventory_image = "my_mobs_carrot.png",
+		on_use = minetest.item_eat(4),
+	})
+	rabbit_droppings = {
+		name = "my_mobs:carrot",
+		chance = 4,
+		min = 1,
+		max = 1,
+	}
+end
+
 mobs:register_mob("my_mobs:rabbit", {
 	type = "animal",
 	hp_max = 1,
@@ -9,12 +44,7 @@ mobs:register_mob("my_mobs:rabbit", {
 	makes_footstep_sound = false,
 	walk_velocity = 4,
 	armor = 3,
-	drops = {
-		{name = "default:apple",
-		chance = 4,
-		min = 1,
-		max = 1,},
-	},
+	drops = {rabbit_droppings},
 	drawtype = "front",
 	water_damage = 1,
 	lava_damage = 1,

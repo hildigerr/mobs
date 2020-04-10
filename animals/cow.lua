@@ -125,6 +125,7 @@ minetest.register_craftitem("my_mobs:milk_bucket", {
 minetest.register_craftitem("my_mobs:milk_bottle_glass", {
 	description = "Bottle of Milk",
 	image = "my_mobs_glass_bottle_milk.png",
+	wield_image = "my_mobs_glass_bottle_milk_wield.png",
 	on_use = minetest.item_eat(4, "vessels:glass_bottle"),
 	groups = { eatable=1 },
 })
@@ -132,13 +133,15 @@ minetest.register_craftitem("my_mobs:milk_bottle_glass", {
 minetest.register_craftitem("my_mobs:milk_glass_cup", {
 	description = "Bottle of Milk",
 	image = "my_mobs_drinking_glass_milk.png",
+	wield_image = "my_mobs_drinking_glass_milk_wield.png",
 	on_use = minetest.item_eat(2, "vessels:drinking_glass"),
 	groups = { eatable=1 },
 })
 
 minetest.register_craftitem("my_mobs:milk_bottle_steel", {
 	description = "Flask of Milk",
-	image = "my_mobs_steel_bottle_milk.png",
+	image = --"vessels_steel_bottle.png",
+		"my_mobs_steel_bottle_milk.png",
 	on_use = minetest.item_eat(4, "vessels:steel_bottle"),
 	groups = { eatable=1 },
 })

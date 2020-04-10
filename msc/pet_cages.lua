@@ -28,6 +28,7 @@ minetest.register_node("my_mobs:cage_empty", {
 --	paramtype2 = "facedir",
 	sunlight_propagates = true,
 --	light_source = 1,
+	stack_max = 4,
 	groups = {snappy=2,cracky=1,oddly_breakable_by_hand=2},
 	legacy_facedir_simple = true,
 	sounds = {},

@@ -34,4 +34,9 @@ v0.3--0.4:
 		where the cage would be placed sideways or upside down
 		(removed	paramtype2 = "facedir")
 
-
+v0.4-->0.5:
+-milk in steel bottles uses same image as steel bottles (was missing)
+-added wield images for glass vessles, to take advantage of my texture pack (default: uses same image)
+-added a racoon that will turn into a monster if right-clicked, drops apple when killed
+	Image from: <http://stephaniecome-ryker.com/blog/wp-content/uploads/2011/04/coon.jpg>
+-rabbit now drops a carrot instad of an apple (supports food, farming_plus, and docfarming mod carrots)
