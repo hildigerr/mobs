@@ -16,8 +16,8 @@ It Includes:
 		Overcooking and using the result to make dye
 		Meat spoilage if it remains uncooked
 
-Raw meet can be preserved through "cheating" or using a refridgerator provided by VanessaE's Home Decor Mod
-<http://minetest.net/forum/viewtopic.php?id=2041>. 
+Raw meet can be preserved through "cheating" or using a refridgerator provided
+ by VanessaE's Home Decor Mod <http://minetest.net/forum/viewtopic.php?id=2041>. 
 
 KNOWN BUGS:
 	If you drink milk from a stack of vessels, you will not recieve the empty vessel.
@@ -44,8 +44,9 @@ It's README.txt reports:
 	Commercial usage: Allowed
 	Readme file: textures/terms-of-use.txt -->[ I include it, but renamed to rabbit_terms-of-use.txt  ]
 
-The rest of the sounds were found at various locations that I don't recall.
-If you own one of them, I will remove it and delete all copies of it at you're request.
+The rest of the sounds were found at various locations that I don't recall,
+unless otherwise acknowledged in changes.txt. If you own one of them, I will
+remove it and delete all copies of it, at you're request.
 
          DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
                     Version 2, December 2004

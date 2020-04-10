@@ -1,0 +1,12 @@
+CHANGELOG
+
+V0.1-->0.2:
+-Adjusted cow image and box dimensions
+-Added milk_splash sound effect for when milking a cow
+	<http://www.youtube.com/watch?v=Z3GEcgwEMQo>
+-moved cow's dry moo to play when attempting to milk dry cow
+	rather than when milking it dries it up
+-provided constants as config options for timers and chances
+-refactored redundant code into a function spoil_meat()
+-added abm for meat in furnace/oven to rot too
+-stacks of meat may now be divided if there is room for only part of it to rot
