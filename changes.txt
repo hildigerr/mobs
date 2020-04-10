@@ -15,3 +15,23 @@ v0.2-->0.3:
 -Commented out residual debug barf line
 -moved cow right-click sound effects to only sound with poper tool
 -added cages for pet rodents, require apples for food and buckets of water to drink
+
+v0.3--0.4:
+-Shortened cooking time for scorched stuff and meat
+		NOTES:--cooktime with single coal outputs:
+			nil == 13
+			1   == 40
+			2   == 20
+			3   == 13 --DEFAULT
+			4   == 10
+			5   == 8
+-Decreased quantity of meat droped by cow
+-renamed texture files to conform with standards
+-only player who milks cow hears splash sound
+-moved everything to a separate files and
+- added config option to enable/disable their use
+-fixed bug in cages:
+		where the cage would be placed sideways or upside down
+		(removed	paramtype2 = "facedir")
+
+

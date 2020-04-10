@@ -23,7 +23,6 @@ Raw meet can be preserved through "cheating" or using a refridgerator provided
 
 KNOWN BUGS:
 	If you drink milk from a stack of vessels, you will not recieve the empty vessel.
-	The cage is sometimes placed sideways or upside down
 
 
 
@@ -46,10 +45,15 @@ It's README.txt reports:
 	License: Freeware
 	Commercial usage: Allowed
 	Readme file: textures/terms-of-use.txt -->[ I include it, but renamed to rabbit_terms-of-use.txt  ]
+	
+The current rat-in-cage image is also adapted from one of the critters from the
+same source as the rabbit.
 
 The rest of the sounds were found at various locations that I don't recall,
 unless otherwise acknowledged in changes.txt. If you own one of them, I will
 remove it and delete all copies of it, at you're request.
+
+The unused images were created by me using THE GIMP <http://www.gimp.org/>
 
          DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
                     Version 2, December 2004
