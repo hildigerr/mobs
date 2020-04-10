@@ -26,6 +26,7 @@ function mobs:register_mob(name, def)
 		sounds = def.sounds,
 		
 		timer = 0,
+		env_damage_timer = 0, -- only if state = "attack"
 		attack = {player=nil, dist=nil},
 		state = "stand",
 		v_start = false,
@@ -120,7 +121,9 @@ function mobs:register_mob(name, def)
 				end
 			end
 			
-			if self.state == "attack" and self.timer > 1 then
+			self.env_damage_timer = self.env_damage_timer + dtime
+			if self.state == "attack" and self.env_damage_timer > 1 then
+				self.env_damage_timer = 0
 				do_env_damage(self)
 			elseif self.state ~= "attack" then
 				do_env_damage(self)
@@ -148,7 +151,7 @@ function mobs:register_mob(name, def)
 			end
 			
 			if self.state == "stand" then
-				if math.random(1, 2) == 1 then
+				if math.random(1, 4) == 1 then
 					self.object:setyaw(self.object:getyaw()+((math.random(0,360)-180)/180*math.pi))
 				end
 				if math.random(1, 100) <= 50 then
