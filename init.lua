@@ -1,3 +1,9 @@
+--------------------------------------------------------------------------------
+----CONFIG OPTIONS:					[true --or-- false]
+local MEAT_ROTS = true
+local ALLOW_OVER_COOKING = true
+local USE_CAGES = true
+--------------------------------------------------------------------------------
 local modpath = minetest.get_modpath("mobs")
 dofile(modpath.."/api.lua")
 dofile(modpath.."/msc/meat.lua")
@@ -17,7 +23,18 @@ dofile(modpath.."/animals/racoon.lua")
 dofile(modpath.."/animals/rat.lua")
 dofile(modpath.."/animals/sheep.lua")
 
-dofile(modpath.."/init-additional.lua")
+--------------------------------------------------------------------------------
+if ALLOW_OVER_COOKING then
+	dofile(minetest.get_modpath("mobs").."/msc/overcook.lua")
+end
+
+if MEAT_ROTS then
+	dofile(minetest.get_modpath("mobs").."/msc/bad_meat.lua")
+end
+
+if USE_CAGES then
+	dofile(minetest.get_modpath("mobs").."/msc/pet_cages.lua")
+end
 
 if minetest.setting_get("log_mods") then
 	minetest.log("action", "mobs loaded")
