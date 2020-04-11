@@ -86,7 +86,8 @@ function mobs:register_mob(name, def)
 				if not self.old_y then
 					self.old_y = self.object:getpos().y
 				else
-					local d = self.old_y - self.object:getpos().y
+                    local pos = self.object:getpos()
+					local d = self.old_y - pos.y
 					local pos_node_name = minetest.env:get_node(pos).name
 					if d > 5 and minetest.get_item_group(pos_node_name, "water") == 0 then
 						local damage = d-5
