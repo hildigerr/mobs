@@ -35,30 +35,11 @@
 --		cows "eat" grass
 --------------------------------------------------------------------------------
 ----CONFIG OPTIONS:					[true --or-- false]
---Animals:
-local USE_COWS = true
-local USE_RABBITS = true
-local USE_RACOONS = true
---Msc:
 local MEAT_ROTS = true
 local ALLOW_OVER_COOKING = true
 local USE_CAGES = true
 --------------------------------------------------------------------------------
 
---------------------------------ANIMALS-----------------------------------------
-if USE_COWS then
-	dofile(minetest.get_modpath("mobs").."/animals/cow.lua")
-end
-
-if USE_RABBITS then
-	dofile(minetest.get_modpath("mobs").."/animals/rabbit.lua")
-end
-
-if USE_RACOONS then
-dofile(minetest.get_modpath("mobs").."/animals/racoon.lua")
-end
-
-----------------------------------MSC-------------------------------------------
 --	These files generally have further config options
 if ALLOW_OVER_COOKING then
 	dofile(minetest.get_modpath("mobs").."/msc/overcook.lua")
