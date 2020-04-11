@@ -43,7 +43,7 @@ mobs:register_mob("mobs:rabbit", {
 	textures = {"mobs_rabbit.png", "mobs_rabbit.png"},
 	makes_footstep_sound = false,
 	walk_velocity = 4,
-	armor = 3,
+	armor = 200,
 	drops = {rabbit_droppings},
 	drawtype = "front",
 	water_damage = 1,
