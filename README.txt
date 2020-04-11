@@ -10,19 +10,19 @@ The additional mobs were originally provided in another mod called my_mobs.
 <https://forum.minetest.net/viewtopic.php?pid=57041>.
 
 It Includes:
-		Animals:
-			Cow (and milk),
-			Rabbit
-		Overcooking and using the result to make dye
-		Meat spoilage if it remains uncooked
-		Cages for Pet Rodents
-			They must be fed apples and have a bucket of water available to survive
+        Animals:
+            Cow (and milk),
+            Rabbit
+        Overcooking and using the result to make dye
+        Meat spoilage if it remains uncooked
+        Cages for Pet Rodents
+            They must be fed apples and have a bucket of water available to survive
 
 Raw meet can be preserved through "cheating" or using a refridgerator provided
- by VanessaE's Home Decor Mod <http://minetest.net/forum/viewtopic.php?id=2041>. 
+ by VanessaE's Home Decor Mod <http://minetest.net/forum/viewtopic.php?id=2041>.
 
 KNOWN BUGS:
-	If you drink milk from a stack of vessels, you will not recieve the empty vessel.
+    If you drink milk from a stack of vessels, you will not recieve the empty vessel.
 
 
 
@@ -40,12 +40,12 @@ and created by Secretlondon <http://commons.wikimedia.org/wiki/User:Secretlondon
 The rabbit texture was acquired from cornernote's critters modpack.
 <http://minetest.net/forum/viewtopic.php?id=3337>
 It's README.txt reports:
-	Artist: Martin Berube (Available for custom work)
-	Iconset Homepage: http://www.graphics-and-desktop-icons.com/animal-icons.html
-	License: Freeware
-	Commercial usage: Allowed
-	Readme file: textures/terms-of-use.txt -->[ I include it, but renamed to rabbit_terms-of-use.txt  ]
-	
+    Artist: Martin Berube (Available for custom work)
+    Iconset Homepage: http://www.graphics-and-desktop-icons.com/animal-icons.html
+    License: Freeware
+    Commercial usage: Allowed
+    Readme file: textures/terms-of-use.txt -->[ I include it, but renamed to rabbit_terms-of-use.txt  ]
+
 The current rat-in-cage image is also adapted from one of the critters from the
 same source as the rabbit.
 
@@ -67,4 +67,4 @@ The unused images were created by me using THE GIMP <http://www.gimp.org/>
             DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
    TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
 
-  0. You just DO WHAT THE FUCK YOU WANT TO. 
+  0. You just DO WHAT THE FUCK YOU WANT TO.
