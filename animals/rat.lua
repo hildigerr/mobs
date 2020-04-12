@@ -8,6 +8,7 @@ mobs:register_mob("mobs:rat", {
     textures = {"mobs_rat.png", "mobs_rat.png"},
     makes_footstep_sound = false,
     walk_velocity = 1,
+    run_velocity = 2,
     armor = 200,
     drops = {},
     drawtype = "front",

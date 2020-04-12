@@ -8,6 +8,7 @@ mobs:register_mob("mobs:sheep", {
     textures = {"mobs_sheep.png", "mobs_sheep.png"},
     makes_footstep_sound = true,
     walk_velocity = 1,
+    run_velocity = 1,
     armor = 200,
     drops = {
         {name = "mobs:meat_raw",
