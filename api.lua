@@ -38,7 +38,7 @@ function mobs:register_mob(name, def)
 
         timer = 0,
         lifetimer = 600,
-        env_damage_timer = 0, -- only if state = "attack"
+        env_damage_timer = 0,
         attack = {player=nil, dist=nil},
         v_start = false,
         old_y = nil,
@@ -118,7 +118,10 @@ function mobs:register_mob(name, def)
                 minetest.sound_play(self.sounds.random, {object = self.object})
             end
 
-            local do_env_damage = function(self)
+
+            self.env_damage_timer = self.env_damage_timer + dtime
+            if self.env_damage_timer > 1 then
+                self.env_damage_timer = 0
                 local pos = self.object:getpos()
                 local n = minetest.env:get_node(pos)
 
@@ -132,6 +135,7 @@ function mobs:register_mob(name, def)
                     self.object:set_hp(self.object:get_hp()-self.light_damage)
                     if self.object:get_hp() == 0 then
                         self.object:remove()
+                        return
                     end
                 end
 
@@ -141,6 +145,7 @@ function mobs:register_mob(name, def)
                     self.object:set_hp(self.object:get_hp()-self.water_damage)
                     if self.object:get_hp() == 0 then
                         self.object:remove()
+                        return
                     end
                 end
 
@@ -150,16 +155,9 @@ function mobs:register_mob(name, def)
                     self.object:set_hp(self.object:get_hp()-self.lava_damage)
                     if self.object:get_hp() == 0 then
                         self.object:remove()
+                        return
                     end
                 end
-            end
-
-            self.env_damage_timer = self.env_damage_timer + dtime
-            if self.state == "attack" and self.env_damage_timer > 1 then
-                self.env_damage_timer = 0
-                do_env_damage(self)
-            elseif self.state ~= "attack" then
-                do_env_damage(self)
             end
 
             if self.type == "monster" and minetest.setting_getbool("enable_damage") then
