@@ -175,16 +175,6 @@ function mobs:register_mob(name, def)
             end
 
             if self.follow then
-                if not self.following
-                    or not self.following:is_player()
-                    or self.following:get_wielded_item():get_name() ~= self.follow
-                then
-                    self.following = nil
-                    self.state = "stand"
-                    self.v_start = false
-                    self.set_velocity(self, 0)
-                end
-
                 for _,player in pairs(minetest.get_connected_players()) do
                     local s = pos
                     local p = player:getpos()
@@ -197,7 +187,15 @@ function mobs:register_mob(name, def)
                     end
                 end
 
-                if self.following and self.following:is_player() then
+                if not self.following
+                    or not self.following:is_player()
+                    or self.following:get_wielded_item():get_name() ~= self.follow
+                then
+                    self.following = nil
+                    self.state = "stand"
+                    self.v_start = false
+                    self.set_velocity(self, 0)
+                else
                     local s = pos
                     local p = self.following:getpos()
                     local dist = ((p.x-s.x)^2 + (p.y-s.y)^2 + (p.z-s.z)^2)^0.5
