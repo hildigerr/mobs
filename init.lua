@@ -1,8 +1,8 @@
 --------------------------------------------------------------------------------
 ----CONFIG OPTIONS:                    [true --or-- false]
-local MEAT_ROTS = true
-local ALLOW_OVER_COOKING = true
-local USE_CAGES = true
+local MEAT_ROTS = minetest.settings:get_bool("mobs.meat_rots", true)
+local ALLOW_OVER_COOKING = minetest.settings:get_bool("mobs.overcooking", true)
+local USE_CAGES = minetest.settings:get_bool("mobs.cages", true)
 --------------------------------------------------------------------------------
 local modpath = minetest.get_modpath("mobs")
 dofile(modpath.."/api.lua")

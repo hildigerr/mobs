@@ -1,0 +1,10 @@
+# TODO bad_meat and pet_cages configuration options
+
+#    Meat will rot if not cooked or refridgerated
+mobs.meat_rots (Meat Rots) bool true
+
+#    Cooked Meat can be overcooked
+mobs.overcooking (Overcooking) bool true
+
+#    Enable creating cages for pets
+mobs.cages (Include Cages) bool true
