@@ -180,7 +180,9 @@ function mobs:register_mob(name, def)
                     or self.following:get_wielded_item():get_name() ~= self.follow
                 then
                     self.following = nil
+                    self.state = "stand"
                     self.v_start = false
+                    self.set_velocity(self, 0)
                 end
 
                 for _,player in pairs(minetest.get_connected_players()) do
@@ -201,7 +203,9 @@ function mobs:register_mob(name, def)
                     local dist = ((p.x-s.x)^2 + (p.y-s.y)^2 + (p.z-s.z)^2)^0.5
                     if dist > self.view_range then
                         self.following = nil
+                        self.state = "stand"
                         self.v_start = false
+                        self.set_velocity(self, 0)
                     else
                         local vec = {x=p.x-s.x, y=p.y-s.y, z=p.z-s.z}
                         local yaw = math.atan(vec.z/vec.x)+math.pi/2
@@ -297,8 +301,8 @@ function mobs:register_mob(name, def)
                             self.set_velocity(self, self.run_velocity)
                         end
                     else
-                        self.set_velocity(self, 0)
                         self.v_start = false
+                        self.set_velocity(self, 0)
                         if self.timer > 1 then
                             self.timer = 0
                             if self.sounds and self.sounds.attack then
