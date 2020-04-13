@@ -90,22 +90,20 @@ function mobs:register_mob(name, def)
                 self.object:setacceleration({x=0, y=-10, z=0})
             end
 
-            if self.disable_fall_damage and self.object:getvelocity().y == 0 then
-                if not self.old_y then
-                    self.old_y = self.object:getpos().y
-                else
-                    local pos = self.object:getpos()
+            if not self.disable_fall_damage and self.object:getvelocity().y == 0 then
+                local pos = self.object:getpos()
+                if self.old_y then
                     local d = self.old_y - pos.y
-                    local pos_node_name = minetest.env:get_node(pos).name
-                    if d > 5 and minetest.get_item_group(pos_node_name, "water") == 0 then
+                    if d > 5 and minetest.get_item_group(minetest.env:get_node(pos).name, "water") == 0 then
                         local damage = d-5
                         self.object:set_hp(self.object:get_hp()-damage)
-                        if self.object:get_hp() == 0 then
+                        if self.object:get_hp() <= 0 then
                             self.object:remove()
+                            return
                         end
                     end
-                    self.old_y = self.object:getpos().y
                 end
+                self.old_y = pos.y
             end
 
             self.timer = self.timer+dtime
