@@ -39,7 +39,7 @@ function mobs:register_mob(name, def)
         timer = 0,
         lifetimer = 600,
         env_damage_timer = 0,
-        attack = {player=nil, dist=nil},
+        target = {player=nil, dist=nil},
         v_start = false,
         old_y = nil,
 
@@ -165,10 +165,10 @@ function mobs:register_mob(name, def)
                     local p = player:getpos()
                     local dist = ((p.x-s.x)^2 + (p.y-s.y)^2 + (p.z-s.z)^2)^0.5
                     if dist < self.view_range then
-                        if not self.attack.dist or self.attack.dist < dist then
+                        if not self.target.dist or self.target.dist < dist then
                             self.state = "attack"
-                            self.attack.player = player
-                            self.attack.dist = dist
+                            self.target.player = player
+                            self.target.dist = dist
                         end
                     end
                 end
@@ -257,21 +257,21 @@ function mobs:register_mob(name, def)
                     self.state = "stand"
                 end
             elseif self.state == "attack" and self.attack_type == "dogfight" then
-                if not self.attack.player or not self.attack.player:is_player() then
+                if not self.target.player or not self.target.player:is_player() then
                     self.state = "stand"
                     return
                 end
                 local s = pos
-                local p = self.attack.player:getpos()
+                local p = self.target.player:getpos()
                 local dist = ((p.x-s.x)^2 + (p.y-s.y)^2 + (p.z-s.z)^2)^0.5
-                if dist > self.view_range or self.attack.player:get_hp() <= 0 then
+                if dist > self.view_range or self.target.player:get_hp() <= 0 then
                     self.state = "stand"
                     self.v_start = false
                     self.set_velocity(self, 0)
-                    self.attack = {player=nil, dist=nil}
+                    self.target = {player=nil, dist=nil}
                     return
                 else
-                    self.attack.dist = dist
+                    self.target.dist = dist
                 end
 
                 local vec = {x=p.x-s.x, y=p.y-s.y, z=p.z-s.z}
@@ -283,7 +283,7 @@ function mobs:register_mob(name, def)
                     yaw = yaw+math.pi
                 end
                 self.object:setyaw(yaw)
-                if self.attack.dist > 2 then
+                if self.target.dist > 2 then
                     if not self.v_start then
                         self.v_start = true
                         self.set_velocity(self, self.run_velocity)
@@ -303,28 +303,28 @@ function mobs:register_mob(name, def)
                         if self.sounds and self.sounds.attack then
                             minetest.sound_play(self.sounds.attack, {object = self.object})
                         end
-                        self.attack.player:punch(self.object, 1.0,  {
+                        self.target.player:punch(self.object, 1.0,  {
                             full_punch_interval=1.0,
                             damage_groups = {fleshy=self.damage}
                         }, vec)
                     end
                 end
             elseif self.state == "attack" and self.attack_type == "shoot" then
-                if not self.attack.player or not self.attack.player:is_player() then
+                if not self.target.player or not self.target.player:is_player() then
                     self.state = "stand"
                     return
                 end
                 local s = pos
-                local p = self.attack.player:getpos()
+                local p = self.target.player:getpos()
                 local dist = ((p.x-s.x)^2 + (p.y-s.y)^2 + (p.z-s.z)^2)^0.5
-                if dist > self.view_range or self.attack.player:get_hp() <= 0 then
+                if dist > self.view_range or self.target.player:get_hp() <= 0 then
                     self.state = "stand"
                     self.v_start = false
                     self.set_velocity(self, 0)
-                    self.attack = {player=nil, dist=nil}
+                    self.target = {player=nil, dist=nil}
                     return
                 else
-                    self.attack.dist = dist
+                    self.target.dist = dist
                 end
 
                 local vec = {x=p.x-s.x, y=p.y-s.y, z=p.z-s.z}
