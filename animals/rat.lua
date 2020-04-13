@@ -1,20 +1,25 @@
 
 mobs:register_mob("mobs:rat", {
     type = "animal",
+
     hp_max = 1,
-    collisionbox = {-0.25, -0.175, -0.25, 0.25, 0.33, 0.25},
-    visual = "upright_sprite",
-    visual_size = {x=0.7, y=0.35},
-    textures = {"mobs_rat.png", "mobs_rat.png"},
-    makes_footstep_sound = false,
+    armor = 100,
     walk_velocity = 1,
     run_velocity = 2,
-    armor = 100,
-    drops = {},
-    drawtype = "front",
+
     water_damage = 0,
     lava_damage = 1,
     light_damage = 0,
+
+    visual = "upright_sprite",
+    drawtype = "front",
+    visual_size = {x=0.7, y=0.35},
+    collisionbox = {-0.25, -0.175, -0.25, 0.25, 0.33, 0.25},
+    textures = {"mobs_rat.png", "mobs_rat.png"},
+
+    makes_footstep_sound = false,
+
+    drops = {},
 
     on_rightclick = function(self, clicker)
         if clicker:is_player() and clicker:get_inventory() then

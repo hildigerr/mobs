@@ -22,20 +22,25 @@ local rabbit_droppings = {
 
 mobs:register_mob("mobs:rabbit", {
     type = "animal",
+
     hp_max = 1,
-    collisionbox = {-0.25, -0.33, -0.25, 0.25, 0.33, 0.25},
-    visual = "upright_sprite",
-    visual_size = {x=0.7, y=0.7},
-    textures = {"mobs_rabbit.png", "mobs_rabbit.png"},
-    makes_footstep_sound = false,
+    armor = 100,
     walk_velocity = 4,
     run_velocity = 4,
-    armor = 100,
-    drops = {rabbit_droppings},
-    drawtype = "front",
+
     water_damage = 1,
     lava_damage = 1,
     light_damage = 0,
+
+    visual = "upright_sprite",
+    drawtype = "front",
+    visual_size = {x=0.7, y=0.7},
+    collisionbox = {-0.25, -0.33, -0.25, 0.25, 0.33, 0.25},
+    textures = {"mobs_rabbit.png", "mobs_rabbit.png"},
+
+    makes_footstep_sound = false,
+
+    drops = {rabbit_droppings},
 
     on_rightclick = function(self, clicker)
         if clicker:is_player() and clicker:get_inventory() then

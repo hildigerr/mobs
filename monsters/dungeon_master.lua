@@ -1,34 +1,39 @@
 
 mobs:register_mob("mobs:dungeon_master", {
     type = "monster",
+
     hp_max = 10,
-    collisionbox = {-0.8, -1.21875, -0.8, 0.8, 1.21875, 0.8},
-    visual = "upright_sprite",
-    visual_size = {x=1.875, y=2.4375},
-    textures = {"mobs_dungeon_master.png", "mobs_dungeon_master_back.png"},
-    makes_footstep_sound = true,
+    damage = 4,
+    armor = 50,
     view_range = 15,
     walk_velocity = 1,
     run_velocity = 3,
-    damage = 4,
+
+    water_damage = 1,
+    lava_damage = 1,
+    light_damage = 0,
+
+    visual = "upright_sprite",
+    drawtype = "front",
+    visual_size = {x=1.875, y=2.4375},
+    collisionbox = {-0.8, -1.21875, -0.8, 0.8, 1.21875, 0.8},
+    textures = {"mobs_dungeon_master.png", "mobs_dungeon_master_back.png"},
+
+    sounds = {
+        attack = "mobs_fireball",
+    },
+    makes_footstep_sound = true,
+
     drops = {
         {name = "default:mese",
         chance = 100,
         min = 1,
         max = 2,},
     },
-    armor = 50,
-    drawtype = "front",
-    water_damage = 1,
-    lava_damage = 1,
-    light_damage = 0,
-    on_rightclick = nil,
+
     attack_type = "shoot",
     arrow = "mobs:fireball",
     shoot_interval = 2.5,
-    sounds = {
-        attack = "mobs_fireball",
-    },
 })
 mobs:register_spawn("mobs:dungeon_master", {"default:stone"}, 2, -1, 7000, 1, -50)
 

@@ -1,30 +1,37 @@
 
 mobs:register_mob("mobs:sheep", {
     type = "animal",
+
     hp_max = 5,
-    collisionbox = {-0.6, -0.625, -0.6, 0.6, 0.625, 0.6},
-    visual = "upright_sprite",
-    visual_size = {x=2, y=1.25},
-    textures = {"mobs_sheep.png", "mobs_sheep.png"},
-    makes_footstep_sound = true,
+    armor = 90,
+    view_range = 5,
     walk_velocity = 1,
     run_velocity = 1,
-    armor = 90,
-    drops = {
-        {name = "mobs:meat_raw",
-        chance = 1,
-        min = 2,
-        max = 3,},
-    },
-    drawtype = "side",
+
     water_damage = 1,
     lava_damage = 5,
     light_damage = 0,
+
+    visual = "upright_sprite",
+    drawtype = "side",
+    visual_size = {x=2, y=1.25},
+    collisionbox = {-0.6, -0.625, -0.6, 0.6, 0.625, 0.6},
+    textures = {"mobs_sheep.png", "mobs_sheep.png"},
+
     sounds = {
         random = "mobs_sheep",
     },
+    makes_footstep_sound = true,
     follow = "farming:wheat",
-    view_range = 5,
+
+    drops = {
+        {
+            name = "mobs:meat_raw",
+            chance = 1,
+            min = 2,
+            max = 3,
+        },
+    },
 
     on_rightclick = function(self, clicker)
         local item = clicker:get_wielded_item()
@@ -45,7 +52,7 @@ mobs:register_mob("mobs:sheep", {
                     self.food = 0
                     self.naked = false
                     self.object:set_properties({
-                textures = {"mobs_sheep.png", "mobs_sheep.png"},
+                        textures = {"mobs_sheep.png", "mobs_sheep.png"},
                     })
                 end
             end

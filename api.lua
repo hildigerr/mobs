@@ -1,40 +1,47 @@
 mobs = {}
 function mobs:register_mob(name, def)
     minetest.register_entity(name, {
-        hp_max = def.hp_max,
+        type = def.type,
         physical = true,
-        collisionbox = def.collisionbox,
-        visual = def.visual,
-        visual_size = def.visual_size,
-        textures = def.textures,
-        makes_footstep_sound = def.makes_footstep_sound,
+        state = "stand",
+        tamed = false,
+
+        hp_max = def.hp_max,
+        damage = def.damage,
+        armor = def.armor,
         view_range = def.view_range,
         walk_velocity = def.walk_velocity,
         run_velocity = def.run_velocity,
-        damage = def.damage,
-        light_damage = def.light_damage,
+
         water_damage = def.water_damage,
         lava_damage = def.lava_damage,
+        light_damage = def.light_damage,
         disable_fall_damage = def.disable_fall_damage,
-        drops = def.drops,
-        armor = def.armor,
+
+        visual = def.visual,
         drawtype = def.drawtype,
-        on_rightclick = def.on_rightclick,
-        type = def.type,
+        visual_size = def.visual_size,
+        collisionbox = def.collisionbox,
+        textures = def.textures,
+
+        sounds = def.sounds,
+        makes_footstep_sound = def.makes_footstep_sound,
+        follow = def.follow,
+
+        drops = def.drops,
+
         attack_type = def.attack_type,
         arrow = def.arrow,
         shoot_interval = def.shoot_interval,
-        sounds = def.sounds,
-        follow = def.follow,
+
+        on_rightclick = def.on_rightclick,
 
         timer = 0,
+        lifetimer = 600,
         env_damage_timer = 0, -- only if state = "attack"
         attack = {player=nil, dist=nil},
-        state = "stand",
         v_start = false,
         old_y = nil,
-        lifetimer = 600,
-        tamed = false,
 
         set_velocity = function(self, v)
             local yaw = self.object:getyaw()
