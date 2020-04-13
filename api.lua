@@ -59,6 +59,8 @@ function mobs:register_mob(name, def)
         end,
 
         on_step = function(self, dtime)
+            local pos = self.object:getpos()
+            local n = minetest.env:get_node(pos)
             if self.type == "monster" and minetest.setting_getbool("only_peaceful_mobs") then
                 self.object:remove()
             end
@@ -66,7 +68,7 @@ function mobs:register_mob(name, def)
             self.lifetimer = self.lifetimer - dtime
             if self.lifetimer <= 0 and not self.tamed and self.state ~= "attack" then
                 local player_near = false
-                for _,obj in ipairs(minetest.env:get_objects_inside_radius(self.object:getpos(), 20)) do
+                for _,obj in ipairs(minetest.env:get_objects_inside_radius(pos, 20)) do
                     if obj:is_player() then
                         player_near = true
                         break
@@ -91,10 +93,9 @@ function mobs:register_mob(name, def)
             end
 
             if not self.disable_fall_damage and self.object:getvelocity().y == 0 then
-                local pos = self.object:getpos()
                 if self.old_y then
                     local d = self.old_y - pos.y
-                    if d > 5 and minetest.get_item_group(minetest.env:get_node(pos).name, "water") == 0 then
+                    if d > 5 and minetest.get_item_group(n.name, "water") == 0 then
                         local damage = d-5
                         self.object:set_hp(self.object:get_hp()-damage)
                         if self.object:get_hp() <= 0 then
@@ -122,8 +123,6 @@ function mobs:register_mob(name, def)
             self.env_damage_timer = self.env_damage_timer + dtime
             if self.env_damage_timer > 1 then
                 self.env_damage_timer = 0
-                local pos = self.object:getpos()
-                local n = minetest.env:get_node(pos)
 
                 if self.light_damage and self.light_damage ~= 0
                     and pos.y>0
@@ -162,7 +161,7 @@ function mobs:register_mob(name, def)
 
             if self.type == "monster" and minetest.setting_getbool("enable_damage") then
                 for _,player in pairs(minetest.get_connected_players()) do
-                    local s = self.object:getpos()
+                    local s = pos
                     local p = player:getpos()
                     local dist = ((p.x-s.x)^2 + (p.y-s.y)^2 + (p.z-s.z)^2)^0.5
                     if dist < self.view_range then
@@ -183,7 +182,7 @@ function mobs:register_mob(name, def)
 
             if self.follow ~= "" and not self.following then
                 for _,player in pairs(minetest.get_connected_players()) do
-                    local s = self.object:getpos()
+                    local s = pos
                     local p = player:getpos()
                     local dist = ((p.x-s.x)^2 + (p.y-s.y)^2 + (p.z-s.z)^2)^0.5
                     if self.view_range and dist < self.view_range then
@@ -197,7 +196,7 @@ function mobs:register_mob(name, def)
                     self.following = nil
                     self.v_start = false
                 else
-                    local s = self.object:getpos()
+                    local s = pos
                     local p = self.following:getpos()
                     local dist = ((p.x-s.x)^2 + (p.y-s.y)^2 + (p.z-s.z)^2)^0.5
                     if dist > self.view_range then
@@ -262,7 +261,7 @@ function mobs:register_mob(name, def)
                     self.state = "stand"
                     return
                 end
-                local s = self.object:getpos()
+                local s = pos
                 local p = self.attack.player:getpos()
                 local dist = ((p.x-s.x)^2 + (p.y-s.y)^2 + (p.z-s.z)^2)^0.5
                 if dist > self.view_range or self.attack.player:get_hp() <= 0 then
@@ -315,7 +314,7 @@ function mobs:register_mob(name, def)
                     self.state = "stand"
                     return
                 end
-                local s = self.object:getpos()
+                local s = pos
                 local p = self.attack.player:getpos()
                 local dist = ((p.x-s.x)^2 + (p.y-s.y)^2 + (p.z-s.z)^2)^0.5
                 if dist > self.view_range or self.attack.player:get_hp() <= 0 then
@@ -346,7 +345,7 @@ function mobs:register_mob(name, def)
                         minetest.sound_play(self.sounds.attack, {object = self.object})
                     end
 
-                    local obj = minetest.env:add_entity(self.object:getpos(), self.arrow)
+                    local obj = minetest.env:add_entity(pos, self.arrow)
                     local amount = (vec.x^2+vec.y^2+vec.z^2)^0.5
                     local v = obj:get_luaentity().velocity
                     vec.y = vec.y+1
@@ -461,7 +460,7 @@ function mobs:register_arrow(name, def)
 
         on_step = function(self, dtime)
             local pos = self.object:getpos()
-            if minetest.env:get_node(self.object:getpos()).name ~= "air" then
+            if minetest.env:get_node(pos).name ~= "air" then
                 self.hit_node(self, pos, node)
                 self.object:remove()
                 return
