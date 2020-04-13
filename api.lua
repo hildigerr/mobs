@@ -284,51 +284,51 @@ function mobs:register_mob(name, def)
                 end
                 self.object:setyaw(yaw)
                 if self.attack_type == "dogfight" then
-                if self.target.dist > 2 then
-                    if not self.v_start then
-                        self.v_start = true
-                        self.set_velocity(self, self.run_velocity)
-                    else
-                        if self.get_velocity(self) <= 0.5 and self.object:getvelocity().y == 0 then
-                            local v = self.object:getvelocity()
-                            v.y = 5
-                            self.object:setvelocity(v)
+                    if self.target.dist > 2 then
+                        if not self.v_start then
+                            self.v_start = true
+                            self.set_velocity(self, self.run_velocity)
+                        else
+                            if self.get_velocity(self) <= 0.5 and self.object:getvelocity().y == 0 then
+                                local v = self.object:getvelocity()
+                                v.y = 5
+                                self.object:setvelocity(v)
+                            end
+                            self.set_velocity(self, self.run_velocity)
                         end
-                        self.set_velocity(self, self.run_velocity)
+                    else
+                        self.set_velocity(self, 0)
+                        self.v_start = false
+                        if self.timer > 1 then
+                            self.timer = 0
+                            if self.sounds and self.sounds.attack then
+                                minetest.sound_play(self.sounds.attack, {object = self.object})
+                            end
+                            self.target.player:punch(self.object, 1.0,  {
+                                full_punch_interval=1.0,
+                                damage_groups = {fleshy=self.damage}
+                            }, vec)
+                        end
                     end
-                else
+                elseif self.attack_type == "shoot" then
                     self.set_velocity(self, 0)
-                    self.v_start = false
-                    if self.timer > 1 then
+
+                    if self.timer > self.shoot_interval and math.random(1, 100) <= 60 then
                         self.timer = 0
+
                         if self.sounds and self.sounds.attack then
                             minetest.sound_play(self.sounds.attack, {object = self.object})
                         end
-                        self.target.player:punch(self.object, 1.0,  {
-                            full_punch_interval=1.0,
-                            damage_groups = {fleshy=self.damage}
-                        }, vec)
+
+                        local obj = minetest.env:add_entity(pos, self.arrow)
+                        local amount = (vec.x^2+vec.y^2+vec.z^2)^0.5
+                        local v = obj:get_luaentity().velocity
+                        vec.y = vec.y+1
+                        vec.x = vec.x*v/amount
+                        vec.y = vec.y*v/amount
+                        vec.z = vec.z*v/amount
+                        obj:setvelocity(vec)
                     end
-                end
-                elseif self.attack_type == "shoot" then
-                self.set_velocity(self, 0)
-
-                if self.timer > self.shoot_interval and math.random(1, 100) <= 60 then
-                    self.timer = 0
-
-                    if self.sounds and self.sounds.attack then
-                        minetest.sound_play(self.sounds.attack, {object = self.object})
-                    end
-
-                    local obj = minetest.env:add_entity(pos, self.arrow)
-                    local amount = (vec.x^2+vec.y^2+vec.z^2)^0.5
-                    local v = obj:get_luaentity().velocity
-                    vec.y = vec.y+1
-                    vec.x = vec.x*v/amount
-                    vec.y = vec.y*v/amount
-                    vec.z = vec.z*v/amount
-                    obj:setvelocity(vec)
-                end
                 end
             end
         end,
