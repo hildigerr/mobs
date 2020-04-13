@@ -174,22 +174,28 @@ function mobs:register_mob(name, def)
                 end
             end
 
-            if self.follow ~= "" and not self.following then
+            if self.follow then
+                if not self.following
+                    or not self.following:is_player()
+                    or self.following:get_wielded_item():get_name() ~= self.follow
+                then
+                    self.following = nil
+                    self.v_start = false
+                end
+
                 for _,player in pairs(minetest.get_connected_players()) do
                     local s = pos
                     local p = player:getpos()
                     local dist = ((p.x-s.x)^2 + (p.y-s.y)^2 + (p.z-s.z)^2)^0.5
-                    if self.view_range and dist < self.view_range then
-                        self.following = player
+                    if dist < self.view_range then
+                        if player:get_wielded_item():get_name() == self.follow then
+                            self.following = player
+                            break
+                        end
                     end
                 end
-            end
 
-            if self.following and self.following:is_player() then
-                if self.following:get_wielded_item():get_name() ~= self.follow then
-                    self.following = nil
-                    self.v_start = false
-                else
+                if self.following and self.following:is_player() then
                     local s = pos
                     local p = self.following:getpos()
                     local dist = ((p.x-s.x)^2 + (p.y-s.y)^2 + (p.z-s.z)^2)^0.5
@@ -209,14 +215,14 @@ function mobs:register_mob(name, def)
                         if dist > 2 then
                             if not self.v_start then
                                 self.v_start = true
-                                self.set_velocity(self, self.walk_velocity)
+                                self.set_velocity(self, -self.run_velocity)
                             else
                                 if self.get_velocity(self) <= 0.5 and self.object:getvelocity().y == 0 then
                                     local v = self.object:getvelocity()
                                     v.y = 5
                                     self.object:setvelocity(v)
                                 end
-                                self.set_velocity(self, self.walk_velocity)
+                                self.set_velocity(self, -self.run_velocity)
                             end
                         else
                             self.v_start = false
