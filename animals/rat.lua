@@ -9,7 +9,7 @@ mobs:register_mob("mobs:rat", {
     makes_footstep_sound = false,
     walk_velocity = 1,
     run_velocity = 2,
-    armor = 200,
+    armor = 100,
     drops = {},
     drawtype = "front",
     water_damage = 0,

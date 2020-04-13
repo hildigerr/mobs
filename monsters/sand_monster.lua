@@ -18,7 +18,7 @@ mobs:register_mob("mobs:sand_monster", {
         max = 5,},
     },
     light_resistant = true,
-    armor = 100,
+    armor = 80,
     drawtype = "front",
     water_damage = 3,
     lava_damage = 1,

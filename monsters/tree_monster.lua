@@ -22,7 +22,7 @@ mobs:register_mob("mobs:tree_monster", {
         max = 2,},
     },
     light_resistant = true,
-    armor = 100,
+    armor = 80,
     drawtype = "front",
     water_damage = 1,
     lava_damage = 5,

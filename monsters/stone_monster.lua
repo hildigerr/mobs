@@ -18,7 +18,7 @@ mobs:register_mob("mobs:stone_monster", {
         max = 5,},
     },
     light_resistant = true,
-    armor = 80,
+    armor = 70,
     drawtype = "front",
     water_damage = 0,
     lava_damage = 0,

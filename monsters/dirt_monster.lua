@@ -17,7 +17,7 @@ mobs:register_mob("mobs:dirt_monster", {
         min = 3,
         max = 5,},
     },
-    armor = 100,
+    armor = 80,
     drawtype = "front",
     water_damage = 1,
     lava_damage = 5,

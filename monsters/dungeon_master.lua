@@ -17,7 +17,7 @@ mobs:register_mob("mobs:dungeon_master", {
         min = 1,
         max = 2,},
     },
-    armor = 60,
+    armor = 50,
     drawtype = "front",
     water_damage = 1,
     lava_damage = 1,

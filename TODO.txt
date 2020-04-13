@@ -3,6 +3,7 @@
 --        drinking from a stack of vessels does not return an empty vessel
 --         cages are sometimes placed sideways or upsidedown
 --HIGH PRIORITY:
+--        death sounds
 --        support more food, --check balance-- [cheese]
 --        add fresh meat and remove rotten meat litter periodically
 --MED PRIORITY:

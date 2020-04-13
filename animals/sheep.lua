@@ -9,7 +9,7 @@ mobs:register_mob("mobs:sheep", {
     makes_footstep_sound = true,
     walk_velocity = 1,
     run_velocity = 1,
-    armor = 200,
+    armor = 90,
     drops = {
         {name = "mobs:meat_raw",
         chance = 1,

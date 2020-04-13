@@ -12,7 +12,7 @@ mobs:register_mob("mobs:oerkki", {
     run_velocity = 3,
     damage = 4,
     drops = {},
-    armor = 100,
+    armor = 60,
     drawtype = "front",
     light_resistant = true,
     water_damage = 1,

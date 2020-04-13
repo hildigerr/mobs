@@ -12,7 +12,7 @@ mobs:register_mob("mobs:racoon", {
     makes_footstep_sound = false,
     walk_velocity = 2,
     run_velocity = 2,
-    armor = 150,
+    armor = 80,
     drops = {
         {name = "default:apple",
         chance = 4,
