@@ -256,7 +256,7 @@ function mobs:register_mob(name, def)
                     self.set_velocity(self, 0)
                     self.state = "stand"
                 end
-            elseif self.state == "attack" and self.attack_type == "dogfight" then
+            elseif self.state == "attack" then
                 if not self.target.player or not self.target.player:is_player() then
                     self.state = "stand"
                     return
@@ -283,6 +283,7 @@ function mobs:register_mob(name, def)
                     yaw = yaw+math.pi
                 end
                 self.object:setyaw(yaw)
+                if self.attack_type == "dogfight" then
                 if self.target.dist > 2 then
                     if not self.v_start then
                         self.v_start = true
@@ -309,33 +310,7 @@ function mobs:register_mob(name, def)
                         }, vec)
                     end
                 end
-            elseif self.state == "attack" and self.attack_type == "shoot" then
-                if not self.target.player or not self.target.player:is_player() then
-                    self.state = "stand"
-                    return
-                end
-                local s = pos
-                local p = self.target.player:getpos()
-                local dist = ((p.x-s.x)^2 + (p.y-s.y)^2 + (p.z-s.z)^2)^0.5
-                if dist > self.view_range or self.target.player:get_hp() <= 0 then
-                    self.state = "stand"
-                    self.v_start = false
-                    self.set_velocity(self, 0)
-                    self.target = {player=nil, dist=nil}
-                    return
-                else
-                    self.target.dist = dist
-                end
-
-                local vec = {x=p.x-s.x, y=p.y-s.y, z=p.z-s.z}
-                local yaw = math.atan(vec.z/vec.x)+math.pi/2
-                if self.drawtype == "side" then
-                    yaw = yaw+(math.pi/2)
-                end
-                if p.x > s.x then
-                    yaw = yaw+math.pi
-                end
-                self.object:setyaw(yaw)
+                elseif self.attack_type == "shoot" then
                 self.set_velocity(self, 0)
 
                 if self.timer > self.shoot_interval and math.random(1, 100) <= 60 then
@@ -353,6 +328,7 @@ function mobs:register_mob(name, def)
                     vec.y = vec.y*v/amount
                     vec.z = vec.z*v/amount
                     obj:setvelocity(vec)
+                end
                 end
             end
         end,
