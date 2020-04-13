@@ -156,9 +156,9 @@ minetest.register_abm({
         local meta = minetest.env:get_meta(pos)
         local inv = meta:get_inventory()
         if inv:contains_item("house", "mobs:rabbit") then
-            hacky_swap_node(pos,"mobs:cage_rabbit")
+            minetest.swap_node(pos,{name="mobs:cage_rabbit"})
         elseif inv:contains_item("house", "mobs:rat") then
-            hacky_swap_node(pos,"mobs:cage_rat")
+            minetest.swap_node(pos,{name="mobs:cage_rat"})
 --         else --DOESNT WORK
 --             for i, name in ipairs({
 --                 "breeding_totaltime",
@@ -204,7 +204,7 @@ minetest.register_abm({
         elseif inv:contains_item("house", "mobs:rat") then
             occupant = "mobs:rat"
         else -- no occupant
-            hacky_swap_node(pos,"mobs:cage_empty")
+            minetest.swap_node(pos,{name="mobs:cage_empty"})
         end -- if animal occupant
 
         if occupant then
@@ -326,7 +326,7 @@ minetest.register_abm({
 --             end -- breeding if
 
         else -- empty house (redundant)
---            hacky_swap_node(pos,"mobs:cage_empty")
+--            minetest.swap_node(pos,"mobs:cage_empty")
         end
     end,
 })
