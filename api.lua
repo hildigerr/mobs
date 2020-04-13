@@ -64,14 +64,15 @@ function mobs:register_mob(name, def)
             end
 
             self.lifetimer = self.lifetimer - dtime
-            if self.lifetimer <= 0 and not self.tamed then
-                local player_count = 0
+            if self.lifetimer <= 0 and not self.tamed and self.state ~= "attack" then
+                local player_near = false
                 for _,obj in ipairs(minetest.env:get_objects_inside_radius(self.object:getpos(), 20)) do
                     if obj:is_player() then
-                        player_count = player_count+1
+                        player_near = true
+                        break
                     end
                 end
-                if player_count == 0 and self.state ~= "attack" then
+                if not player_near then
                     self.object:remove()
                     return
                 end
