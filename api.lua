@@ -40,6 +40,7 @@ function mobs:register_mob(name, def)
         lifetimer = 600,
         env_damage_timer = 0,
         target = {player=nil, dist=nil},
+        following = {player=nil, dist=nil},
         v_start = false,
         old_y = nil,
 
@@ -181,29 +182,29 @@ function mobs:register_mob(name, def)
                     local dist = ((p.x-s.x)^2 + (p.y-s.y)^2 + (p.z-s.z)^2)^0.5
                     if dist < self.view_range then
                         if player:get_wielded_item():get_name() == self.follow then
-                            self.following = player
+                            self.following.player = player
                             break
                         end
                     end
                 end
 
-                if not self.following
-                    or not self.following:is_player()
-                    or self.following:get_wielded_item():get_name() ~= self.follow
+                if not self.following.player
+                    or not self.following.player:is_player()
+                    or self.following.player:get_wielded_item():get_name() ~= self.follow
                 then
-                    self.following = nil
                     self.state = "stand"
                     self.v_start = false
                     self.set_velocity(self, 0)
+                    self.following = {player=nil, dist=nil}
                 else
                     local s = pos
-                    local p = self.following:getpos()
+                    local p = self.following.player:getpos()
                     local dist = ((p.x-s.x)^2 + (p.y-s.y)^2 + (p.z-s.z)^2)^0.5
                     if dist > self.view_range then
-                        self.following = nil
                         self.state = "stand"
                         self.v_start = false
                         self.set_velocity(self, 0)
+                        self.following = {player=nil, dist=nil}
                     else
                         local vec = {x=p.x-s.x, y=p.y-s.y, z=p.z-s.z}
                         local yaw = math.atan(vec.z/vec.x)+math.pi/2
