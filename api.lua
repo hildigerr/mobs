@@ -182,12 +182,16 @@ function mobs:register_mob(name, def)
                     local dist = ((p.x-s.x)^2 + (p.y-s.y)^2 + (p.z-s.z)^2)^0.5
                     if dist < self.view_range then
                         if player:get_wielded_item():get_name() == self.follow then
+                            self.state = "chase"
                             self.following.player = player
+                            self.following.dist = dist
                             break
                         end
                     end
                 end
+            end
 
+            if self.state == "chase" then
                 if not self.following.player
                     or not self.following.player:is_player()
                     or self.following.player:get_wielded_item():get_name() ~= self.follow
@@ -206,6 +210,7 @@ function mobs:register_mob(name, def)
                         self.set_velocity(self, 0)
                         self.following = {player=nil, dist=nil}
                     else
+                        self.following.dist = dist
                         local vec = {x=p.x-s.x, y=p.y-s.y, z=p.z-s.z}
                         local yaw = math.atan(vec.z/vec.x)+math.pi/2
                         if self.drawtype == "side" then
@@ -231,12 +236,10 @@ function mobs:register_mob(name, def)
                             self.v_start = false
                             self.set_velocity(self, 0)
                         end
-                        return
                     end
                 end
-            end
 
-            if self.state == "stand" then
+            elseif self.state == "stand" then
                 if math.random(1, 4) == 1 then
                     self.object:setyaw(self.object:getyaw()+((math.random(0,360)-180)/180*math.pi))
                 end
@@ -275,7 +278,6 @@ function mobs:register_mob(name, def)
                     return
                 else
                     self.target.dist = dist
-                end
 
                 local vec = {x=p.x-s.x, y=p.y-s.y, z=p.z-s.z}
                 local yaw = math.atan(vec.z/vec.x)+math.pi/2
@@ -332,6 +334,7 @@ function mobs:register_mob(name, def)
                         vec.z = vec.z*v/amount
                         obj:setvelocity(vec)
                     end
+                end
                 end
             end
         end,
