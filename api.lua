@@ -39,8 +39,8 @@ function mobs:register_mob(name, def)
         timer = 0,
         lifetimer = 600,
         env_damage_timer = 0,
-        target = {player=nil, dist=nil},
-        following = {player=nil, dist=nil},
+        target = {player=nil, pos=nil, dist=nil},
+        following = {player=nil, pos=nil, dist=nil},
         v_start = false,
         old_y = nil,
 
@@ -168,7 +168,7 @@ function mobs:register_mob(name, def)
                     self.state = "stand"
                     self.v_start = false
                     self.set_velocity(self, 0)
-                    self.following = {player=nil, dist=nil}
+                    self.following = {player=nil, pos=nil, dist=nil}
                 else
                     local s = pos
                     local p = self.following.player:getpos()
@@ -177,7 +177,9 @@ function mobs:register_mob(name, def)
                         self.state = "stand"
                         self.v_start = false
                         self.set_velocity(self, 0)
-                        self.following = {player=nil, dist=nil}
+                        self.following = {player=nil, pos=nil, dist=nil}
+                    else
+                        self.following.pos = p
                     end
                 end
             elseif self.state == "attack" then
@@ -188,7 +190,7 @@ function mobs:register_mob(name, def)
                     self.state = "stand"
                     self.v_start = false
                     self.set_velocity(self, 0)
-                    self.target = {player=nil, dist=nil}
+                    self.target = {player=nil, pos=nil, dist=nil}
                 else
                     local s = pos
                     local p = self.target.player:getpos()
@@ -197,7 +199,9 @@ function mobs:register_mob(name, def)
                         self.state = "stand"
                         self.v_start = false
                         self.set_velocity(self, 0)
-                        self.target = {player=nil, dist=nil}
+                        self.target = {player=nil, pos=nil, dist=nil}
+                    else
+                        self.target.pos = p
                     end
                 end
             end
@@ -211,6 +215,7 @@ function mobs:register_mob(name, def)
                         if not self.target.dist or self.target.dist < dist then
                             self.state = "attack"
                             self.target.player = player
+                            self.target.pos = p
                             self.target.dist = dist
                         end
                     end
@@ -226,6 +231,7 @@ function mobs:register_mob(name, def)
                         if player:get_wielded_item():get_name() == self.follow then
                             self.state = "chase"
                             self.following.player = player
+                            self.following.pos = p
                             self.following.dist = dist
                             break
                         end
@@ -235,7 +241,7 @@ function mobs:register_mob(name, def)
 
             if self.state == "chase" then
                 local s = pos
-                local p = self.following.player:getpos()
+                local p = self.following.pos
                 local vec = {x=p.x-s.x, y=p.y-s.y, z=p.z-s.z}
                 local yaw = math.atan(vec.z/vec.x)
                 if self.drawtype == "front" then
@@ -287,7 +293,7 @@ function mobs:register_mob(name, def)
                 end
             elseif self.state == "attack" then
                 local s = pos
-                local p = self.target.player:getpos()
+                local p = self.target.pos
                 local vec = {x=p.x-s.x, y=p.y-s.y, z=p.z-s.z}
                 local yaw = math.atan(vec.z/vec.x)
                 if self.drawtype == "front" then
