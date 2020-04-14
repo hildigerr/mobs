@@ -340,14 +340,7 @@ function mobs:register_mob(name, def)
                             minetest.sound_play(self.sounds.attack, {object = self.object})
                         end
 
-                        local obj = minetest.env:add_entity(pos, self.arrow)
-                        local amount = (vec.x^2+vec.y^2+vec.z^2)^0.5
-                        local v = obj:get_luaentity().velocity
-                        vec.y = vec.y+1
-                        vec.x = vec.x*v/amount
-                        vec.y = vec.y*v/amount
-                        vec.z = vec.z*v/amount
-                        obj:setvelocity(vec)
+                        mobs:shoot(self.arrow,pos, self.target.pos, self.sounds)
                     end
                 end
             end
@@ -472,3 +465,16 @@ function mobs:register_arrow(name, def)
         end
     })
 end
+
+function mobs:shoot(name, pos, target)
+    local obj = minetest.env:add_entity(pos, name)
+    local vec = {x=target.x-pos.x, y=target.y-pos.y, z=target.z-pos.z}
+    local amount = (vec.x^2+vec.y^2+vec.z^2)^0.5
+    local v = obj:get_luaentity().velocity
+    vec.y = vec.y+1
+    vec.x = vec.x*v/amount
+    vec.y = vec.y*v/amount
+    vec.z = vec.z*v/amount
+    obj:setvelocity(vec)
+end
+
