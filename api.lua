@@ -237,8 +237,8 @@ function mobs:register_mob(name, def)
                 local s = pos
                 local p = self.following.player:getpos()
                 local vec = {x=p.x-s.x, y=p.y-s.y, z=p.z-s.z}
-                local yaw = math.atan(vec.z/vec.x)+math.pi/2
-                if self.drawtype == "side" then
+                local yaw = math.atan(vec.z/vec.x)
+                if self.drawtype == "front" then
                     yaw = yaw+(math.pi/2)
                 end
                 if p.x > s.x then
@@ -248,14 +248,14 @@ function mobs:register_mob(name, def)
                 if self.following.dist > 2 then
                     if not self.v_start then
                         self.v_start = true
-                        self.set_velocity(self, -self.run_velocity)
+                        self.set_velocity(self, self.run_velocity)
                     else
                         if self.get_velocity(self) <= 0.5 and self.object:getvelocity().y == 0 then
                             local v = self.object:getvelocity()
                             v.y = 5
                             self.object:setvelocity(v)
                         end
-                        self.set_velocity(self, -self.run_velocity)
+                        self.set_velocity(self, self.run_velocity)
                     end
                 else
                     self.v_start = false
@@ -289,8 +289,8 @@ function mobs:register_mob(name, def)
                 local s = pos
                 local p = self.target.player:getpos()
                 local vec = {x=p.x-s.x, y=p.y-s.y, z=p.z-s.z}
-                local yaw = math.atan(vec.z/vec.x)+math.pi/2
-                if self.drawtype == "side" then
+                local yaw = math.atan(vec.z/vec.x)
+                if self.drawtype == "front" then
                     yaw = yaw+(math.pi/2)
                 end
                 if p.x > s.x then
