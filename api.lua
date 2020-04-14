@@ -169,6 +169,16 @@ function mobs:register_mob(name, def)
                     self.v_start = false
                     self.set_velocity(self, 0)
                     self.following = {player=nil, dist=nil}
+                else
+                    local s = pos
+                    local p = self.following.player:getpos()
+                    self.following.dist = ((p.x-s.x)^2 + (p.y-s.y)^2 + (p.z-s.z)^2)^0.5
+                    if self.following.dist > self.view_range then
+                        self.state = "stand"
+                        self.v_start = false
+                        self.set_velocity(self, 0)
+                        self.following = {player=nil, dist=nil}
+                    end
                 end
             elseif self.state == "attack" then
                 if not self.target.player
@@ -179,6 +189,16 @@ function mobs:register_mob(name, def)
                     self.v_start = false
                     self.set_velocity(self, 0)
                     self.target = {player=nil, dist=nil}
+                else
+                    local s = pos
+                    local p = self.target.player:getpos()
+                    self.target.dist = ((p.x-s.x)^2 + (p.y-s.y)^2 + (p.z-s.z)^2)^0.5
+                    if self.target.dist > self.view_range then
+                        self.state = "stand"
+                        self.v_start = false
+                        self.set_velocity(self, 0)
+                        self.target = {player=nil, dist=nil}
+                    end
                 end
             end
 
@@ -216,14 +236,6 @@ function mobs:register_mob(name, def)
             if self.state == "chase" then
                     local s = pos
                     local p = self.following.player:getpos()
-                    local dist = ((p.x-s.x)^2 + (p.y-s.y)^2 + (p.z-s.z)^2)^0.5
-                    if dist > self.view_range then
-                        self.state = "stand"
-                        self.v_start = false
-                        self.set_velocity(self, 0)
-                        self.following = {player=nil, dist=nil}
-                    else
-                        self.following.dist = dist
                         local vec = {x=p.x-s.x, y=p.y-s.y, z=p.z-s.z}
                         local yaw = math.atan(vec.z/vec.x)+math.pi/2
                         if self.drawtype == "side" then
@@ -233,7 +245,7 @@ function mobs:register_mob(name, def)
                             yaw = yaw+math.pi
                         end
                         self.object:setyaw(yaw)
-                        if dist > 2 then
+                        if self.following.dist > 2 then
                             if not self.v_start then
                                 self.v_start = true
                                 self.set_velocity(self, -self.run_velocity)
@@ -249,7 +261,6 @@ function mobs:register_mob(name, def)
                             self.v_start = false
                             self.set_velocity(self, 0)
                         end
-                    end
 
             elseif self.state == "stand" then
                 if math.random(1, 4) == 1 then
@@ -277,15 +288,6 @@ function mobs:register_mob(name, def)
             elseif self.state == "attack" then
                 local s = pos
                 local p = self.target.player:getpos()
-                local dist = ((p.x-s.x)^2 + (p.y-s.y)^2 + (p.z-s.z)^2)^0.5
-                if dist > self.view_range then
-                    self.state = "stand"
-                    self.v_start = false
-                    self.set_velocity(self, 0)
-                    self.target = {player=nil, dist=nil}
-                    return
-                else
-                    self.target.dist = dist
                     local vec = {x=p.x-s.x, y=p.y-s.y, z=p.z-s.z}
                     local yaw = math.atan(vec.z/vec.x)+math.pi/2
                     if self.drawtype == "side" then
@@ -342,7 +344,6 @@ function mobs:register_mob(name, def)
                             obj:setvelocity(vec)
                         end
                     end
-                end
             end
         end,
 
