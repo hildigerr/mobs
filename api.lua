@@ -234,33 +234,33 @@ function mobs:register_mob(name, def)
             end
 
             if self.state == "chase" then
-                    local s = pos
-                    local p = self.following.player:getpos()
-                        local vec = {x=p.x-s.x, y=p.y-s.y, z=p.z-s.z}
-                        local yaw = math.atan(vec.z/vec.x)+math.pi/2
-                        if self.drawtype == "side" then
-                            yaw = yaw+(math.pi/2)
+                local s = pos
+                local p = self.following.player:getpos()
+                local vec = {x=p.x-s.x, y=p.y-s.y, z=p.z-s.z}
+                local yaw = math.atan(vec.z/vec.x)+math.pi/2
+                if self.drawtype == "side" then
+                    yaw = yaw+(math.pi/2)
+                end
+                if p.x > s.x then
+                    yaw = yaw+math.pi
+                end
+                self.object:setyaw(yaw)
+                if self.following.dist > 2 then
+                    if not self.v_start then
+                        self.v_start = true
+                        self.set_velocity(self, -self.run_velocity)
+                    else
+                        if self.get_velocity(self) <= 0.5 and self.object:getvelocity().y == 0 then
+                            local v = self.object:getvelocity()
+                            v.y = 5
+                            self.object:setvelocity(v)
                         end
-                        if p.x > s.x then
-                            yaw = yaw+math.pi
-                        end
-                        self.object:setyaw(yaw)
-                        if self.following.dist > 2 then
-                            if not self.v_start then
-                                self.v_start = true
-                                self.set_velocity(self, -self.run_velocity)
-                            else
-                                if self.get_velocity(self) <= 0.5 and self.object:getvelocity().y == 0 then
-                                    local v = self.object:getvelocity()
-                                    v.y = 5
-                                    self.object:setvelocity(v)
-                                end
-                                self.set_velocity(self, -self.run_velocity)
-                            end
-                        else
-                            self.v_start = false
-                            self.set_velocity(self, 0)
-                        end
+                        self.set_velocity(self, -self.run_velocity)
+                    end
+                else
+                    self.v_start = false
+                    self.set_velocity(self, 0)
+                end
 
             elseif self.state == "stand" then
                 if math.random(1, 4) == 1 then
@@ -288,62 +288,62 @@ function mobs:register_mob(name, def)
             elseif self.state == "attack" then
                 local s = pos
                 local p = self.target.player:getpos()
-                    local vec = {x=p.x-s.x, y=p.y-s.y, z=p.z-s.z}
-                    local yaw = math.atan(vec.z/vec.x)+math.pi/2
-                    if self.drawtype == "side" then
-                        yaw = yaw+(math.pi/2)
-                    end
-                    if p.x > s.x then
-                        yaw = yaw+math.pi
-                    end
-                    self.object:setyaw(yaw)
-                    if self.attack_type == "dogfight" then
-                        if self.target.dist > 2 then
-                            if not self.v_start then
-                                self.v_start = true
-                                self.set_velocity(self, self.run_velocity)
-                            else
-                                if self.get_velocity(self) <= 0.5 and self.object:getvelocity().y == 0 then
-                                    local v = self.object:getvelocity()
-                                    v.y = 5
-                                    self.object:setvelocity(v)
-                                end
-                                self.set_velocity(self, self.run_velocity)
-                            end
+                local vec = {x=p.x-s.x, y=p.y-s.y, z=p.z-s.z}
+                local yaw = math.atan(vec.z/vec.x)+math.pi/2
+                if self.drawtype == "side" then
+                    yaw = yaw+(math.pi/2)
+                end
+                if p.x > s.x then
+                    yaw = yaw+math.pi
+                end
+                self.object:setyaw(yaw)
+                if self.attack_type == "dogfight" then
+                    if self.target.dist > 2 then
+                        if not self.v_start then
+                            self.v_start = true
+                            self.set_velocity(self, self.run_velocity)
                         else
-                            self.v_start = false
-                            self.set_velocity(self, 0)
-                            if self.timer > 1 then
-                                self.timer = 0
-                                if self.sounds and self.sounds.attack then
-                                    minetest.sound_play(self.sounds.attack, {object = self.object})
-                                end
-                                self.target.player:punch(self.object, 1.0,  {
-                                    full_punch_interval=1.0,
-                                    damage_groups = {fleshy=self.damage}
-                                }, vec)
+                            if self.get_velocity(self) <= 0.5 and self.object:getvelocity().y == 0 then
+                                local v = self.object:getvelocity()
+                                v.y = 5
+                                self.object:setvelocity(v)
                             end
+                            self.set_velocity(self, self.run_velocity)
                         end
-                    elseif self.attack_type == "shoot" then
+                    else
+                        self.v_start = false
                         self.set_velocity(self, 0)
-
-                        if self.timer > self.shoot_interval and math.random(1, 100) <= 60 then
+                        if self.timer > 1 then
                             self.timer = 0
-
                             if self.sounds and self.sounds.attack then
                                 minetest.sound_play(self.sounds.attack, {object = self.object})
                             end
-
-                            local obj = minetest.env:add_entity(pos, self.arrow)
-                            local amount = (vec.x^2+vec.y^2+vec.z^2)^0.5
-                            local v = obj:get_luaentity().velocity
-                            vec.y = vec.y+1
-                            vec.x = vec.x*v/amount
-                            vec.y = vec.y*v/amount
-                            vec.z = vec.z*v/amount
-                            obj:setvelocity(vec)
+                            self.target.player:punch(self.object, 1.0,  {
+                                full_punch_interval=1.0,
+                                damage_groups = {fleshy=self.damage}
+                            }, vec)
                         end
                     end
+                elseif self.attack_type == "shoot" then
+                    self.set_velocity(self, 0)
+
+                    if self.timer > self.shoot_interval and math.random(1, 100) <= 60 then
+                        self.timer = 0
+
+                        if self.sounds and self.sounds.attack then
+                            minetest.sound_play(self.sounds.attack, {object = self.object})
+                        end
+
+                        local obj = minetest.env:add_entity(pos, self.arrow)
+                        local amount = (vec.x^2+vec.y^2+vec.z^2)^0.5
+                        local v = obj:get_luaentity().velocity
+                        vec.y = vec.y+1
+                        vec.x = vec.x*v/amount
+                        vec.y = vec.y*v/amount
+                        vec.z = vec.z*v/amount
+                        obj:setvelocity(vec)
+                    end
+                end
             end
         end,
 
