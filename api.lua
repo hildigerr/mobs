@@ -64,6 +64,7 @@ function mobs:register_mob(name, def)
             local n = minetest.env:get_node(pos)
             if self.type == "monster" and minetest.setting_getbool("only_peaceful_mobs") then
                 self.object:remove()
+                return
             end
 
             self.lifetimer = self.lifetimer - dtime
@@ -119,7 +120,6 @@ function mobs:register_mob(name, def)
             if self.sounds and self.sounds.random and math.random(1, 100) <= 1 then
                 minetest.sound_play(self.sounds.random, {object = self.object})
             end
-
 
             self.env_damage_timer = self.env_damage_timer + dtime
             if self.env_damage_timer > 1 then
