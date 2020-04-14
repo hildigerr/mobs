@@ -160,6 +160,28 @@ function mobs:register_mob(name, def)
                 end
             end
 
+            if self.state == "chase" then
+                if not self.following.player
+                    or not self.following.player:is_player()
+                    or self.following.player:get_wielded_item():get_name() ~= self.follow
+                then
+                    self.state = "stand"
+                    self.v_start = false
+                    self.set_velocity(self, 0)
+                    self.following = {player=nil, dist=nil}
+                end
+            elseif self.state == "attack" then
+                if not self.target.player
+                    or not self.target.player:is_player() 
+                    or self.target.player:get_hp() <= 0
+                then
+                    self.state = "stand"
+                    self.v_start = false
+                    self.set_velocity(self, 0)
+                    self.target = {player=nil, dist=nil}
+                end
+            end
+
             if self.type == "monster" and minetest.setting_getbool("enable_damage") then
                 for _,player in pairs(minetest.get_connected_players()) do
                     local s = pos
@@ -192,15 +214,6 @@ function mobs:register_mob(name, def)
             end
 
             if self.state == "chase" then
-                if not self.following.player
-                    or not self.following.player:is_player()
-                    or self.following.player:get_wielded_item():get_name() ~= self.follow
-                then
-                    self.state = "stand"
-                    self.v_start = false
-                    self.set_velocity(self, 0)
-                    self.following = {player=nil, dist=nil}
-                else
                     local s = pos
                     local p = self.following.player:getpos()
                     local dist = ((p.x-s.x)^2 + (p.y-s.y)^2 + (p.z-s.z)^2)^0.5
@@ -237,7 +250,6 @@ function mobs:register_mob(name, def)
                             self.set_velocity(self, 0)
                         end
                     end
-                end
 
             elseif self.state == "stand" then
                 if math.random(1, 4) == 1 then
@@ -263,14 +275,10 @@ function mobs:register_mob(name, def)
                     self.state = "stand"
                 end
             elseif self.state == "attack" then
-                if not self.target.player or not self.target.player:is_player() then
-                    self.state = "stand"
-                    return
-                end
                 local s = pos
                 local p = self.target.player:getpos()
                 local dist = ((p.x-s.x)^2 + (p.y-s.y)^2 + (p.z-s.z)^2)^0.5
-                if dist > self.view_range or self.target.player:get_hp() <= 0 then
+                if dist > self.view_range then
                     self.state = "stand"
                     self.v_start = false
                     self.set_velocity(self, 0)
