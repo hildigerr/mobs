@@ -67,7 +67,7 @@ function mobs:register_mob(name, def)
             end
 
             self.lifetimer = self.lifetimer - dtime
-            if self.lifetimer <= 0 and not self.tamed and self.state ~= "attack" then
+            if self.lifetimer <= 0 and not self.tamed and self.state ~= "chase" then
                 local player_near = false
                 for _,obj in ipairs(minetest.env:get_objects_inside_radius(pos, 20)) do
                     if obj:is_player() then
@@ -109,7 +109,7 @@ function mobs:register_mob(name, def)
             end
 
             self.timer = self.timer+dtime
-            if self.state ~= "attack" then
+            if self.state ~= "chase" then
                 if self.timer < 1 then
                     return
                 end
@@ -159,7 +159,7 @@ function mobs:register_mob(name, def)
                 end
             end
 
-            if self.state == "chase" or self.state == "attack" then
+            if self.state == "chase" then
                 if not self.target.player
                     or not self.target.player:is_player() 
                     or (self.follow and self.target.player:get_wielded_item():get_name() ~= self.follow)
@@ -191,7 +191,7 @@ function mobs:register_mob(name, def)
                     local dist = ((p.x-s.x)^2 + (p.y-s.y)^2 + (p.z-s.z)^2)^0.5
                     if dist < self.view_range then
                         if not self.target.dist or self.target.dist < dist then
-                            self.state = "attack"
+                            self.state = "chase"
                             self.target.player = player
                             self.target.pos = p
                             self.target.dist = dist
@@ -217,36 +217,7 @@ function mobs:register_mob(name, def)
                 end
             end
 
-            if self.state == "chase" then
-                local s = pos
-                local p = self.target.pos
-                local vec = {x=p.x-s.x, y=p.y-s.y, z=p.z-s.z}
-                local yaw = math.atan(vec.z/vec.x)
-                if self.drawtype == "front" then
-                    yaw = yaw+(math.pi/2)
-                end
-                if p.x > s.x then
-                    yaw = yaw+math.pi
-                end
-                self.object:setyaw(yaw)
-                if self.target.dist > 2 then
-                    if not self.v_start then
-                        self.v_start = true
-                        self.set_velocity(self, self.run_velocity)
-                    else
-                        if self.get_velocity(self) <= 0.5 and self.object:getvelocity().y == 0 then
-                            local v = self.object:getvelocity()
-                            v.y = 5
-                            self.object:setvelocity(v)
-                        end
-                        self.set_velocity(self, self.run_velocity)
-                    end
-                else
-                    self.v_start = false
-                    self.set_velocity(self, 0)
-                end
-
-            elseif self.state == "stand" then
+            if self.state == "stand" then
                 if math.random(1, 4) == 1 then
                     self.object:setyaw(self.object:getyaw()+((math.random(0,360)-180)/180*math.pi))
                 end
@@ -269,7 +240,7 @@ function mobs:register_mob(name, def)
                     self.set_velocity(self, 0)
                     self.state = "stand"
                 end
-            elseif self.state == "attack" then
+            elseif self.state == "chase" then
                 local s = pos
                 local p = self.target.pos
                 local vec = {x=p.x-s.x, y=p.y-s.y, z=p.z-s.z}
@@ -301,7 +272,7 @@ function mobs:register_mob(name, def)
                             self.timer = 0
                             mobs:shoot(self.arrow,pos, self.target.pos, self.sounds)
                         end
-                    else -- "dogfight"
+                    elseif self.type == "monster" then -- "dogfight"
                         if self.timer > 1 then
                             self.timer = 0
                             if self.sounds and self.sounds.attack then
