@@ -320,13 +320,11 @@ function mobs:register_mob(name, def)
             return minetest.serialize(tmp)
         end,
 
-        on_punch = function(self, hitter)
-            if self.object:get_hp() <= 0 then
-                if hitter and hitter:is_player() and hitter:get_inventory() then
-                    for _,drop in ipairs(self.drops) do
-                        if math.random(1, drop.chance) == 1 then
-                            hitter:get_inventory():add_item("main", ItemStack(drop.name.." "..math.random(drop.min, drop.max)))
-                        end
+        on_death = function(self, hitter)
+            if hitter and hitter:is_player() and hitter:get_inventory() then
+                for _,drop in ipairs(self.drops) do
+                    if math.random(1, drop.chance) == 1 then
+                        hitter:get_inventory():add_item("main", ItemStack(drop.name.." "..math.random(drop.min, drop.max)))
                     end
                 end
             end
