@@ -37,7 +37,5 @@ mobs:register_mob("mobs:tree_monster", {
             max = 2,
         },
     },
-
-    attack_type = "dogfight",
 })
 mobs:register_spawn("mobs:tree_monster", {"default:leaves", "default:jungleleaves"}, 3, -1, 7000, 3, 31000)

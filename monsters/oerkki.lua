@@ -23,7 +23,5 @@ mobs:register_mob("mobs:oerkki", {
     makes_footstep_sound = false,
 
     drops = {},
-
-    attack_type = "dogfight",
 })
 mobs:register_spawn("mobs:oerkki", {"default:stone"}, 2, -1, 7000, 3, -10)

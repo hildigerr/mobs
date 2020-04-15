@@ -33,8 +33,6 @@ mobs:register_mob("mobs:racoon", {
         },
     },
 
-    attack_type = "dogfight",
-
     on_rightclick = function(self, clicker)
         if self.type == "animal" then
             self.type = "monster"

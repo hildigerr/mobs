@@ -30,7 +30,5 @@ mobs:register_mob("mobs:stone_monster", {
             max = 5,
         },
     },
-
-    attack_type = "dogfight",
 })
 mobs:register_spawn("mobs:stone_monster", {"default:stone"}, 3, -1, 7000, 3, 0)

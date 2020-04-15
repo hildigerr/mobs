@@ -30,7 +30,6 @@ function mobs:register_mob(name, def)
 
         drops = def.drops,
 
-        attack_type = def.attack_type,
         attack_range = def.attack_range or 2,
         arrow = def.arrow,
         shoot_interval = def.shoot_interval,
@@ -319,7 +318,12 @@ function mobs:register_mob(name, def)
                 else
                     self.v_start = false
                     self.set_velocity(self, 0)
-                    if self.attack_type == "dogfight" then
+                    if self.arrow then -- "shoot"
+                        if self.timer > self.shoot_interval and math.random(1, 100) <= 60 then
+                            self.timer = 0
+                            mobs:shoot(self.arrow,pos, self.target.pos, self.sounds)
+                        end
+                    else -- "dogfight"
                         if self.timer > 1 then
                             self.timer = 0
                             if self.sounds and self.sounds.attack then
@@ -329,11 +333,6 @@ function mobs:register_mob(name, def)
                                 full_punch_interval=1.0,
                                 damage_groups = {fleshy=self.damage}
                             }, vec)
-                        end
-                    elseif self.attack_type == "shoot" then
-                        if self.timer > self.shoot_interval and math.random(1, 100) <= 60 then
-                            self.timer = 0
-                            mobs:shoot(self.arrow,pos, self.target.pos, self.sounds)
                         end
                     end
                 end

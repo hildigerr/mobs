@@ -27,7 +27,5 @@ mobs:register_mob("mobs:dirt_monster", {
         min = 3,
         max = 5,},
     },
-
-    attack_type = "dogfight",
 })
 mobs:register_spawn("mobs:dirt_monster", {"default:dirt_with_grass"}, 3, -1, 7000, 3, 31000)

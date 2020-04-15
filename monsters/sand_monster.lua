@@ -30,7 +30,5 @@ mobs:register_mob("mobs:sand_monster", {
             max = 5,
         },
     },
-
-    attack_type = "dogfight",
 })
 mobs:register_spawn("mobs:sand_monster", {"default:desert_sand"}, 20, -1, 7000, 3, 31000)
