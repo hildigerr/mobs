@@ -2,7 +2,6 @@
 ----CONFIG OPTIONS:                    [true --or-- false]
 local MEAT_ROTS = minetest.settings:get_bool("mobs.meat_rots", true)
 local ALLOW_OVER_COOKING = minetest.settings:get_bool("mobs.overcooking", true)
-local USE_CAGES = minetest.settings:get_bool("mobs.cages", true)
 --------------------------------------------------------------------------------
 local modpath = minetest.get_modpath("mobs")
 dofile(modpath.."/api.lua")
@@ -30,10 +29,6 @@ end
 
 if MEAT_ROTS then
     dofile(minetest.get_modpath("mobs").."/msc/bad_meat.lua")
-end
-
-if USE_CAGES then
-    dofile(minetest.get_modpath("mobs").."/msc/pet_cages.lua")
 end
 
 if minetest.setting_get("log_mods") then

@@ -1,5 +1,5 @@
 --------------------------------------CAGES-------------------------------------
-----Aditional TODO:
+----Aditional TODO: Separate into a new mod
 -- configurable chat message warning of pet starvation,
 -- pet rodent breeding,
 -- empty cage shall reset timers
