@@ -37,13 +37,13 @@ mobs:register_mob("mobs:sheep", {
         local item = clicker:get_wielded_item()
         if item:get_name() == "farming:wheat" then
             if not self.tamed then
-                if not minetest.setting_getbool("creative_mode") then
+                if not minetest.settings:get_bool("creative_mode", false) then
                     item:take_item()
                     clicker:set_wielded_item(item)
                 end
                 self.tamed = true
             elseif self.naked then
-                if not minetest.setting_getbool("creative_mode") then
+                if not minetest.settings:get_bool("creative_mode", false) then
                     item:take_item()
                     clicker:set_wielded_item(item)
                 end

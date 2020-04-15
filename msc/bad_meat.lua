@@ -82,7 +82,7 @@ if not minetest.get_modpath("homedecor") then
         interval = STORAGE_TIMER, -- (operation interval)
         chance = 1, -- (chance of trigger is 1.0/this)
         action = function(pos, node)
-            spoil_meat( minetest.env:get_meta(pos):get_inventory(),
+            spoil_meat( minetest.get_meta(pos):get_inventory(),
                             "main",
                             ROT_IN_STORAGE_CHANCE,
                             false, nil )
@@ -93,15 +93,15 @@ if not minetest.get_modpath("homedecor") then
         interval = STORAGE_TIMER, -- (operation interval)
         chance = 1, -- (chance of trigger is 1.0/this)
         action = function(pos, node)
-            spoil_meat( minetest.env:get_meta(pos):get_inventory(),
+            spoil_meat( minetest.get_meta(pos):get_inventory(),
                             "fuel",
                             ROT_WHILE_COOKING_CHANCE,
                             false, nil )
-            spoil_meat( minetest.env:get_meta(pos):get_inventory(),
+            spoil_meat( minetest.get_meta(pos):get_inventory(),
                             "src",
                             ROT_WHILE_COOKING_CHANCE,
                             false, nil )
-            spoil_meat( minetest.env:get_meta(pos):get_inventory(),
+            spoil_meat( minetest.get_meta(pos):get_inventory(),
                             "dst",
                             ROT_WHILE_COOKING_CHANCE,
                             false, nil )
@@ -119,7 +119,7 @@ else
         interval = STORAGE_TIMER, -- (operation interval)
         chance = 1, -- (chance of trigger is 1.0/this)
         action = function(pos, node)
-            spoil_meat( minetest.env:get_meta(pos):get_inventory(),
+            spoil_meat( minetest.get_meta(pos):get_inventory(),
                             "main",
                             ROT_IN_STORAGE_CHANCE,
                             false, nil )
@@ -130,15 +130,15 @@ else
         interval = STORAGE_TIMER, -- (operation interval)
         chance = 1, -- (chance of trigger is 1.0/this)
         action = function(pos, node)
-            spoil_meat( minetest.env:get_meta(pos):get_inventory(),
+            spoil_meat( minetest.get_meta(pos):get_inventory(),
                             "fuel",
                             ROT_WHILE_COOKING_CHANCE,
                             false, nil )
-            spoil_meat( minetest.env:get_meta(pos):get_inventory(),
+            spoil_meat( minetest.get_meta(pos):get_inventory(),
                             "src",
                             ROT_WHILE_COOKING_CHANCE,
                             false, nil )
-            spoil_meat( minetest.env:get_meta(pos):get_inventory(),
+            spoil_meat( minetest.get_meta(pos):get_inventory(),
                             "dst",
                             ROT_WHILE_COOKING_CHANCE,
                             false, nil )
@@ -176,7 +176,7 @@ minetest.register_abm({
      interval = GROUND_TIMER, -- (operation interval)
      chance = 1, -- (chance of trigger is 1.0/this)
      action = function(pos, node)
-        local objs = minetest.env:get_objects_inside_radius(pos, 1)
+        local objs = minetest.get_objects_inside_radius(pos, 1)
         if objs then
             for i,j in ipairs(objs) do
                 local k = j:get_luaentity()
@@ -189,7 +189,7 @@ minetest.register_abm({
                         if str == "mobs:meat_raw" then
                             if math.random(1,100) > ROT_ON_GROUND_CHANCE then -- about 1/3 chance --TESTING
                                 objs[i]:remove()
-                                minetest.env:add_item(pos, "mobs:meat_rotten")
+                                minetest.add_item(pos, "mobs:meat_rotten")
                             end -- if by chance
                         end -- if is meat
                     end -- itemstring exists
@@ -211,7 +211,7 @@ minetest.register_abm({
      interval = WATER_TIMER, -- (operation interval)
      chance = 1, -- (chance of trigger is 1.0/this)
      action = function(pos, node)
-        local objs = minetest.env:get_objects_inside_radius(pos, 1)
+        local objs = minetest.get_objects_inside_radius(pos, 1)
         if objs then
             for i,j in ipairs(objs) do
                 local k = j:get_luaentity()
@@ -224,7 +224,7 @@ minetest.register_abm({
                         if str == "mobs:meat_raw" then
                             if math.random(1,100) > ROT_IN_WATER_CHANCE then
                                 objs[i]:remove()
-                                minetest.env:add_item(pos, "mobs:meat_rotten")
+                                minetest.add_item(pos, "mobs:meat_rotten")
                             end -- if by chance
                         end -- if is meat
                     end -- itemstring exists

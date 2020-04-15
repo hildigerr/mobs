@@ -44,23 +44,23 @@ mobs:register_arrow("mobs:fireball", {
     textures = {"mobs_fireball.png"},
     velocity = 5,
     hit_player = function(self, player)
-        local s = self.object:getpos()
-        local p = player:getpos()
+        local s = self.object:get_pos()
+        local p = player:get_pos()
         local vec = {x=s.x-p.x, y=s.y-p.y, z=s.z-p.z}
         player:punch(self.object, 1.0,  {
             full_punch_interval=1.0,
             damage_groups = {fleshy=4},
         }, vec)
-        local pos = self.object:getpos()
+        local pos = self.object:get_pos()
         for dx=-1,1 do
             for dy=-1,1 do
                 for dz=-1,1 do
                     local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-                    local n = minetest.env:get_node(pos).name
+                    local n = minetest.get_node(pos).name
                     if minetest.registered_nodes[n].groups.flammable or math.random(1, 100) <= 30 then
-                        minetest.env:set_node(p, {name="fire:basic_flame"})
+                        minetest.set_node(p, {name="fire:basic_flame"})
                     else
-                        minetest.env:remove_node(p)
+                        minetest.remove_node(p)
                     end
                 end
             end
@@ -71,11 +71,11 @@ mobs:register_arrow("mobs:fireball", {
             for dy=-2,1 do
                 for dz=-1,1 do
                     local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-                    local n = minetest.env:get_node(pos).name
+                    local n = minetest.get_node(pos).name
                     if minetest.registered_nodes[n].groups.flammable or math.random(1, 100) <= 30 then
-                        minetest.env:set_node(p, {name="fire:basic_flame"})
+                        minetest.set_node(p, {name="fire:basic_flame"})
                     else
-                        minetest.env:remove_node(p)
+                        minetest.remove_node(p)
                     end
                 end
             end

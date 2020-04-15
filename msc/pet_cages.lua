@@ -33,7 +33,7 @@ minetest.register_node("mobs:cage_empty", {
     legacy_facedir_simple = true,
     sounds = {},
     on_construct = function(pos)
-        local meta = minetest.env:get_meta(pos)
+        local meta = minetest.get_meta(pos)
         meta:set_string("formspec",
             "size[8,9;]"..
             "list[current_name;drink;5,1;1,1;]"..
@@ -48,7 +48,7 @@ minetest.register_node("mobs:cage_empty", {
         inv:set_size("drink",1)
     end,
     can_dig = function(pos,player)
-        local meta = minetest.env:get_meta(pos);
+        local meta = minetest.get_meta(pos);
         local inv = meta:get_inventory()
         if not inv:is_empty("house") then
             return false
@@ -81,7 +81,7 @@ minetest.register_node("mobs:cage_rat", {
     legacy_facedir_simple = true,
     sounds = {},
     on_construct = function(pos)
-        local meta = minetest.env:get_meta(pos)
+        local meta = minetest.get_meta(pos)
         meta:set_string("formspec",
             "size[8,9;]"..
             "list[current_name;drink;5,1;1,1;]"..
@@ -96,7 +96,7 @@ minetest.register_node("mobs:cage_rat", {
         inv:set_size("drink",1)
     end,
     can_dig = function(pos,player)
-        local meta = minetest.env:get_meta(pos);
+        local meta = minetest.get_meta(pos);
         local inv = meta:get_inventory()
         if not inv:is_empty("house") then
             return false
@@ -120,7 +120,7 @@ minetest.register_node("mobs:cage_rabbit", {
     legacy_facedir_simple = true,
     sounds = {},
     on_construct = function(pos)
-        local meta = minetest.env:get_meta(pos)
+        local meta = minetest.get_meta(pos)
         meta:set_string("formspec",
             "size[8,9;]"..
             "list[current_name;drink;5,1;1,1;]"..
@@ -135,7 +135,7 @@ minetest.register_node("mobs:cage_rabbit", {
         inv:set_size("drink",1)
     end,
     can_dig = function(pos,player)
-        local meta = minetest.env:get_meta(pos);
+        local meta = minetest.get_meta(pos);
         local inv = meta:get_inventory()
         if not inv:is_empty("house") then
             return false
@@ -153,7 +153,7 @@ minetest.register_abm({
     interval = 1.0,
     chance = 1,
     action = function(pos, node)
-        local meta = minetest.env:get_meta(pos)
+        local meta = minetest.get_meta(pos)
         local inv = meta:get_inventory()
         if inv:contains_item("house", "mobs:rabbit") then
             minetest.swap_node(pos,{name="mobs:cage_rabbit"})
@@ -181,7 +181,7 @@ minetest.register_abm({
     interval = 1.0,
     chance = 1,
     action = function(pos, node)
-        local meta = minetest.env:get_meta(pos)
+        local meta = minetest.get_meta(pos)
         for i, name in ipairs({
                 "breeding_totaltime",
                 "breeding_time",
