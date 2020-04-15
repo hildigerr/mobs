@@ -31,6 +31,7 @@ function mobs:register_mob(name, def)
         drops = def.drops,
 
         attack_type = def.attack_type,
+        attack_range = def.attack_range or 2,
         arrow = def.arrow,
         shoot_interval = def.shoot_interval,
 
@@ -303,8 +304,7 @@ function mobs:register_mob(name, def)
                     yaw = yaw+math.pi
                 end
                 self.object:setyaw(yaw)
-                if self.attack_type == "dogfight" then
-                    if self.target.dist > 2 then
+                    if self.target.dist > self.attack_range then
                         if not self.v_start then
                             self.v_start = true
                             self.set_velocity(self, self.run_velocity)
@@ -319,6 +319,7 @@ function mobs:register_mob(name, def)
                     else
                         self.v_start = false
                         self.set_velocity(self, 0)
+                if self.attack_type == "dogfight" then
                         if self.timer > 1 then
                             self.timer = 0
                             if self.sounds and self.sounds.attack then
@@ -329,7 +330,6 @@ function mobs:register_mob(name, def)
                                 damage_groups = {fleshy=self.damage}
                             }, vec)
                         end
-                    end
                 elseif self.attack_type == "shoot" then
                     self.set_velocity(self, 0)
 
@@ -338,6 +338,7 @@ function mobs:register_mob(name, def)
 
                         mobs:shoot(self.arrow,pos, self.target.pos, self.sounds)
                     end
+                end
                 end
             end
         end,

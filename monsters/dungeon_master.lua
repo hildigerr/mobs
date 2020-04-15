@@ -32,6 +32,7 @@ mobs:register_mob("mobs:dungeon_master", {
     },
 
     attack_type = "shoot",
+    attack_range = 10,
     arrow = "mobs:fireball",
     shoot_interval = 2.5,
 })
