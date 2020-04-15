@@ -336,10 +336,6 @@ function mobs:register_mob(name, def)
                     if self.timer > self.shoot_interval and math.random(1, 100) <= 60 then
                         self.timer = 0
 
-                        if self.sounds and self.sounds.attack then
-                            minetest.sound_play(self.sounds.attack, {object = self.object})
-                        end
-
                         mobs:shoot(self.arrow,pos, self.target.pos, self.sounds)
                     end
                 end
@@ -466,7 +462,7 @@ function mobs:register_arrow(name, def)
     })
 end
 
-function mobs:shoot(name, pos, target)
+function mobs:shoot(name, pos, target, sounds)
     local obj = minetest.env:add_entity(pos, name)
     local vec = {x=target.x-pos.x, y=target.y-pos.y, z=target.z-pos.z}
     local amount = (vec.x^2+vec.y^2+vec.z^2)^0.5
@@ -476,5 +472,8 @@ function mobs:shoot(name, pos, target)
     vec.y = vec.y*v/amount
     vec.z = vec.z*v/amount
     obj:setvelocity(vec)
+    if sounds and sounds.attack then
+        minetest.sound_play(sounds.attack, {object = obj})
+    end
 end
 
