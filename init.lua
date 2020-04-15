@@ -25,6 +25,4 @@ if minetest.settings:get_bool("mobs.overcooking", true) then
     dofile(modpath.."/msc/overcook.lua")
 end
 
-if minetest.setting_get("log_mods") then
-    minetest.log("action", "mobs loaded")
-end
+minetest.log("info", "mobs loaded")
