@@ -1,5 +1,11 @@
 # TODO bad_meat and pet_cages configuration options
 
+#   Notify players of mob spawns
+mobs.display_mob_spawn (Notify of Spawns) bool false
+
+#   Spawn only peacefull mobs
+mobs.only_peaceful_mobs (Only Peaceful Mobs) bool false
+
 #    Meat will rot if not cooked or refridgerated
 mobs.meat_rots (Meat Rots) bool true
 
