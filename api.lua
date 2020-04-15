@@ -40,7 +40,6 @@ function mobs:register_mob(name, def)
         lifetimer = 600,
         env_damage_timer = 0,
         target = {player=nil, pos=nil, dist=nil},
-        following = {player=nil, pos=nil, dist=nil},
         v_start = false,
         old_y = nil,
 
@@ -160,32 +159,11 @@ function mobs:register_mob(name, def)
                 end
             end
 
-            if self.state == "chase" then
-                if not self.following.player
-                    or not self.following.player:is_player()
-                    or self.following.player:get_wielded_item():get_name() ~= self.follow
-                then
-                    self.state = "stand"
-                    self.v_start = false
-                    self.set_velocity(self, 0)
-                    self.following = {player=nil, pos=nil, dist=nil}
-                else
-                    local s = pos
-                    local p = self.following.player:getpos()
-                    self.following.dist = ((p.x-s.x)^2 + (p.y-s.y)^2 + (p.z-s.z)^2)^0.5
-                    if self.following.dist > self.view_range then
-                        self.state = "stand"
-                        self.v_start = false
-                        self.set_velocity(self, 0)
-                        self.following = {player=nil, pos=nil, dist=nil}
-                    else
-                        self.following.pos = p
-                    end
-                end
-            elseif self.state == "attack" then
+            if self.state == "chase" or self.state == "attack" then
                 if not self.target.player
                     or not self.target.player:is_player() 
-                    or self.target.player:get_hp() <= 0
+                    or (self.follow and self.target.player:get_wielded_item():get_name() ~= self.follow)
+                    or (self.type == "monster" and self.target.player:get_hp() <= 0)
                 then
                     self.state = "stand"
                     self.v_start = false
@@ -230,9 +208,9 @@ function mobs:register_mob(name, def)
                     if dist < self.view_range then
                         if player:get_wielded_item():get_name() == self.follow then
                             self.state = "chase"
-                            self.following.player = player
-                            self.following.pos = p
-                            self.following.dist = dist
+                            self.target.player = player
+                            self.target.pos = p
+                            self.target.dist = dist
                             break
                         end
                     end
@@ -241,7 +219,7 @@ function mobs:register_mob(name, def)
 
             if self.state == "chase" then
                 local s = pos
-                local p = self.following.pos
+                local p = self.target.pos
                 local vec = {x=p.x-s.x, y=p.y-s.y, z=p.z-s.z}
                 local yaw = math.atan(vec.z/vec.x)
                 if self.drawtype == "front" then
@@ -251,7 +229,7 @@ function mobs:register_mob(name, def)
                     yaw = yaw+math.pi
                 end
                 self.object:setyaw(yaw)
-                if self.following.dist > 2 then
+                if self.target.dist > 2 then
                     if not self.v_start then
                         self.v_start = true
                         self.set_velocity(self, self.run_velocity)
