@@ -30,6 +30,7 @@ minetest.register_craft({
     recipe = "mobs:meat_rotten",
 })
 
+if not minetest.settings:get_bool("mobs.meat_rots", true) then return end
 
 function spoil_meat( inv, title, chance, warn, owner )
 --inv = InvRef

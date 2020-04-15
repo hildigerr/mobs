@@ -1,11 +1,9 @@
 --------------------------------------------------------------------------------
-----CONFIG OPTIONS:                    [true --or-- false]
-local MEAT_ROTS = minetest.settings:get_bool("mobs.meat_rots", true)
-local ALLOW_OVER_COOKING = minetest.settings:get_bool("mobs.overcooking", true)
 --------------------------------------------------------------------------------
 local modpath = minetest.get_modpath("mobs")
 dofile(modpath.."/api.lua")
 dofile(modpath.."/msc/meat.lua")
+dofile(modpath.."/msc/bad_meat.lua")
 
 -------------------------------MONSTERS-----------------------------------------
 dofile(modpath.."/monsters/dirt_monster.lua")
@@ -23,12 +21,8 @@ dofile(modpath.."/animals/rat.lua")
 dofile(modpath.."/animals/sheep.lua")
 
 --------------------------------------------------------------------------------
-if ALLOW_OVER_COOKING then
-    dofile(minetest.get_modpath("mobs").."/msc/overcook.lua")
-end
-
-if MEAT_ROTS then
-    dofile(minetest.get_modpath("mobs").."/msc/bad_meat.lua")
+if minetest.settings:get_bool("mobs.overcooking", true) then
+    dofile(modpath.."/msc/overcook.lua")
 end
 
 if minetest.setting_get("log_mods") then
