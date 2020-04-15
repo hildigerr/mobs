@@ -304,22 +304,22 @@ function mobs:register_mob(name, def)
                     yaw = yaw+math.pi
                 end
                 self.object:setyaw(yaw)
-                    if self.target.dist > self.attack_range then
-                        if not self.v_start then
-                            self.v_start = true
-                            self.set_velocity(self, self.run_velocity)
-                        else
-                            if self.get_velocity(self) <= 0.5 and self.object:getvelocity().y == 0 then
-                                local v = self.object:getvelocity()
-                                v.y = 5
-                                self.object:setvelocity(v)
-                            end
-                            self.set_velocity(self, self.run_velocity)
-                        end
+                if self.target.dist > self.attack_range then
+                    if not self.v_start then
+                        self.v_start = true
+                        self.set_velocity(self, self.run_velocity)
                     else
-                        self.v_start = false
-                        self.set_velocity(self, 0)
-                if self.attack_type == "dogfight" then
+                        if self.get_velocity(self) <= 0.5 and self.object:getvelocity().y == 0 then
+                            local v = self.object:getvelocity()
+                            v.y = 5
+                            self.object:setvelocity(v)
+                        end
+                        self.set_velocity(self, self.run_velocity)
+                    end
+                else
+                    self.v_start = false
+                    self.set_velocity(self, 0)
+                    if self.attack_type == "dogfight" then
                         if self.timer > 1 then
                             self.timer = 0
                             if self.sounds and self.sounds.attack then
@@ -330,15 +330,12 @@ function mobs:register_mob(name, def)
                                 damage_groups = {fleshy=self.damage}
                             }, vec)
                         end
-                elseif self.attack_type == "shoot" then
-                    self.set_velocity(self, 0)
-
-                    if self.timer > self.shoot_interval and math.random(1, 100) <= 60 then
-                        self.timer = 0
-
-                        mobs:shoot(self.arrow,pos, self.target.pos, self.sounds)
+                    elseif self.attack_type == "shoot" then
+                        if self.timer > self.shoot_interval and math.random(1, 100) <= 60 then
+                            self.timer = 0
+                            mobs:shoot(self.arrow,pos, self.target.pos, self.sounds)
+                        end
                     end
-                end
                 end
             end
         end,
