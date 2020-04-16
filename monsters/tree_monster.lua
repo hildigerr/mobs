@@ -50,8 +50,8 @@ mobs:register_mob("mobs:tree_monster", {
             max = 2,
         },
     },
-    attack_method = function(self, target)
-        mobs:slap(self, target.player, {fleshy=2})
+    attack = function(self, target)
+        return mobs:slap(self, target.player, {fleshy=2})
     end,
 })
 mobs:register_spawn("mobs:tree_monster", {"default:leaves", "default:jungleleaves"}, 3, -1, 7000, 3, 31000)

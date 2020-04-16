@@ -37,8 +37,8 @@ mobs:register_mob("mobs:oerkki", {
 
     drops = {},
     
-    attack_method = function(self, target)
-        mobs:slap(self, target.player, {fleshy=4})
+    attack = function(self, target)
+        return mobs:slap(self, target.player, {fleshy=4})
     end,
 })
 mobs:register_spawn("mobs:oerkki", {"default:stone"}, 2, -1, 7000, 3, -10)

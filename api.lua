@@ -41,7 +41,14 @@ function mobs:register_mob(name, def)
         drops = def.drops,
 
         attack_range = def.attack_range or 2,
-        attack_method = def.attack_method,
+        attack = def.attack or
+            function(self, target)
+                if self.timer > 1 then
+                    self.timer = 0
+                    -- return true -- To trigger animation and sound
+                end
+                return false
+            end,
 
         on_rightclick = def.on_rightclick,
 
@@ -338,14 +345,12 @@ function mobs:register_mob(name, def)
                     self.v_start = false
                     self.set_velocity(self, 0)
                     self:set_animation("stand")
-                    if self.attack_method then
-                        if self.attack_method(self, self.target) then
+                        if self:attack(self.target) then
                             self:set_animation("punch")
                             if self.sounds and self.sounds.attack then
                                 minetest.sound_play(self.sounds.attack, {object = self.object})
                             end
                         end
-                    end
                 end
             end
         end,

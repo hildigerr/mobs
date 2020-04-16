@@ -44,8 +44,8 @@ mobs:register_mob("mobs:sand_monster", {
         },
     },
     
-    attack_method = function(self, target)
-        mobs:slap(self, target.player, {fleshy=1})
+    attack = function(self, target)
+        return mobs:slap(self, target.player, {fleshy=1})
     end,
 })
 mobs:register_spawn("mobs:sand_monster", {"default:desert_sand"}, 20, -1, 7000, 3, 31000)

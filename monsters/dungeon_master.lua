@@ -43,7 +43,7 @@ mobs:register_mob("mobs:dungeon_master", {
     },
 
     attack_range = 10,
-    attack_method = function(self, target)
+    attack = function(self, target)
         local shoot_interval = 2.5
         if self.timer > shoot_interval and math.random(1, 100) <= 60 then
             local p = self.object:get_pos()

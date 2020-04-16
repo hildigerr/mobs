@@ -43,8 +43,8 @@ mobs:register_mob("mobs:stone_monster", {
             max = 5,
         },
     },
-    attack_method = function(self, target)
-        mobs:slap(self, target.player, {fleshy=3})
+    attack = function(self, target)
+        return mobs:slap(self, target.player, {fleshy=3})
     end,
 })
 mobs:register_spawn("mobs:stone_monster", {"default:stone"}, 3, -1, 7000, 3, 0)
