@@ -6,7 +6,6 @@ mobs:register_mob("mobs:racoon", {
     type = "animal",
 
     hp_max = 3,
-    damage = 1,
     armor = 80,
     view_range = 15,
     walk_velocity = 2,
@@ -36,6 +35,9 @@ mobs:register_mob("mobs:racoon", {
     on_rightclick = function(self, clicker)
         if self.type == "animal" then
             self.type = "monster"
+            self.attack_method = function(self, target)
+                mobs:slap(self, target.player, {fleshy=1})
+            end
         end
     end,
 })

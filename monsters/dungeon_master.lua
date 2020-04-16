@@ -3,7 +3,6 @@ mobs:register_mob("mobs:dungeon_master", {
     type = "monster",
 
     hp_max = 10,
-    damage = 4,
     armor = 50,
     view_range = 15,
     walk_velocity = 1,
@@ -32,8 +31,15 @@ mobs:register_mob("mobs:dungeon_master", {
     },
 
     attack_range = 10,
-    arrow = "mobs:fireball",
-    shoot_interval = 2.5,
+    attack_method = function(self, target)
+        local shoot_interval = 2.5
+        if self.timer > shoot_interval and math.random(1, 100) <= 60 then
+            mobs:shoot("mobs:fireball", self.object:get_pos(), target.pos)
+            self.timer = 0
+            return true
+        end
+        return false
+    end,
 })
 mobs:register_spawn("mobs:dungeon_master", {"default:stone"}, 2, -1, 7000, 1, -50)
 

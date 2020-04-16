@@ -4,7 +4,6 @@ mobs:register_mob("mobs:stone_monster", {
     type = "monster",
 
     hp_max = 10,
-    damage = 3,
     armor = 70,
     view_range = 10,
     walk_velocity = 0.5,
@@ -42,5 +41,8 @@ mobs:register_mob("mobs:stone_monster", {
             max = 5,
         },
     },
+    attack_method = function(self, target)
+        mobs:slap(self, target.player, {fleshy=3})
+    end,
 })
 mobs:register_spawn("mobs:stone_monster", {"default:stone"}, 3, -1, 7000, 3, 0)

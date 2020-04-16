@@ -4,7 +4,6 @@ mobs:register_mob("mobs:oerkki", {
     type = "monster",
 
     hp_max = 8,
-    damage = 4,
     armor = 60,
     view_range = 15,
     walk_velocity = 1,
@@ -35,5 +34,9 @@ mobs:register_mob("mobs:oerkki", {
     makes_footstep_sound = false,
 
     drops = {},
+    
+    attack_method = function(self, target)
+        mobs:slap(self, target.player, {fleshy=4})
+    end,
 })
 mobs:register_spawn("mobs:oerkki", {"default:stone"}, 2, -1, 7000, 3, -10)

@@ -7,7 +7,6 @@ function mobs:register_mob(name, def)
         tamed = false,
 
         hp_max = def.hp_max,
-        damage = def.damage,
         armor = def.armor,
         view_range = def.view_range,
         walk_velocity = def.walk_velocity,
@@ -33,8 +32,7 @@ function mobs:register_mob(name, def)
         drops = def.drops,
 
         attack_range = def.attack_range or 2,
-        arrow = def.arrow,
-        shoot_interval = def.shoot_interval,
+        attack_method = def.attack_method,
 
         on_rightclick = def.on_rightclick,
 
@@ -339,23 +337,12 @@ function mobs:register_mob(name, def)
                     self.v_start = false
                     self.set_velocity(self, 0)
                     self:set_animation("stand")
-                    if self.arrow then -- "shoot"
-                        if self.timer > self.shoot_interval and math.random(1, 100) <= 60 then
-                            self.timer = 0
-                            self:set_animation("punch")
-                            mobs:shoot(self.arrow,pos, self.target.pos, self.sounds)
-                        end
-                    elseif self.type == "monster" then -- "dogfight"
-                        if self.timer > 1 then
-                            self.timer = 0
+                    if self.attack_method then
+                        if self.attack_method(self, self.target) then
                             self:set_animation("punch")
                             if self.sounds and self.sounds.attack then
                                 minetest.sound_play(self.sounds.attack, {object = self.object})
                             end
-                            self.target.player:punch(self.object, 1.0,  {
-                                full_punch_interval=1.0,
-                                damage_groups = {fleshy=self.damage}
-                            }, vec)
                         end
                     end
                 end
@@ -504,7 +491,22 @@ function mobs:register_arrow(name, def)
     })
 end
 
-function mobs:shoot(name, pos, target, sounds)
+function mobs:slap(self, target, damage)
+    local s = self.object:get_pos()
+    local t = target:get_pos()
+    if self.timer > 1 then
+        local vec = {x=t.x-s.x, y=t.y-s.y, z=t.z-s.z}
+        target:punch(self.object, 1.0,  {
+            full_punch_interval=1.0,
+            damage_groups = damage
+        }, vec)
+        self.timer = 0
+        return true
+    end
+    return false
+end
+
+function mobs:shoot(name, pos, target)
     local obj = minetest.add_entity(pos, name)
     local vec = {x=target.x-pos.x, y=target.y-pos.y, z=target.z-pos.z}
     local amount = (vec.x^2+vec.y^2+vec.z^2)^0.5
@@ -514,8 +516,5 @@ function mobs:shoot(name, pos, target, sounds)
     vec.y = vec.y*v/amount
     vec.z = vec.z*v/amount
     obj:set_velocity(vec)
-    if sounds and sounds.attack then
-        minetest.sound_play(sounds.attack, {object = obj})
-    end
 end
 

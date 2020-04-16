@@ -3,7 +3,6 @@ mobs:register_mob("mobs:dirt_monster", {
     type = "monster",
 
     hp_max = 5,
-    damage = 2,
     armor = 80,
     view_range = 15,
     walk_velocity = 1,
@@ -27,5 +26,9 @@ mobs:register_mob("mobs:dirt_monster", {
         min = 3,
         max = 5,},
     },
+    
+    attack_method = function(self, target)
+        mobs:slap(self, target.player, {fleshy=2})
+    end,
 })
 mobs:register_spawn("mobs:dirt_monster", {"default:dirt_with_grass"}, 3, -1, 7000, 3, 31000)

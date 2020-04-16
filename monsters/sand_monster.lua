@@ -4,7 +4,6 @@ mobs:register_mob("mobs:sand_monster", {
     type = "monster",
 
     hp_max = 3,
-    damage = 1,
     armor = 80,
     view_range = 15,
     walk_velocity = 1.5,
@@ -42,5 +41,9 @@ mobs:register_mob("mobs:sand_monster", {
             max = 5,
         },
     },
+    
+    attack_method = function(self, target)
+        mobs:slap(self, target.player, {fleshy=1})
+    end,
 })
 mobs:register_spawn("mobs:sand_monster", {"default:desert_sand"}, 20, -1, 7000, 3, 31000)
