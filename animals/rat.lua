@@ -16,7 +16,7 @@ mobs:register_mob("mobs:rat", {
     drawtype = "front",
     mesh = "mobs_rat.x",
     visual_size = {x=0.7, y=0.35},
-    collisionbox = USE_SPRITES and {-0.25, -0.175, -0.25, 0.25, 0.33, 0.25} or {-0.2, 0, -0.2, 0.2, 0.2, 0.2},
+    collisionbox = USE_SPRITES and {-0.25, -0.175, -0.25, 0.25, 0.33, 0.25} or {-0.2, -0.01, -0.2, 0.2, 0.2, 0.2},
     textures = USE_SPRITES and {"mobs_rat.png", "mobs_rat.png"} or {"mobs_rat_mesh.png"},
 
     makes_footstep_sound = false,

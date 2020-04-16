@@ -18,7 +18,7 @@ mobs:register_mob("mobs:oerkki", {
     drawtype = "front",
     mesh = "mobs_oerkki.x",
     visual_size = USE_SPRITES and {x=1, y=2} or {x=5, y=5},
-    collisionbox = USE_SPRITES and {-0.4, -1, -0.4, 0.4, 1, 0.4} or {-0.4, 0, -0.4, 0.4, 1.9, 0.4},
+    collisionbox = USE_SPRITES and {-0.4, -1, -0.4, 0.4, 1, 0.4} or {-0.4, -0.01, -0.4, 0.4, 1.9, 0.4},
     textures = USE_SPRITES and {"mobs_oerkki.png", "mobs_oerkki_back.png"} or {"mobs_oerkki_mesh.png"},
     animation = not USE_SPRITES and {
         stand_start = 0,
@@ -27,6 +27,8 @@ mobs:register_mob("mobs:oerkki", {
         walk_end = 36,
         run_start = 37,
         run_end = 49,
+        punch_start = 37,
+        punch_end = 49,
         speed_normal = 15,
         speed_run = 15,
     },

@@ -17,7 +17,7 @@ mobs:register_mob("mobs:sheep", {
     drawtype = USE_SPRITES and "side" or "front",
     mesh = "mobs_sheep.x",
     visual_size = {x=2, y=1.25},
-    collisionbox = USE_SPRITES and {-0.6, -0.625, -0.6, 0.6, 0.625, 0.6} or {-0.4, 0, -0.4, 0.4, 1, 0.4},
+    collisionbox = USE_SPRITES and {-0.6, -0.625, -0.6, 0.6, 0.625, 0.6} or {-0.4, -0.01, -0.4, 0.4, 1, 0.4},
     textures = USE_SPRITES and {"mobs_sheep.png", "mobs_sheep.png"} or {"mobs_sheep_mesh.png"},
     animation = not USE_SPRITES and {
         speed_normal = 15,

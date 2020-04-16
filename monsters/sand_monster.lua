@@ -18,7 +18,7 @@ mobs:register_mob("mobs:sand_monster", {
     drawtype = "front",
     mesh = "mobs_sand_monster.x",
     visual_size = USE_SPRITES and {x=1, y=2} or {x=8,y=8},
-    collisionbox = USE_SPRITES and {-0.4, -1, -0.4, 0.4, 0.9, 0.4} or {-0.4, 0, -0.4, 0.4, 1.9, 0.4},
+    collisionbox = USE_SPRITES and {-0.4, -1, -0.4, 0.4, 0.9, 0.4} or {-0.4, -0.01, -0.4, 0.4, 1.9, 0.4},
     textures = USE_SPRITES and {"mobs_sand_monster.png", "mobs_sand_monster_back.png"} or {"mobs_sand_monster_mesh.png"},
     animation = not USE_SPRITES and {
         speed_normal = 15,
@@ -29,6 +29,8 @@ mobs:register_mob("mobs:sand_monster", {
         walk_end = 72,
         run_start = 74,
         run_end = 105,
+        punch_start = 74,
+        punch_end = 105,
     },
 
     makes_footstep_sound = true,
