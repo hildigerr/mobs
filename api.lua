@@ -474,7 +474,8 @@ function mobs:register_arrow(name, def)
 
         on_step = function(self, dtime)
             local pos = self.object:get_pos()
-            if minetest.get_node(pos).name ~= "air" then
+            local node = minetest.get_node(pos)
+            if node.name ~= "air" then
                 self.hit_node(self, pos, node)
                 self.object:remove()
                 return
