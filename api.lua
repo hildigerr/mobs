@@ -11,7 +11,7 @@ function mobs:register_mob(name, def)
         armor = def.armor,
         view_range = def.view_range,
         walk_velocity = def.walk_velocity,
-        run_velocity = def.run_velocity,
+        run_velocity = def.run_velocity or def.walk_velocity,
 
         water_damage = def.water_damage,
         lava_damage = def.lava_damage,
@@ -162,7 +162,7 @@ function mobs:register_mob(name, def)
             if self.state == "chase" then
                 if not self.target.player
                     or not self.target.player:is_player() 
-                    or (self.follow and self.target.player:get_wielded_item():get_name() ~= self.follow)
+                    or (self.follow and not self.follow(self.target.player:get_wielded_item():get_name()))
                     or (self.type == "monster" and self.target.player:get_hp() <= 0)
                 then
                     self.state = "stand"
@@ -206,7 +206,7 @@ function mobs:register_mob(name, def)
                     local p = player:get_pos()
                     local dist = ((p.x-s.x)^2 + (p.y-s.y)^2 + (p.z-s.z)^2)^0.5
                     if dist < self.view_range then
-                        if player:get_wielded_item():get_name() == self.follow then
+                        if self.follow(player:get_wielded_item():get_name()) then
                             self.state = "chase"
                             self.target.player = player
                             self.target.pos = p

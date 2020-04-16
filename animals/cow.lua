@@ -4,8 +4,9 @@ mobs:register_mob("mobs:cow", {
 
     hp_max = 8,
     armor = 90,
+    view_range = 10,
     walk_velocity = 1,
-    run_velocity = 1,
+    run_velocity = 2,
 
     water_damage = 1,
     lava_damage = 8,
@@ -21,6 +22,9 @@ mobs:register_mob("mobs:cow", {
         random = "cow",
     },
     makes_foostep_sound = true,
+    follow = function(item)
+        return string.find(item, "grass") and not string.find(item, "seed")
+    end,
 
     drops = {
         {name = "mobs:meat_raw",

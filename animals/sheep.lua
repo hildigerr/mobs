@@ -4,7 +4,7 @@ mobs:register_mob("mobs:sheep", {
 
     hp_max = 5,
     armor = 90,
-    view_range = 5,
+    view_range = 10,
     walk_velocity = 1,
     run_velocity = 1,
 
@@ -22,7 +22,9 @@ mobs:register_mob("mobs:sheep", {
         random = "mobs_sheep",
     },
     makes_footstep_sound = true,
-    follow = "farming:wheat",
+    follow = function(item)
+        return item == "farming:wheat"
+    end,
 
     drops = {
         {
