@@ -100,6 +100,7 @@ function mobs:register_mob(name, def)
                         local damage = d-5
                         self.object:set_hp(self.object:get_hp()-damage)
                         if self.object:get_hp() <= 0 then
+                            self.drop_litter(self.drops, pos)
                             self.object:remove()
                             return
                         end
@@ -133,6 +134,7 @@ function mobs:register_mob(name, def)
                 then
                     self.object:set_hp(self.object:get_hp()-self.light_damage)
                     if self.object:get_hp() == 0 then
+                            self.drop_litter(self.drops, pos)
                         self.object:remove()
                         return
                     end
@@ -144,6 +146,7 @@ function mobs:register_mob(name, def)
                     self.object:set_hp(self.object:get_hp()-self.water_damage)
                     if self.object:get_hp() == 0 then
                         self.object:remove()
+                            self.drop_litter(self.drops, pos)
                         return
                     end
                 end
@@ -325,6 +328,30 @@ function mobs:register_mob(name, def)
                 for _,drop in ipairs(self.drops) do
                     if math.random(1, drop.chance) == 1 then
                         hitter:get_inventory():add_item("main", ItemStack(drop.name.." "..math.random(drop.min, drop.max)))
+                    end
+                end
+            end
+        end,
+
+        drop_litter = function(drops, pos)
+            if minetest.settings:get_bool("mobs.drop_litter", false) then
+                for _,drop in ipairs(drops) do
+                    if math.random(1, drop.chance) == 1 then
+                        for i=1,math.random(drop.min, drop.max) do
+                            local obj = minetest.add_item(pos, drop.name)
+                            if obj then
+                                obj:get_luaentity().collect = true
+                                local x = math.random(1, 5)
+                                if math.random(1,2) == 1 then
+                                    x = -x
+                                end
+                                local z = math.random(1, 5)
+                                if math.random(1,2) == 1 then
+                                    z = -z
+                                end
+                                obj:set_velocity({x=1/x, y=obj:get_velocity().y, z=1/z})
+                            end
+                        end
                     end
                 end
             end

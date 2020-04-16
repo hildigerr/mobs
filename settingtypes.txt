@@ -6,6 +6,9 @@ mobs.display_mob_spawn (Notify of Spawns) bool false
 #   Spawn only peacefull mobs
 mobs.only_peaceful_mobs (Only Peaceful Mobs) bool false
 
+#   Do drop drops when dying naturally
+mobs.drop_litter (Drop Litter) bool false
+
 #    Meat will rot if not cooked or refridgerated
 mobs.meat_rots (Meat Rots) bool true
 
