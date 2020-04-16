@@ -174,14 +174,14 @@ function mobs:register_mob(name, def)
                         local damage = d-5
                         self.object:set_hp(self.object:get_hp()-damage)
                         if self.object:get_hp() <= 0 then
-                            if self.sounds and self.sounds.die then
-                                minetest.sound_play(self.sounds.die, {oject = self.object})
+                            if self.sounds and self.sounds.death_fall then
+                                minetest.sound_play(self.sounds.death_fall, {oject = self.object})
                             end
                             self.drop_litter(self.drops, pos)
                             self.object:remove()
                             return
-                        elseif self.sounds and self.sounds.damage then
-                            minetest.sound_play(self.sounds.damage, {oject = self.object})
+                        elseif self.sounds and self.sounds.damage_fall then
+                            minetest.sound_play(self.sounds.damage_fall, {oject = self.object})
                         end
                     end
                 end
@@ -213,14 +213,14 @@ function mobs:register_mob(name, def)
                 then
                     self.object:set_hp(self.object:get_hp()-self.light_damage)
                     if self.object:get_hp() == 0 then
-                        if self.sounds and self.sounds.die then
-                            minetest.sound_play(self.sounds.die, {oject = self.object})
+                        if self.sounds and self.sounds.death_light then
+                            minetest.sound_play(self.sounds.death_light, {oject = self.object})
                         end
                         self.drop_litter(self.drops, pos)
                         self.object:remove()
                         return
-                    elseif self.sounds and self.sounds.damage then
-                        minetest.sound_play(self.sounds.damage, {oject = self.object})
+                    elseif self.sounds and self.sounds.damage_light then
+                        minetest.sound_play(self.sounds.damage_light, {oject = self.object})
                     end
                 end
 
@@ -229,14 +229,14 @@ function mobs:register_mob(name, def)
                 then
                     self.object:set_hp(self.object:get_hp()-self.water_damage)
                     if self.object:get_hp() == 0 then
-                        if self.sounds and self.sounds.die then
-                            minetest.sound_play(self.sounds.die, {oject = self.object})
+                        if self.sounds and self.sounds.death_drown then
+                            minetest.sound_play(self.sounds.death_drown, {oject = self.object})
                         end
                         self.drop_litter(self.drops, pos)
                         self.object:remove()
                         return
-                    elseif self.sounds and self.sounds.damage then
-                        minetest.sound_play(self.sounds.damage, {oject = self.object})
+                    elseif self.sounds and self.sounds.damage_drown then
+                        minetest.sound_play(self.sounds.damage_drown, {oject = self.object})
                     end
                 end
 
@@ -245,13 +245,13 @@ function mobs:register_mob(name, def)
                 then
                     self.object:set_hp(self.object:get_hp()-self.lava_damage)
                     if self.object:get_hp() == 0 then
-                        if self.sounds and self.sounds.die then
-                            minetest.sound_play(self.sounds.die, {oject = self.object})
+                        if self.sounds and self.sounds.death_lava then
+                            minetest.sound_play(self.sounds.death_lava, {oject = self.object})
                         end
                         self.object:remove()
                         return
-                    elseif self.sounds and self.sounds.damage then
-                        minetest.sound_play(self.sounds.damage, {oject = self.object})
+                    elseif self.sounds and self.sounds.damage_lava then
+                        minetest.sound_play(self.sounds.damage_lava, {oject = self.object})
                     end
                 end
             end
@@ -408,15 +408,15 @@ function mobs:register_mob(name, def)
         end,
 
         on_punch = function(self, hitter)
-            if self.sounds and self.sounds.damage then
-                minetest.sound_play(self.sounds.damage, {oject = self.object})
+            if self.sounds and self.sounds.punch then
+                minetest.sound_play(self.sounds.punch, {oject = self.object})
             end
         end,
 
         on_death = function(self, hitter)
             if hitter and hitter:is_player() and hitter:get_inventory() then
-                if self.sounds and self.sounds.die then
-                    minetest.sound_play(self.sounds.die, {oject = self.object})
+                if self.sounds and self.sounds.death then
+                    minetest.sound_play(self.sounds.death, {oject = self.object})
                 end
                 for _,drop in ipairs(self.drops) do
                     if math.random(1, drop.chance) == 1 then
