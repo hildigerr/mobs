@@ -45,12 +45,30 @@ Upstream contributions have been included from:
  - [ ] Cages for Pet Rodents (TODO: move into separate mod)
   -- They must be fed apples and have a bucket of water available to survive
 
-## KNOWN BUGS ##
- - [ ] If you drink milk from a stack of vessels, you will not recieve the empty vessel.
+## Callbacks ##
+Besides the regular [entity](https://dev.minetest.net/LuaEntitySAO) callbacks, the mobs api adds some more that you may take advantage of.
 
+### attack( self, target ) ###
+Monsters should provide an attack method in order to inflict damage on players. The function receives two parameters, the `self` entity which is performing the attack and the `target` of the attack. The target will be a table with **player**, **pos**ition, and **dist**ance attributes. Return *true* if the attack was performed, or else *false*.
+
+It can be as simple as using the provided **mobs:slap(self, target, damage)** function, as most of these mobs do. For example:
+
+    attack = function(self, target)
+        return mobs:slap(self, target.player, {fleshy=2})
+    end
+
+The mob entity has a a `self.timer` which should be checked to control how often the attack will take place. This is handled automatically if you use the provided `mobs:slap` method. *However, if you wish for your mob to shoot: you will need to register the projectile via `register_arrow`, and verify/update the timing yourself as is done by the Dungeon Master mob.* There is a **mobs:shoot(name, pos, target)** method provided to launch projectiles at a target. `name` is the name of the projectile, and `pos` and `target` are the *positions* of the shooter and the target respectively.
+
+### try_jump( self ) ###
+*You don't need to provide a callback to handle mobs jumping.* However, you may. Or if you simply want to *prevent* a mob from jumping, use something like the following for your mob:
+
+    try_jump = function(self) return end
+
+## Issues ##
+ - [ ] If you drink milk from a stack of vessels, you will not recieve the empty vessel.
+ - [ ] When an entity is slain both the `on_punch` and `on_death` callbacks are triggered. So, if you have sounds for punch and death both will be heard. Take this into account while creating your sounds.
 
 ## ETHICAL DISCLOSURE ##
-
 The sourcecode (by PilzAdam), models (by Pavel_S), and other graphics (unless otherwise noted) were originally released under the *WTFPL* (see below).
 
 ### Cow Assets ###
