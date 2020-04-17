@@ -31,7 +31,7 @@ Upstream contributions have been included from:
  - [x] Raw and Cooked Meat
  - [x] Meat spoilage if it remains uncooked
   -- [ ] Raw meet can be preserved through "cheating" or using a refridgerator provided
- by VanessaE's [Home Decor](http://minetest.net/forum/viewtopic.php?id=2041) Mod
+ by VanessaE's [Home Decor](https://gitlab.com/VanessaE/homedecor_modpack) Mod
  - [ ] Overcooking and using the result to make dye (untested)
  - [ ] Cages for Pet Rodents (TODO: move into separate mod)
   -- They must be fed apples and have a bucket of water available to survive
@@ -45,7 +45,7 @@ Upstream contributions have been included from:
 The sourcecode (by PilzAdam), models (by Pavel_S), and other graphics (unless otherwise noted) were originally released under the *WTFPL* (see below).
 
 ### Cow Assets ###
-The cow texture was created by [rinoux](http://minetest.net/forum/profile.php?id=1128). It was retrieved from the [mobf](http://minetest.net/forum/viewtopic.php?id=629) mod by sapier. The cow's dry-up sound came from there too, which reports that the graphic is under WTFPL and the [sound](http://commons.wikimedia.org/wiki/Category:Mudchute_Park_and_Farm) was created by [Secretlondon](http://commons.wikimedia.org/wiki/User:Secretlondon).
+The cow texture was created by [rinoux](https://forum.minetest.net/memberlist.php?mode=viewprofile&u=1128). It was retrieved from the [mobf](https://wiki.minetest.net/Mods/MOB_Framework) mod by [sapier](https://forum.minetest.net/memberlist.php?mode=viewprofile&u=231). The cow's dry-up sound came from there too, which reports that the graphic is under WTFPL and the [sound](http://commons.wikimedia.org/wiki/Category:Mudchute_Park_and_Farm) was created by [Secretlondon](http://commons.wikimedia.org/wiki/User:Secretlondon).
 
 ### Rodent Assets ###
 The rabbit and rat textures were acquired from cornernote's [critters](http://minetest.net/forum/viewtopic.php?id=3337) modpack. It's README.txt reports:
