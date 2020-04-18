@@ -49,7 +49,7 @@ Mobs are added using the **mobs:register_mob(name, def)** function, where `name`
 ### Mob Attributes ###
 
  - **type** = "animal" or "monster",
- - **armor** = the setting for the fleshy armor group, [TODO: change to an armor group table which will be used by `set_armor_groups`]
+ - **armor** = the armor group table which will be used by `set_armor_groups`
  - **view_range** = integer indicating how far away the mob can see a player,
  - **walk_velocity** = the velocity when the mob is walking around,
  - **run_velocity** = the velocity when the mob is running,

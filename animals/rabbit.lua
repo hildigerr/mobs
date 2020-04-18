@@ -24,7 +24,7 @@ mobs:register_mob("rabbit", {
     type = "animal",
 
     hp_max = 1,
-    armor = 100,
+    armor = {fleshy = 100},
     walk_velocity = 4,
     run_velocity = 4,
 

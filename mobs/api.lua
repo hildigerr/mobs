@@ -373,7 +373,7 @@ function mobs:register_mob(name, def, disabled)
         end,
 
         on_activate = function(self, staticdata, dtime_s)
-            self.object:set_armor_groups({fleshy=self.armor})
+            self.object:set_armor_groups(self.armor)
             self.object:set_acceleration({x=0, y=-10, z=0})
             self.state = "stand"
             self.object:set_velocity({x=0, y=self.object:get_velocity().y, z=0})

@@ -5,7 +5,7 @@ mobs:register_mob("stone_monster", {
     type = "monster",
 
     hp_max = 10,
-    armor = 70,
+    armor = {fleshy = 70},
     view_range = 10,
     walk_velocity = 0.5,
     run_velocity = 2,

@@ -5,7 +5,7 @@ mobs:register_mob("dirt_monster", {
     type = "monster",
 
     hp_max = 5,
-    armor = 80,
+    armor = {fleshy = 80},
     view_range = 15,
     walk_velocity = 1,
     run_velocity = 3,

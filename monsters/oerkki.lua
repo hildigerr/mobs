@@ -5,7 +5,7 @@ mobs:register_mob("oerkki", {
     type = "monster",
 
     hp_max = 8,
-    armor = 60,
+    armor = {fleshy = 60},
     view_range = 15,
     walk_velocity = 1,
     run_velocity = 3,

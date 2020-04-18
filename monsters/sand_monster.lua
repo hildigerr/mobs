@@ -5,7 +5,7 @@ mobs:register_mob("sand_monster", {
     type = "monster",
 
     hp_max = 3,
-    armor = 80,
+    armor = {fleshy = 80},
     view_range = 15,
     walk_velocity = 1.5,
     run_velocity = 4,

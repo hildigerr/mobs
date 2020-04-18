@@ -5,7 +5,7 @@ mobs:register_mob("sheep", {
     type = "animal",
 
     hp_max = 5,
-    armor = 90,
+    armor = {fleshy = 90},
     view_range = 10,
     walk_velocity = 1,
     run_velocity = 1,

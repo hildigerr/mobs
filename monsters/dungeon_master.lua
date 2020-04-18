@@ -5,7 +5,7 @@ mobs:register_mob("dungeon_master", {
     type = "monster",
 
     hp_max = 10,
-    armor = 50,
+    armor = {fleshy = 50},
     view_range = 15,
     walk_velocity = 1,
     run_velocity = 3,

@@ -5,7 +5,7 @@ mobs:register_mob("rat", {
     type = "animal",
 
     hp_max = 1,
-    armor = 100,
+    armor = {fleshy = 100},
     walk_velocity = 1,
     run_velocity = 2,
 
