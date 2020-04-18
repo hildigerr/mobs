@@ -2,8 +2,8 @@
 mobs:register_mob("cow", {
     type = "animal",
 
-    hp_max = 8,
-    armor = {fleshy = 90},
+    hp_max = 18,
+    armor = {crumbly = 15, cracky = 25, choppy = 80, fleshy = 90},
     view_range = 10,
     walk_velocity = 1,
     run_velocity = 2,

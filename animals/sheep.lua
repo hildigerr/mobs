@@ -4,8 +4,8 @@ local USE_SPRITES = sheep_setting ~= "mesh"
 mobs:register_mob("sheep", {
     type = "animal",
 
-    hp_max = 5,
-    armor = {fleshy = 90},
+    hp_max = 16,
+    armor = {crumbly = 25, cracky = 25, choppy = 80, fleshy = 90},
     view_range = 10,
     walk_velocity = 1,
     run_velocity = 1,

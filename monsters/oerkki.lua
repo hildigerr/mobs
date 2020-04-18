@@ -4,8 +4,8 @@ local USE_SPRITES = oerkki_setting ~= "mesh"
 mobs:register_mob("oerkki", {
     type = "monster",
 
-    hp_max = 8,
-    armor = {fleshy = 60},
+    hp_max = 18,
+    armor = {crumbly = 15, cracky = 25, choppy = 50, fleshy = 60},
     view_range = 15,
     walk_velocity = 1,
     run_velocity = 3,

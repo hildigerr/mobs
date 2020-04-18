@@ -4,8 +4,8 @@ local USE_SPRITES = dungeon_master_setting ~= "mesh"
 mobs:register_mob("dungeon_master", {
     type = "monster",
 
-    hp_max = 10,
-    armor = {fleshy = 50},
+    hp_max = 20,
+    armor = {crumbly = 1, cracky = 15, choppy = 45, fleshy = 50},
     view_range = 15,
     walk_velocity = 1,
     run_velocity = 3,

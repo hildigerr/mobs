@@ -5,8 +5,8 @@
 mobs:register_mob("racoon", {
     type = "animal",
 
-    hp_max = 3,
-    armor = {fleshy = 80},
+    hp_max = 14,
+    armor = {crumbly = 25, cracky = 25, choppy = 70, fleshy = 80},
     view_range = 15,
     walk_velocity = 2,
     run_velocity = 2,

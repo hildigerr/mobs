@@ -23,8 +23,8 @@ local rabbit_droppings = {
 mobs:register_mob("rabbit", {
     type = "animal",
 
-    hp_max = 1,
-    armor = {fleshy = 100},
+    hp_max = 12,
+    armor = {crumbly = 25, cracky = 25, choppy = 90, fleshy = 100},
     walk_velocity = 4,
     run_velocity = 4,
 

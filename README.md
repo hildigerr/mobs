@@ -34,6 +34,21 @@ Upstream contributions have been included from:
  - [x] Stone Monster
  - [x] Tree Monster
 
+### Combat Table [Spoiler Alert] ###
+|Mob Name|HP/2 (Hearts)|Crumbly (Shovel)|Cracky (Pickaxe)|Choppy (Axe)|Fleshy (Sword)|
+|--|--|--|--|--|--|
+|Cow|9|15%|25%|80%|90%|
+|Rabbit|6|25%|25%|90%|100%|
+|Racoon|7|25%|25%|70%|80%|
+|Rat|5|100%|100%|100%|100%|
+|Sheep|8|25%|25%|80%|90%|
+|Dirt Monster|7|85%|50%|40%|50%|
+|DM|10|1%|15%|40%|50%|
+|Oerkki|9|15%|25%|50%|60%|
+|Sand Monster|7|90%|30%|10%|25%|
+|Stone Monster|8|1%|90%|10%|25%|
+|Tree Monster|8|0%|10%|80%|70%|
+
 ## Miscellaneous ##
  - [x] Raw and Cooked Meat
  - [ ] Meat spoilage if it remains uncooked (untested)
@@ -49,7 +64,11 @@ Mobs are added using the **mobs:register_mob(name, def)** function, where `name`
 ### Mob Attributes ###
 
  - **type** = "animal" or "monster",
- - **armor** = the armor group table which will be used by `set_armor_groups`
+ - **armor** = the armor group table for percentages of damage caused by:
+   - **crumbly** = shovels,
+   - **cracky** = pickaxes,
+   - **choppy** = axes,
+   - **fleshy** = swords,
  - **view_range** = integer indicating how far away the mob can see a player,
  - **walk_velocity** = the velocity when the mob is walking around,
  - **run_velocity** = the velocity when the mob is running,

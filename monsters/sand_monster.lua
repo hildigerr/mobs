@@ -4,8 +4,8 @@ local USE_SPRITES = sand_monster_setting ~= "mesh"
 mobs:register_mob("sand_monster", {
     type = "monster",
 
-    hp_max = 3,
-    armor = {fleshy = 80},
+    hp_max = 14,
+    armor = {crumbly = 90, cracky = 30, choppy = 10, fleshy = 25},
     view_range = 15,
     walk_velocity = 1.5,
     run_velocity = 4,

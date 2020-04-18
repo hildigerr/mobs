@@ -4,8 +4,8 @@ local USE_SPRITES = tree_monster_setting ~= "mesh"
 mobs:register_mob("tree_monster", {
     type = "monster",
 
-    hp_max = 5,
-    armor = {fleshy = 80},
+    hp_max = 16,
+    armor = {cracky = 10, choppy = 80, fleshy = 70},
     view_range = 15,
     walk_velocity = 1,
     run_velocity = 3,

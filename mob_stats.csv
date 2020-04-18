@@ -1,0 +1,12 @@
+"Mob Name","HP/2 (Hearts)","Crumbly (Shovel)","Cracky (Pickaxe)","Choppy (Axe)","Fleshy (Sword)"
+Cow,9,15,25,80,90
+Rabbit,6,25,25,90,100
+Racoon,7,25,25,70,80
+Rat,5,100,100,100,100
+Sheep,8,25,25,80,90
+Dirt,7,85,50,40,50
+DM,10,1,15,40,50
+Oerkki,9,15,25,50,60
+Sand,7,90,30,10,25
+Stone,8,1,90,10,25
+Tree,8,0,10,80,70

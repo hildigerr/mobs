@@ -4,8 +4,8 @@ local USE_SPRITES = rats_setting ~= "mesh"
 mobs:register_mob("rat", {
     type = "animal",
 
-    hp_max = 1,
-    armor = {fleshy = 100},
+    hp_max = 10,
+    armor = {crumbly = 100, cracky = 100, choppy = 100, fleshy = 100},
     walk_velocity = 1,
     run_velocity = 2,
 

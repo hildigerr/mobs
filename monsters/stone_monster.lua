@@ -4,8 +4,8 @@ local USE_SPRITES = stone_monster_setting ~= "mesh"
 mobs:register_mob("stone_monster", {
     type = "monster",
 
-    hp_max = 10,
-    armor = {fleshy = 70},
+    hp_max = 16,
+    armor = {crumbly = 1, cracky = 90, choppy = 10, fleshy = 25},
     view_range = 10,
     walk_velocity = 0.5,
     run_velocity = 2,
