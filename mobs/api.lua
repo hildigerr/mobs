@@ -136,10 +136,6 @@ function mobs:register_mob(name, def, disabled)
         on_step = not disabled and function(self, dtime)
             local pos = self.object:get_pos()
             local n = minetest.get_node(pos)
-            if self.type == "monster" and minetest.settings:get_bool("mobs.only_peaceful_mobs", false) then
-                self.object:remove()
-                return
-            end
 
             self.lifetimer = self.lifetimer - dtime
             if self.lifetimer <= 0 and not self.tamed and self.state ~= "chase" then
@@ -385,9 +381,6 @@ function mobs:register_mob(name, def, disabled)
             self.state = "stand"
             self.object:set_velocity({x=0, y=self.object:get_velocity().y, z=0})
             self.object:set_yaw(math.random(1, 360)/180*math.pi)
-            if self.type == "monster" and minetest.settings:get_bool("mobs.only_peaceful_mobs", false) then
-                self.object:remove()
-            end
             self.lifetimer = 600 - dtime_s
             if staticdata then
                 local tmp = minetest.deserialize(staticdata)

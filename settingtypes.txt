@@ -1,13 +1,7 @@
 # TODO bad_meat and pet_cages configuration options
 
-#   Use old sprites instead of 3D Meshes
-mobs.use_sprites (Use Sprites) bool false
-
 #   Notify players of mob spawns
 mobs.display_mob_spawn (Notify of Spawns) bool false
-
-#   Spawn only peacefull mobs
-mobs.only_peaceful_mobs (Only Peaceful Mobs) bool false
 
 #   Do drop drops when dying naturally
 mobs.drop_litter (Drop Litter) bool false
@@ -17,5 +11,28 @@ mobs.meat_rots (Meat Rots) bool false
 
 [animals]
 
+#	Rats can be drawn with a 3D mesh, a 2D sprite, or be disabled.
+mobs.rats (Rats) enum  mesh mesh,sprite,disabled
+
 #	Sheep can be drawn with a 3D mesh, a 2D sprite, or be disabled.
 mobs.sheep (Sheep) enum  mesh mesh,sprite,disabled
+
+[monsters]
+
+#	Dirt monsters can be drawn with a 3D mesh, a 2D sprite, or be disabled.
+mobs.dirt_monsters (Dirt Monsters) enum  mesh mesh,sprite,disabled
+
+#	Dungeon Masters can be drawn with a 3D mesh, a 2D sprite, or be disabled.
+mobs.dms (Dungeon Masters) enum  mesh mesh,sprite,disabled
+
+#	Oerkki can be drawn with a 3D mesh, a 2D sprite, or be disabled.
+mobs.oerkki (Oerkki) enum  mesh mesh,sprite,disabled
+
+#	Sand monsters can be drawn with a 3D mesh, a 2D sprite, or be disabled.
+mobs.sand_monsters (Sand Monsters) enum  mesh mesh,sprite,disabled
+
+#	Stone monsters can be drawn with a 3D mesh, a 2D sprite, or be disabled.
+mobs.stone_monsters (Stone Monsters) enum  mesh mesh,sprite,disabled
+
+#	Tree monsters can be drawn with a 3D mesh, a 2D sprite, or be disabled.
+mobs.tree_monsters (Tree Monsters) enum  mesh mesh,sprite,disabled

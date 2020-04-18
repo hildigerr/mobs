@@ -1,4 +1,5 @@
-local USE_SPRITES = minetest.settings:get_bool("mobs.use_sprites", false)
+local oerkki_setting = minetest.settings:get("mobs.oerkki") or "mesh"
+local USE_SPRITES = oerkki_setting ~= "mesh"
 
 mobs:register_mob("oerkki", {
     type = "monster",
@@ -47,4 +48,4 @@ mobs:register_mob("oerkki", {
     attack = function(self, target)
         return mobs:slap(self, target.player, {fleshy=4})
     end,
-})
+}, oerkki_setting == "disabled")

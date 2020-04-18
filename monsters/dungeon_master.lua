@@ -1,4 +1,5 @@
-local USE_SPRITES = minetest.settings:get_bool("mobs.use_sprites", false)
+local dungeon_master_setting = minetest.settings:get("mobs.dms") or "mesh"
+local USE_SPRITES = dungeon_master_setting ~= "mesh"
 
 mobs:register_mob("dungeon_master", {
     type = "monster",
@@ -111,4 +112,4 @@ mobs:register_arrow(":mobs:fireball", {
             end
         end
     end
-})
+}, dungeon_master_setting == "disabled")

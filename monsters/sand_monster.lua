@@ -1,4 +1,5 @@
-local USE_SPRITES = minetest.settings:get_bool("mobs.use_sprites", false)
+local sand_monster_setting = minetest.settings:get("mobs.sand_monsters") or "mesh"
+local USE_SPRITES = sand_monster_setting ~= "mesh"
 
 mobs:register_mob("sand_monster", {
     type = "monster",
@@ -54,4 +55,4 @@ mobs:register_mob("sand_monster", {
     attack = function(self, target)
         return mobs:slap(self, target.player, {fleshy=1})
     end,
-})
+}, sand_monster_setting == "disabled")

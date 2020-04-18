@@ -1,4 +1,5 @@
-local USE_SPRITES = minetest.settings:get_bool("mobs.use_sprites", false)
+local rats_setting = minetest.settings:get("mobs.rats") or "mesh"
+local USE_SPRITES = rats_setting ~= "mesh"
 
 mobs:register_mob("rat", {
     type = "animal",
@@ -36,7 +37,7 @@ mobs:register_mob("rat", {
             self.object:remove()
         end
     end,
-})
+}, rats_setting == "disabled")
 
 minetest.register_craftitem(":mobs:rat", {
     description = "Rat",
