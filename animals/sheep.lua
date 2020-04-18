@@ -1,4 +1,5 @@
-local USE_SPRITES = minetest.settings:get_bool("mobs.use_sprites", false)
+local sheep_setting = minetest.settings:get("mobs.sheep") or "mesh"
+local USE_SPRITES = sheep_setting ~= "mesh"
 
 mobs:register_mob("sheep", {
     type = "animal",
@@ -88,4 +89,4 @@ mobs:register_mob("sheep", {
             })
         end
     end,
-})
+}, sheep_setting == "disabled")

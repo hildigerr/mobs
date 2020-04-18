@@ -14,3 +14,8 @@ mobs.drop_litter (Drop Litter) bool false
 
 #    Meat will rot if not cooked or refridgerated
 mobs.meat_rots (Meat Rots) bool false
+
+[animals]
+
+#	Sheep can be drawn with a 3D mesh, a 2D sprite, or be disabled.
+mobs.sheep (Sheep) enum  mesh mesh,sprite,disabled

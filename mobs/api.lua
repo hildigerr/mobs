@@ -1,6 +1,6 @@
-mobs = {spawning_mobs = {}}
+mobs = {}
 
-function mobs:register_mob(name, def)
+function mobs:register_mob(name, def, disabled)
     name = "mobs:"..name
     minetest.register_entity(":"..name, {
         type = def.type,
@@ -133,7 +133,7 @@ function mobs:register_mob(name, def)
 			end
 		end,
 
-        on_step = function(self, dtime)
+        on_step = not disabled and function(self, dtime)
             local pos = self.object:get_pos()
             local n = minetest.get_node(pos)
             if self.type == "monster" and minetest.settings:get_bool("mobs.only_peaceful_mobs", false) then
@@ -374,6 +374,9 @@ function mobs:register_mob(name, def)
                         end
                 end
             end
+        end or function (self, dtime)
+            minetest.log("action", "Removed disabled "..name.." at "..minetest.pos_to_string(self.object:get_pos()))
+            self.object:remove()
         end,
 
         on_activate = function(self, staticdata, dtime_s)
@@ -450,10 +453,9 @@ function mobs:register_mob(name, def)
                 end
             end
         end,
-
     })
 
-    mobs.spawning_mobs[name] = true
+    if not disabled then
     minetest.register_abm({
         nodenames = def.spawning_nodes,
         neighbors = {"air"},
@@ -461,9 +463,6 @@ function mobs:register_mob(name, def)
         chance = def.spawn_chance,
         action = function(pos, node, _, active_object_count_wider)
             if active_object_count_wider > def.max_spawn_count then
-                return
-            end
-            if not mobs.spawning_mobs[name] then
                 return
             end
             pos.y = pos.y+1
@@ -496,6 +495,7 @@ function mobs:register_mob(name, def)
             minetest.add_entity(pos, name)
         end
     })
+    end
 end
 
 function mobs:register_arrow(name, def)

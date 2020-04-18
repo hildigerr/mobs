@@ -17,6 +17,7 @@ Upstream contributions have been included from:
  - **Only Peaceful Mobs** if you just want animals, *disabled* by default
  - **Drop Litter** if mobs should drop dropps when dying naturally, *disabled* by default
  - **Meat Rots** if raw meat should rot periodically, *disabled* by default
+ - **Sheep** can be drawn with a default 3D *mesh*, a 2D sprite, or be disabled.
 
 ## The Mobs ##
 
