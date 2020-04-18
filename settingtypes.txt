@@ -13,7 +13,4 @@ mobs.only_peaceful_mobs (Only Peaceful Mobs) bool false
 mobs.drop_litter (Drop Litter) bool false
 
 #    Meat will rot if not cooked or refridgerated
-mobs.meat_rots (Meat Rots) bool true
-
-#    Cooked Meat can be overcooked
-mobs.overcooking (Overcooking) bool true
+mobs.meat_rots (Meat Rots) bool false

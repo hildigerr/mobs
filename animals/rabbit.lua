@@ -64,15 +64,8 @@ minetest.register_craftitem("mobs:rabbit", {
     end,
 })
 
-minetest.register_craftitem("mobs:rabbit_cooked", {
-    description = "Cooked Rabbit",
-    inventory_image = "mobs_cooked_rabbit.png",
-
-    on_use = minetest.item_eat(5),
-})
-
 minetest.register_craft({
     type = "cooking",
-    output = "mobs:rabbit_cooked",
+    output = "mobs:meat",
     recipe = "mobs:rabbit",
 })

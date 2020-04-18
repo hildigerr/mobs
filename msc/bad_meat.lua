@@ -1,4 +1,5 @@
 ---------------------------------SPOILING MEAT----------------------------------
+if not minetest.settings:get_bool("mobs.meat_rots", false) then return end
 
 ----CONFIG OPTIONS:
 --Chances of meat rotting [1-100] Lower number = Greater chance
@@ -16,21 +17,6 @@ local GROUND_TIMER = 360 --DEFAULT:360 [6 min]
 local POCKET_TIMER = 720 --DEFAULT:720 [12 min]
 local STORAGE_TIMER = 720 --DEFAULT:720 [12 min]
 --------------------------------------------------------------------------------
-
-minetest.register_craftitem("mobs:meat_rotten", {
-    description = "Rotten Meat",
-    image = "mobs_meat_rotten.png",
-    on_use = minetest.item_eat(-6),
-    groups = { meat=1, eatable=1 },
-})
-
-minetest.register_craft({
-    type = "cooking",
-    output = "scorched_stuff",
-    recipe = "mobs:meat_rotten",
-})
-
-if not minetest.settings:get_bool("mobs.meat_rots", true) then return end
 
 function spoil_meat( inv, title, chance, warn, owner )
 --inv = InvRef

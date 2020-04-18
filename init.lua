@@ -21,8 +21,5 @@ dofile(modpath.."/animals/rat.lua")
 dofile(modpath.."/animals/sheep.lua")
 
 --------------------------------------------------------------------------------
-if minetest.settings:get_bool("mobs.overcooking", true) then
-    dofile(modpath.."/msc/overcook.lua")
-end
 
 minetest.log("info", "mobs loaded")
