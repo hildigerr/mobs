@@ -15,9 +15,7 @@ mobs:register_mob("cow", {
     max_spawn_count = 2,
     max_spawn_height = 31000,
 
-    water_damage = 1,
-    lava_damage = 8,
-    light_damage = 0,
+    damage = {water = 1, lava = 8, light = 0},
 
     visual = "upright_sprite",
     drawtype = "side",

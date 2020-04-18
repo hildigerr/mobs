@@ -17,9 +17,7 @@ mobs:register_mob("tree_monster", {
     max_spawn_count = 3,
     max_spawn_height = 31000,
 
-    water_damage = 1,
-    lava_damage = 5,
-    light_damage = 2,
+    damage = {water = 1, lava = 5, light = 2},
     light_resistant = true,
     disable_fall_damage = true,
 

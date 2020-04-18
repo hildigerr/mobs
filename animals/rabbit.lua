@@ -35,9 +35,7 @@ mobs:register_mob("rabbit", {
     max_spawn_count = 1,
     max_spawn_height = 31000,
 
-    water_damage = 1,
-    lava_damage = 1,
-    light_damage = 0,
+    damage = {water = 1, lava = 1, light = 0},
 
     visual = "upright_sprite",
     drawtype = "front",

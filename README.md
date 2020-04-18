@@ -61,9 +61,7 @@ Mobs are added using the **mobs:register_mob(name, def)** function, where `name`
  - **max_spawn_count** = the maximum quantity of active mobs in the spawning node's vicinity,
  - **max_spawn_height** = the highest altitude that the mob may spawn,
 
- - **water_damage** = damage per second done to the mob if it is in water,
- - **lava_damage** = damage per second done to the mob if it is in lava,
- - **light_damage** = damage per second done to the mob if it is in light,
+ - **damage** = a table of damage per second done to the mob if it is in: **water**, **lava**, or **light**
 
  - **drawtype** = "front" or "side" to orient the mob's directional heading,
  - **animation** = a table with the animation ranges and speed of a model:

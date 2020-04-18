@@ -14,10 +14,7 @@ function mobs:register_mob(name, def, disabled)
         walk_velocity = def.walk_velocity,
         run_velocity = def.run_velocity or def.walk_velocity,
 
-        water_damage = def.water_damage,
-        lava_damage = def.lava_damage,
-        light_damage = def.light_damage,
-        disable_fall_damage = def.disable_fall_damage,
+        damage = def.damage,
 
         visual = def.visual,
         drawtype = def.drawtype,
@@ -201,14 +198,14 @@ function mobs:register_mob(name, def, disabled)
             if self.env_damage_timer > 1 then
                 self.env_damage_timer = 0
 
-                if self.light_damage and self.light_damage ~= 0
+                if self.damage.light and self.damage.light ~= 0
                     and pos.y>0
                     and minetest.get_node_light(pos)
                     and minetest.get_node_light(pos) > 4
                     and minetest.get_timeofday() > 0.2
                     and minetest.get_timeofday() < 0.8
                 then
-                    self.object:set_hp(self.object:get_hp()-self.light_damage)
+                    self.object:set_hp(self.object:get_hp()-self.damage.light)
                     if self.object:get_hp() == 0 then
                         if self.sounds and self.sounds.death_light then
                             minetest.sound_play(self.sounds.death_light, {oject = self.object})
@@ -221,10 +218,10 @@ function mobs:register_mob(name, def, disabled)
                     end
                 end
 
-                if self.water_damage and self.water_damage ~= 0 and
+                if self.damage.water and self.damage.water ~= 0 and
                     minetest.get_item_group(n.name, "water") ~= 0
                 then
-                    self.object:set_hp(self.object:get_hp()-self.water_damage)
+                    self.object:set_hp(self.object:get_hp()-self.damage.water)
                     if self.object:get_hp() == 0 then
                         if self.sounds and self.sounds.death_drown then
                             minetest.sound_play(self.sounds.death_drown, {oject = self.object})
@@ -237,10 +234,10 @@ function mobs:register_mob(name, def, disabled)
                     end
                 end
 
-                if self.lava_damage and self.lava_damage ~= 0 and
+                if self.damage.lava and self.damage.lava ~= 0 and
                     minetest.get_item_group(n.name, "lava") ~= 0
                 then
-                    self.object:set_hp(self.object:get_hp()-self.lava_damage)
+                    self.object:set_hp(self.object:get_hp()-self.damage.lava)
                     if self.object:get_hp() == 0 then
                         if self.sounds and self.sounds.death_lava then
                             minetest.sound_play(self.sounds.death_lava, {oject = self.object})
