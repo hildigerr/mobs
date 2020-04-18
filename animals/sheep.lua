@@ -1,6 +1,6 @@
 local USE_SPRITES = minetest.settings:get_bool("mobs.use_sprites", false)
 
-mobs:register_mob("mobs:sheep", {
+mobs:register_mob(":mobs:sheep", {
     type = "animal",
 
     hp_max = 5,

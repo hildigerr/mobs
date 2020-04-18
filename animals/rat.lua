@@ -1,6 +1,6 @@
 local USE_SPRITES = minetest.settings:get_bool("mobs.use_sprites", false)
 
-mobs:register_mob("mobs:rat", {
+mobs:register_mob(":mobs:rat", {
     type = "animal",
 
     hp_max = 1,
@@ -32,7 +32,7 @@ mobs:register_mob("mobs:rat", {
 })
 mobs:register_spawn("mobs:rat", {"default:dirt_with_grass", "default:stone"}, 20, -1, 7000, 1, 31000)
 
-minetest.register_craftitem("mobs:rat", {
+minetest.register_craftitem(":mobs:rat", {
     description = "Rat",
     inventory_image = "mobs_rat.png",
 

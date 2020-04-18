@@ -1,6 +1,6 @@
 local USE_SPRITES = minetest.settings:get_bool("mobs.use_sprites", false)
 
-mobs:register_mob("mobs:dungeon_master", {
+mobs:register_mob(":mobs:dungeon_master", {
     type = "monster",
 
     hp_max = 10,
@@ -59,7 +59,7 @@ mobs:register_mob("mobs:dungeon_master", {
 })
 mobs:register_spawn("mobs:dungeon_master", {"default:stone"}, 2, -1, 7000, 1, -50)
 
-mobs:register_arrow("mobs:fireball", {
+mobs:register_arrow(":mobs:fireball", {
     visual = "sprite",
     visual_size = {x=1, y=1},
     --textures = {{name="mobs_fireball.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=0.5}}}, FIXME

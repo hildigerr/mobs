@@ -1,6 +1,6 @@
 local USE_SPRITES = minetest.settings:get_bool("mobs.use_sprites", false)
 
-mobs:register_mob("mobs:oerkki", {
+mobs:register_mob(":mobs:oerkki", {
     type = "monster",
 
     hp_max = 8,

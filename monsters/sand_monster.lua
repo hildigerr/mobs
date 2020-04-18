@@ -1,6 +1,6 @@
 local USE_SPRITES = minetest.settings:get_bool("mobs.use_sprites", false)
 
-mobs:register_mob("mobs:sand_monster", {
+mobs:register_mob(":mobs:sand_monster", {
     type = "monster",
 
     hp_max = 3,

@@ -2,7 +2,7 @@
     --drop furs and craft coonskin hats and taxedermy
 
 ----Racoons:
-mobs:register_mob("mobs:racoon", {
+mobs:register_mob(":mobs:racoon", {
     type = "animal",
 
     hp_max = 3,

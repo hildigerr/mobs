@@ -1,5 +1,5 @@
 ----Cow:
-mobs:register_mob("mobs:cow", {
+mobs:register_mob(":mobs:cow", {
     type = "animal",
 
     hp_max = 8,
@@ -19,7 +19,7 @@ mobs:register_mob("mobs:cow", {
     textures = { "mobs_cow.png", "mobs_cow.png"},
 
     sounds = {
-        random = "cow",
+        random = "mobs_cow",
     },
     makes_foostep_sound = true,
     follow = function(item)
@@ -37,7 +37,7 @@ mobs:register_mob("mobs:cow", {
         tool = clicker:get_wielded_item():get_name()
         if tool == "bucket:bucket_empty" then
             if self.milked then
-                minetest.sound_play("Mudchute_cow_1", {
+                minetest.sound_play("mobs_cow_mad", {
                     object = self.object,
                     gain = 1.0, -- default
                     max_hear_distance = 32, -- default
@@ -45,7 +45,7 @@ mobs:register_mob("mobs:cow", {
                 })
                 do return end
             else
-                minetest.sound_play("milk_splash", {
+                minetest.sound_play("mobs_milk_splash", {
                     to_player = clicker:get_player_name(),
 --                    object = self.object,
                     gain = 1.0, -- default
@@ -58,7 +58,7 @@ mobs:register_mob("mobs:cow", {
             if math.random(1,2) > 1 then self.milked = true    end
         elseif tool == "vessels:glass_bottle" then
             if self.milked then
-                minetest.sound_play("Mudchute_cow_1", {
+                minetest.sound_play("mobs_cow_mad", {
                     object = self.object,
                     gain = 1.0, -- default
                     max_hear_distance = 32, -- default
@@ -66,7 +66,7 @@ mobs:register_mob("mobs:cow", {
                 })
                 do return end
             else
-                minetest.sound_play("milk_splash", {
+                minetest.sound_play("mobs_milk_splash", {
                     to_player = clicker:get_player_name(),
 --                    object = self.object,
                     gain = 1.0, -- default
@@ -79,7 +79,7 @@ mobs:register_mob("mobs:cow", {
             if math.random(1,3) > 2 then self.milked = true    end
         elseif tool == "vessels:drinking_glass" then
             if self.milked then
-                minetest.sound_play("Mudchute_cow_1", {
+                minetest.sound_play("mobs_cow_mad", {
                     object = self.object,
                     gain = 1.0, -- default
                     max_hear_distance = 32, -- default
@@ -87,7 +87,7 @@ mobs:register_mob("mobs:cow", {
                 })
                 do return end
             else
-                minetest.sound_play("milk_splash", {
+                minetest.sound_play("mobs_milk_splash", {
                     to_player = clicker:get_player_name(),
 --                    object = self.object,
                     gain = 1.0, -- default
@@ -100,7 +100,7 @@ mobs:register_mob("mobs:cow", {
             if math.random(1,4) > 3 then self.milked = true    end
         elseif tool == "vessels:steel_bottle" then
             if self.milked then
-                minetest.sound_play("Mudchute_cow_1", {
+                minetest.sound_play("mobs_cow_mad", {
                     object = self.object,
                     gain = 1.0, -- default
                     max_hear_distance = 32, -- default
@@ -108,7 +108,7 @@ mobs:register_mob("mobs:cow", {
                 })
                 do return end
             else
-                minetest.sound_play("milk_splash", {
+                minetest.sound_play("mobs_milk_splash", {
                     to_player = clicker:get_player_name(),
 --                    object = self.object,
                     gain = 1.0, -- default
@@ -124,7 +124,7 @@ mobs:register_mob("mobs:cow", {
 })
 mobs:register_spawn("mobs:cow", {"default:dirt_with_grass"}, 20, 8, 6000, 2, 31000)
 
-minetest.register_craftitem("mobs:milk_bucket", {
+minetest.register_craftitem(":mobs:milk_bucket", {
     description = "Bucket of Milk",
     image = "mobs_bucket_milk.png",
     on_use = minetest.item_eat(8,"bucket:bucket_empty"),
@@ -132,7 +132,7 @@ minetest.register_craftitem("mobs:milk_bucket", {
     stack_max = 1,
 })
 
-minetest.register_craftitem("mobs:milk_bottle_glass", {
+minetest.register_craftitem(":mobs:milk_bottle_glass", {
     description = "Bottle of Milk",
     image = "mobs_glass_bottle_milk.png",
     wield_image = "mobs_glass_bottle_milk_wield.png",
@@ -140,7 +140,7 @@ minetest.register_craftitem("mobs:milk_bottle_glass", {
     groups = { eatable=1 },
 })
 
-minetest.register_craftitem("mobs:milk_glass_cup", {
+minetest.register_craftitem(":mobs:milk_glass_cup", {
     description = "Bottle of Milk",
     image = "mobs_drinking_glass_milk.png",
     wield_image = "mobs_drinking_glass_milk_wield.png",
@@ -148,7 +148,7 @@ minetest.register_craftitem("mobs:milk_glass_cup", {
     groups = { eatable=1 },
 })
 
-minetest.register_craftitem("mobs:milk_bottle_steel", {
+minetest.register_craftitem(":mobs:milk_bottle_steel", {
     description = "Flask of Milk",
     image = --"vessels_steel_bottle.png",
         "mobs_steel_bottle_milk.png",

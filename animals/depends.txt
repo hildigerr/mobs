@@ -1,8 +1,6 @@
-default
-fire
+mobs
 bucket
 vessels
-dye
 food?
 farming_plus?
 docfarming?

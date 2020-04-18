@@ -6,7 +6,7 @@ elseif minetest.get_modpath("farming_plus") ~= nil then
 elseif minetest.get_modpath("docfarming") ~= nil then
     minetest.register_alias("mobs:carrot", "docfarming:carrot")
 else
-    minetest.register_craftitem("mobs:carrot", {
+    minetest.register_craftitem(":mobs:carrot", {
         description = "Carrot",
         inventory_image = "mobs_carrot.png",
         on_use = minetest.item_eat(4),
@@ -20,7 +20,7 @@ local rabbit_droppings = {
     max = 1,
 }
 
-mobs:register_mob("mobs:rabbit", {
+mobs:register_mob(":mobs:rabbit", {
     type = "animal",
 
     hp_max = 1,
@@ -51,7 +51,7 @@ mobs:register_mob("mobs:rabbit", {
 })
 mobs:register_spawn("mobs:rabbit", {"default:dirt_with_grass"}, 20, 8, 8000, 1, 31000)
 
-minetest.register_craftitem("mobs:rabbit", {
+minetest.register_craftitem(":mobs:rabbit", {
     description = "Rabbit",
     inventory_image = "mobs_rabbit.png",
 
