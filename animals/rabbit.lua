@@ -1,24 +1,3 @@
-----Rabbit:
-if minetest.get_modpath("food") ~= nil then
-    minetest.register_alias("mobs:carrot", "food:carrot")
-elseif minetest.get_modpath("farming_plus") ~= nil then
-    minetest.register_alias("mobs:carrot", "farming_plus:carrot_item")
-elseif minetest.get_modpath("docfarming") ~= nil then
-    minetest.register_alias("mobs:carrot", "docfarming:carrot")
-else
-    minetest.register_craftitem(":mobs:carrot", {
-        description = "Carrot",
-        inventory_image = "mobs_carrot.png",
-        on_use = minetest.item_eat(4),
-    })
-end
-
-local rabbit_droppings = {
-    name = "mobs:carrot",
-    chance = 4,
-    min = 1,
-    max = 1,
-}
 
 mobs:register_mob("rabbit", {
     type = "animal",
@@ -45,7 +24,14 @@ mobs:register_mob("rabbit", {
 
     makes_footstep_sound = false,
 
-    drops = {rabbit_droppings},
+    drops = {
+        {
+            name = "mobs:carrot",
+            chance = 4,
+            min = 1,
+            max = 1,
+        }
+    },
 
     on_rightclick = function(self, clicker)
         if clicker:is_player() and clicker:get_inventory() then
