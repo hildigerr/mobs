@@ -24,8 +24,8 @@ function mobs:register_mob(name, def, disabled)
         visual_size = def.visual_size,
         collisionbox = def.collisionbox,
         textures = def.textures,
-		mesh = def.mesh,
-		animation = def.animation,
+        mesh = def.mesh,
+        animation = def.animation,
 
         sounds = def.sounds,
         makes_footstep_sound = def.makes_footstep_sound,
@@ -75,63 +75,63 @@ function mobs:register_mob(name, def, disabled)
             return (v.x^2 + v.z^2)^(0.5)
         end,
 
-		set_animation = function(self, type)
-			if not self.animation then
-				return
-			end
-			if not self.animation.current then
-				self.animation.current = ""
-			end
-			if type == "stand" and self.animation.current ~= "stand" then
-				if
-					self.animation.stand_start
-					and self.animation.stand_end
-					and self.animation.speed_normal
-				then
-					self.object:set_animation(
-						{x=self.animation.stand_start,y=self.animation.stand_end},
-						self.animation.speed_normal, 0
-					)
-					self.animation.current = "stand"
-				end
-			elseif type == "walk" and self.animation.current ~= "walk"  then
-				if
-					self.animation.walk_start
-					and self.animation.walk_end
-					and self.animation.speed_normal
-				then
-					self.object:set_animation(
-						{x=self.animation.walk_start,y=self.animation.walk_end},
-						self.animation.speed_normal, 0
-					)
-					self.animation.current = "walk"
-				end
-			elseif type == "run" and self.animation.current ~= "run"  then
-				if
-					self.animation.run_start
-					and self.animation.run_end
-					and self.animation.speed_run
-				then
-					self.object:set_animation(
-						{x=self.animation.run_start,y=self.animation.run_end},
-						self.animation.speed_run, 0
-					)
-					self.animation.current = "run"
-				end
-			elseif type == "punch" and self.animation.current ~= "punch"  then
-				if
-					self.animation.punch_start
-					and self.animation.punch_end
-					and self.animation.speed_normal
-				then
-					self.object:set_animation(
-						{x=self.animation.punch_start,y=self.animation.punch_end},
-						self.animation.speed_normal, 0
-					)
-					self.animation.current = "punch"
-				end
-			end
-		end,
+        set_animation = function(self, type)
+            if not self.animation then
+                return
+            end
+            if not self.animation.current then
+                self.animation.current = ""
+            end
+            if type == "stand" and self.animation.current ~= "stand" then
+                if
+                    self.animation.stand_start
+                    and self.animation.stand_end
+                    and self.animation.speed_normal
+                then
+                    self.object:set_animation(
+                        {x=self.animation.stand_start,y=self.animation.stand_end},
+                        self.animation.speed_normal, 0
+                    )
+                    self.animation.current = "stand"
+                end
+            elseif type == "walk" and self.animation.current ~= "walk"  then
+                if
+                    self.animation.walk_start
+                    and self.animation.walk_end
+                    and self.animation.speed_normal
+                then
+                    self.object:set_animation(
+                        {x=self.animation.walk_start,y=self.animation.walk_end},
+                        self.animation.speed_normal, 0
+                    )
+                    self.animation.current = "walk"
+                end
+            elseif type == "run" and self.animation.current ~= "run"  then
+                if
+                    self.animation.run_start
+                    and self.animation.run_end
+                    and self.animation.speed_run
+                then
+                    self.object:set_animation(
+                        {x=self.animation.run_start,y=self.animation.run_end},
+                        self.animation.speed_run, 0
+                    )
+                    self.animation.current = "run"
+                end
+            elseif type == "punch" and self.animation.current ~= "punch"  then
+                if
+                    self.animation.punch_start
+                    and self.animation.punch_end
+                    and self.animation.speed_normal
+                then
+                    self.object:set_animation(
+                        {x=self.animation.punch_start,y=self.animation.punch_end},
+                        self.animation.speed_normal, 0
+                    )
+                    self.animation.current = "punch"
+                end
+            end
+        end,
 
         on_step = not disabled and function(self, dtime)
             local pos = self.object:get_pos()
@@ -366,12 +366,12 @@ function mobs:register_mob(name, def, disabled)
                     self.v_start = false
                     self.set_velocity(self, 0)
                     self:set_animation("stand")
-                        if self:attack(self.target) then
-                            self:set_animation("punch")
-                            if self.sounds and self.sounds.attack then
-                                minetest.sound_play(self.sounds.attack, {object = self.object})
-                            end
+                    if self:attack(self.target) then
+                        self:set_animation("punch")
+                        if self.sounds and self.sounds.attack then
+                            minetest.sound_play(self.sounds.attack, {object = self.object})
                         end
+                    end
                 end
             end
         end or function (self, dtime)
@@ -456,45 +456,45 @@ function mobs:register_mob(name, def, disabled)
     })
 
     if not disabled then
-    minetest.register_abm({
-        nodenames = def.spawning_nodes,
-        neighbors = {"air"},
-        interval = 30,
-        chance = def.spawn_chance,
-        action = function(pos, node, _, active_object_count_wider)
-            if active_object_count_wider > def.max_spawn_count then
-                return
-            end
-            pos.y = pos.y+1
-            if not minetest.get_node_light(pos) then
-                return
-            end
-            if minetest.get_node_light(pos) > def.max_spawn_light then
-                return
-            end
-            if minetest.get_node_light(pos) < def.min_spawn_light then
-                return
-            end
-            if pos.y > def.max_spawn_height then
-                return
-            end
-            if minetest.get_node(pos).name ~= "air" then
-                return
-            end
-            pos.y = pos.y+1
-            if minetest.get_node(pos).name ~= "air" then
-                return
-            end
-            if def.spawn_func and not def.spawn_func(pos, node) then
-                return
-            end
+        minetest.register_abm({
+            nodenames = def.spawning_nodes,
+            neighbors = {"air"},
+            interval = 30,
+            chance = def.spawn_chance,
+            action = function(pos, node, _, active_object_count_wider)
+                if active_object_count_wider > def.max_spawn_count then
+                    return
+                end
+                pos.y = pos.y+1
+                if not minetest.get_node_light(pos) then
+                    return
+                end
+                if minetest.get_node_light(pos) > def.max_spawn_light then
+                    return
+                end
+                if minetest.get_node_light(pos) < def.min_spawn_light then
+                    return
+                end
+                if pos.y > def.max_spawn_height then
+                    return
+                end
+                if minetest.get_node(pos).name ~= "air" then
+                    return
+                end
+                pos.y = pos.y+1
+                if minetest.get_node(pos).name ~= "air" then
+                    return
+                end
+                if def.spawn_func and not def.spawn_func(pos, node) then
+                    return
+                end
 
-            if minetest.settings:get_bool("mobs.display_mob_spawn", false) then
-                minetest.chat_send_all("[mobs] Spawned "..name.." at "..minetest.pos_to_string(pos))
+                if minetest.settings:get_bool("mobs.display_mob_spawn", false) then
+                    minetest.chat_send_all("[mobs] Spawned "..name.." at "..minetest.pos_to_string(pos))
+                end
+                minetest.add_entity(pos, name)
             end
-            minetest.add_entity(pos, name)
-        end
-    })
+        })
     end
 end
 

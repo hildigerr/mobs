@@ -42,12 +42,14 @@ mobs:register_mob("dirt_monster", {
     makes_footstep_sound = true,
 
     drops = {
-        {name = "default:dirt",
-        chance = 1,
-        min = 3,
-        max = 5,},
+        {
+            name = "default:dirt",
+            chance = 1,
+            min = 3,
+            max = 5,
+        },
     },
-    
+
     attack = function(self, target)
         return mobs:slap(self, target.player, {fleshy=2})
     end,

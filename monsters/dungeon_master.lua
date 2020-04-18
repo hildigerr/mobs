@@ -43,10 +43,12 @@ mobs:register_mob("dungeon_master", {
     makes_footstep_sound = true,
 
     drops = {
-        {name = "default:mese",
-        chance = 100,
-        min = 1,
-        max = 2,},
+        {
+            name = "default:mese",
+            chance = 100,
+            min = 1,
+            max = 2,
+        },
     },
 
     attack_range = 10,

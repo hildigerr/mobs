@@ -34,10 +34,12 @@ mobs:register_mob("cow", {
     end,
 
     drops = {
-        {name = "mobs:meat_raw",
-        chance = 1,
-        min = 2,
-        max = 4,},
+        {
+            name = "mobs:meat_raw",
+           chance = 1,
+          min = 2,
+          max = 4,
+        },
     },
 
     on_rightclick = function(self, clicker)

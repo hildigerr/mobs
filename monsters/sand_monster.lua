@@ -50,7 +50,7 @@ mobs:register_mob("sand_monster", {
             max = 5,
         },
     },
-    
+
     attack = function(self, target)
         return mobs:slap(self, target.player, {fleshy=1})
     end,

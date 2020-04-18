@@ -43,7 +43,7 @@ mobs:register_mob("oerkki", {
     makes_footstep_sound = false,
 
     drops = {},
-    
+
     attack = function(self, target)
         return mobs:slap(self, target.player, {fleshy=4})
     end,
