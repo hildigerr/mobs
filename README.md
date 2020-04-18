@@ -55,6 +55,13 @@ Mobs are added using the **mobs:register_mob(name, def)** function, where `name`
  - **walk_velocity** = the velocity when the mob is walking around,
  - **run_velocity** = the velocity when the mob is running,
 
+ - **spawning_nodes** = a table of nodes upon which the mob may spawn,
+ - **max_spawn_light** = the maximum amount of light present for the mob to spawn,
+ - **min_spawn_light** = the minimum amount of light present for the mob to spawn,
+ - **spawn_chance** = the inverted chance for the mob to spawn per 30 second,
+ - **max_spawn_count** = the maximum quantity of active mobs in the spawning node's vicinity,
+ - **max_spawn_height** = the highest altitude that the mob may spawn,
+
  - **water_damage** = damage per second done to the mob if it is in water,
  - **lava_damage** = damage per second done to the mob if it is in lava,
  - **light_damage** = damage per second done to the mob if it is in light,

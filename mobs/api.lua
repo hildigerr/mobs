@@ -1,7 +1,8 @@
-mobs = {}
+mobs = {spawning_mobs = {}}
 
 function mobs:register_mob(name, def)
-    minetest.register_entity(name, {
+    name = "mobs:"..name
+    minetest.register_entity(":"..name, {
         type = def.type,
         physical = true,
         state = "stand",
@@ -451,18 +452,15 @@ function mobs:register_mob(name, def)
         end,
 
     })
-end
 
-mobs.spawning_mobs = {}
-function mobs:register_spawn(name, nodes, max_light, min_light, chance, active_object_count, max_height, spawn_func)
     mobs.spawning_mobs[name] = true
     minetest.register_abm({
-        nodenames = nodes,
+        nodenames = def.spawning_nodes,
         neighbors = {"air"},
         interval = 30,
-        chance = chance,
+        chance = def.spawn_chance,
         action = function(pos, node, _, active_object_count_wider)
-            if active_object_count_wider > active_object_count then
+            if active_object_count_wider > def.max_spawn_count then
                 return
             end
             if not mobs.spawning_mobs[name] then
@@ -472,13 +470,13 @@ function mobs:register_spawn(name, nodes, max_light, min_light, chance, active_o
             if not minetest.get_node_light(pos) then
                 return
             end
-            if minetest.get_node_light(pos) > max_light then
+            if minetest.get_node_light(pos) > def.max_spawn_light then
                 return
             end
-            if minetest.get_node_light(pos) < min_light then
+            if minetest.get_node_light(pos) < def.min_spawn_light then
                 return
             end
-            if pos.y > max_height then
+            if pos.y > def.max_spawn_height then
                 return
             end
             if minetest.get_node(pos).name ~= "air" then
@@ -488,7 +486,7 @@ function mobs:register_spawn(name, nodes, max_light, min_light, chance, active_o
             if minetest.get_node(pos).name ~= "air" then
                 return
             end
-            if spawn_func and not spawn_func(pos, node) then
+            if def.spawn_func and not def.spawn_func(pos, node) then
                 return
             end
 

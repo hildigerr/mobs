@@ -1,6 +1,6 @@
 local USE_SPRITES = minetest.settings:get_bool("mobs.use_sprites", false)
 
-mobs:register_mob(":mobs:dirt_monster", {
+mobs:register_mob("dirt_monster", {
     type = "monster",
 
     hp_max = 5,
@@ -8,6 +8,13 @@ mobs:register_mob(":mobs:dirt_monster", {
     view_range = 15,
     walk_velocity = 1,
     run_velocity = 3,
+
+    spawning_nodes = {"default:dirt_with_grass"},
+    max_spawn_light = 3,
+    min_spawn_light = -1,
+    spawn_chance = 7000,
+    max_spawn_count = 3,
+    max_spawn_height = 31000,
 
     water_damage = 1,
     lava_damage = 5,
@@ -45,4 +52,3 @@ mobs:register_mob(":mobs:dirt_monster", {
         return mobs:slap(self, target.player, {fleshy=2})
     end,
 })
-mobs:register_spawn("mobs:dirt_monster", {"default:dirt_with_grass"}, 3, -1, 7000, 3, 31000)

@@ -2,7 +2,7 @@
     --drop furs and craft coonskin hats and taxedermy
 
 ----Racoons:
-mobs:register_mob(":mobs:racoon", {
+mobs:register_mob("racoon", {
     type = "animal",
 
     hp_max = 3,
@@ -10,6 +10,13 @@ mobs:register_mob(":mobs:racoon", {
     view_range = 15,
     walk_velocity = 2,
     run_velocity = 2,
+
+    spawning_nodes = {"default:dirt_with_grass"},
+    max_spawn_light = 20,
+    min_spawn_light = 8,
+    spawn_chance = 8000,
+    max_spawn_count = 1,
+    max_spawn_height = 31000,
 
     water_damage = 1,
     lava_damage = 1,
@@ -41,4 +48,3 @@ mobs:register_mob(":mobs:racoon", {
         end
     end,
 })
-mobs:register_spawn("mobs:racoon", {"default:dirt_with_grass"}, 20, 8, 8000, 1, 31000)

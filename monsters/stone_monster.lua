@@ -1,6 +1,6 @@
 local USE_SPRITES = minetest.settings:get_bool("mobs.use_sprites", false)
 
-mobs:register_mob(":mobs:stone_monster", {
+mobs:register_mob("stone_monster", {
     type = "monster",
 
     hp_max = 10,
@@ -8,6 +8,13 @@ mobs:register_mob(":mobs:stone_monster", {
     view_range = 10,
     walk_velocity = 0.5,
     run_velocity = 2,
+
+    spawning_nodes = {"default:stone"},
+    max_spawn_light = 3,
+    min_spawn_light = -1,
+    spawn_chance = 7000,
+    max_spawn_count = 3,
+    max_spawn_height = 0,
 
     water_damage = 0,
     lava_damage = 0,
@@ -47,4 +54,3 @@ mobs:register_mob(":mobs:stone_monster", {
         return mobs:slap(self, target.player, {fleshy=3})
     end,
 })
-mobs:register_spawn("mobs:stone_monster", {"default:stone"}, 3, -1, 7000, 3, 0)

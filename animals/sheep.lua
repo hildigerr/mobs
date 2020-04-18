@@ -1,6 +1,6 @@
 local USE_SPRITES = minetest.settings:get_bool("mobs.use_sprites", false)
 
-mobs:register_mob(":mobs:sheep", {
+mobs:register_mob("sheep", {
     type = "animal",
 
     hp_max = 5,
@@ -8,6 +8,13 @@ mobs:register_mob(":mobs:sheep", {
     view_range = 10,
     walk_velocity = 1,
     run_velocity = 1,
+
+    spawning_nodes = {"default:dirt_with_grass"},
+    max_spawn_light = 20,
+    min_spawn_light = 8,
+    spawn_chance = 9000,
+    max_spawn_count = 1,
+    max_spawn_height = 31000,
 
     water_damage = 1,
     lava_damage = 5,
@@ -82,4 +89,3 @@ mobs:register_mob(":mobs:sheep", {
         end
     end,
 })
-mobs:register_spawn("mobs:sheep", {"default:dirt_with_grass"}, 20, 8, 9000, 1, 31000)

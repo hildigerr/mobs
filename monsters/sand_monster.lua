@@ -1,6 +1,6 @@
 local USE_SPRITES = minetest.settings:get_bool("mobs.use_sprites", false)
 
-mobs:register_mob(":mobs:sand_monster", {
+mobs:register_mob("sand_monster", {
     type = "monster",
 
     hp_max = 3,
@@ -8,6 +8,13 @@ mobs:register_mob(":mobs:sand_monster", {
     view_range = 15,
     walk_velocity = 1.5,
     run_velocity = 4,
+
+    spawning_nodes = {"default:desert_sand"},
+    max_spawn_light = 20,
+    min_spawn_light = -1,
+    spawn_chance = 7000,
+    max_spawn_count = 3,
+    max_spawn_height = 31000,
 
     water_damage = 3,
     lava_damage = 1,
@@ -48,4 +55,3 @@ mobs:register_mob(":mobs:sand_monster", {
         return mobs:slap(self, target.player, {fleshy=1})
     end,
 })
-mobs:register_spawn("mobs:sand_monster", {"default:desert_sand"}, 20, -1, 7000, 3, 31000)

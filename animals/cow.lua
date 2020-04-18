@@ -1,5 +1,5 @@
 ----Cow:
-mobs:register_mob(":mobs:cow", {
+mobs:register_mob("cow", {
     type = "animal",
 
     hp_max = 8,
@@ -7,6 +7,13 @@ mobs:register_mob(":mobs:cow", {
     view_range = 10,
     walk_velocity = 1,
     run_velocity = 2,
+
+    spawning_nodes = {"default:dirt_with_grass"},
+    max_spawn_light = 20,
+    min_spawn_light = 8,
+    spawn_chance = 6000,
+    max_spawn_count = 2,
+    max_spawn_height = 31000,
 
     water_damage = 1,
     lava_damage = 8,
@@ -122,7 +129,6 @@ mobs:register_mob(":mobs:cow", {
         end -- tool ifs
     end, -- on_rightclick func
 })
-mobs:register_spawn("mobs:cow", {"default:dirt_with_grass"}, 20, 8, 6000, 2, 31000)
 
 minetest.register_craftitem(":mobs:milk_bucket", {
     description = "Bucket of Milk",

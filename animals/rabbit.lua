@@ -20,13 +20,20 @@ local rabbit_droppings = {
     max = 1,
 }
 
-mobs:register_mob(":mobs:rabbit", {
+mobs:register_mob("rabbit", {
     type = "animal",
 
     hp_max = 1,
     armor = 100,
     walk_velocity = 4,
     run_velocity = 4,
+
+    spawning_nodes = {"default:dirt_with_grass"},
+    max_spawn_light = 20,
+    min_spawn_light = 8,
+    spawn_chance = 8000,
+    max_spawn_count = 1,
+    max_spawn_height = 31000,
 
     water_damage = 1,
     lava_damage = 1,
@@ -49,7 +56,6 @@ mobs:register_mob(":mobs:rabbit", {
         end
     end,
 })
-mobs:register_spawn("mobs:rabbit", {"default:dirt_with_grass"}, 20, 8, 8000, 1, 31000)
 
 minetest.register_craftitem(":mobs:rabbit", {
     description = "Rabbit",

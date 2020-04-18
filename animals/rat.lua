@@ -1,12 +1,19 @@
 local USE_SPRITES = minetest.settings:get_bool("mobs.use_sprites", false)
 
-mobs:register_mob(":mobs:rat", {
+mobs:register_mob("rat", {
     type = "animal",
 
     hp_max = 1,
     armor = 100,
     walk_velocity = 1,
     run_velocity = 2,
+
+    spawning_nodes = {"default:dirt_with_grass", "default:stone"},
+    max_spawn_light = 20,
+    min_spawn_light = -1,
+    spawn_chance = 7000,
+    max_spawn_count = 1,
+    max_spawn_height = 31000,
 
     water_damage = 0,
     lava_damage = 1,
@@ -30,7 +37,6 @@ mobs:register_mob(":mobs:rat", {
         end
     end,
 })
-mobs:register_spawn("mobs:rat", {"default:dirt_with_grass", "default:stone"}, 20, -1, 7000, 1, 31000)
 
 minetest.register_craftitem(":mobs:rat", {
     description = "Rat",

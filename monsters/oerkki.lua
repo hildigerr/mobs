@@ -1,6 +1,6 @@
 local USE_SPRITES = minetest.settings:get_bool("mobs.use_sprites", false)
 
-mobs:register_mob(":mobs:oerkki", {
+mobs:register_mob("oerkki", {
     type = "monster",
 
     hp_max = 8,
@@ -8,6 +8,13 @@ mobs:register_mob(":mobs:oerkki", {
     view_range = 15,
     walk_velocity = 1,
     run_velocity = 3,
+
+    spawning_nodes = {"default:stone"},
+    max_spawn_light = 2,
+    min_spawn_light = -1,
+    spawn_chance = 7000,
+    max_spawn_count = 3,
+    max_spawn_height = -10,
 
     water_damage = 1,
     lava_damage = 1,
@@ -41,4 +48,3 @@ mobs:register_mob(":mobs:oerkki", {
         return mobs:slap(self, target.player, {fleshy=4})
     end,
 })
-mobs:register_spawn("mobs:oerkki", {"default:stone"}, 2, -1, 7000, 3, -10)

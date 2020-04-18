@@ -1,6 +1,6 @@
 local USE_SPRITES = minetest.settings:get_bool("mobs.use_sprites", false)
 
-mobs:register_mob(":mobs:dungeon_master", {
+mobs:register_mob("dungeon_master", {
     type = "monster",
 
     hp_max = 10,
@@ -8,6 +8,13 @@ mobs:register_mob(":mobs:dungeon_master", {
     view_range = 15,
     walk_velocity = 1,
     run_velocity = 3,
+
+    spawning_nodes = {"default:stone"},
+    max_spawn_light = 2,
+    min_spawn_light = -1,
+    spawn_chance = 7000,
+    max_spawn_count = 1,
+    max_spawn_height = -50,
 
     water_damage = 1,
     lava_damage = 1,
@@ -57,7 +64,6 @@ mobs:register_mob(":mobs:dungeon_master", {
         return false
     end,
 })
-mobs:register_spawn("mobs:dungeon_master", {"default:stone"}, 2, -1, 7000, 1, -50)
 
 mobs:register_arrow(":mobs:fireball", {
     visual = "sprite",
