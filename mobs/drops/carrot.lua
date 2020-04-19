@@ -9,5 +9,6 @@ else
         description = "Carrot",
         inventory_image = "mobs_carrot.png",
         on_use = minetest.item_eat(4),
+        groups = {eatable = 2}
     })
 end
