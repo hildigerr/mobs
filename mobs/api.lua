@@ -250,7 +250,7 @@ function mobs:register_mob(name, def, disabled)
                 end
             end
 
-            if self.state == "chase" then
+            if self.state == "chase" or self.state == "flee" then
                 if not self.target.player
                     or not self.target.player:is_player()
                     or (self.follow and not self.follow(self.target.player:get_wielded_item():get_name()))
@@ -333,6 +333,13 @@ function mobs:register_mob(name, def, disabled)
                     self.state = "stand"
                     self.set_animation(self, "stand")
                 end
+            elseif self.state == "flee" then
+                if math.random(1, 100) <= 30 then
+                    self.object:set_yaw(mobs:orient(self, pos, self.target.pos)+(math.pi/4)*math.random(2,5))
+                end
+                self:try_jump()
+                self.set_velocity(self, self.run_velocity)
+                self:set_animation("run")
             elseif self.state == "chase" then
                 self.object:set_yaw(mobs:orient(self, pos, self.target.pos))
                 if self.target.dist > self.attack_range then
