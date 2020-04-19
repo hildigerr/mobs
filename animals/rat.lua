@@ -6,8 +6,8 @@ mobs:register_mob("rat", {
 
     hp_max = 10,
     armor = {crumbly = 100, cracky = 100, choppy = 100, fleshy = 100},
-    walk_velocity = 1,
-    run_velocity = 2,
+    walk_velocity = 3,
+    run_velocity = 6,
 
     spawning_nodes = {"default:dirt_with_grass", "default:stone"},
     max_spawn_light = 20,
@@ -39,7 +39,7 @@ mobs:register_mob("rat", {
 
 minetest.register_craftitem(":mobs:rat", {
     description = "Rat",
-    inventory_image = "mobs_rat.png",
+    inventory_image = USE_SPRITES and "mobs_rat.png" or "mobs_rat_inventory.png",
 
     on_place = function(itemstack, placer, pointed_thing)
         if pointed_thing.above then
