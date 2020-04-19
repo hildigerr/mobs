@@ -45,25 +45,19 @@ mobs:register_mob("sheep", {
         {
             name = "mobs:meat_raw",
             chance = 1,
-            min = 2,
-            max = 3,
+            min = 1,
+            max = 2,
         },
     },
 
     on_rightclick = function(self, clicker)
         local item = clicker:get_wielded_item()
         if item:get_name() == "farming:wheat" then
+            item:take_item()
+            clicker:set_wielded_item(item)
             if not self.tamed then
-                if not minetest.settings:get_bool("creative_mode", false) then
-                    item:take_item()
-                    clicker:set_wielded_item(item)
-                end
                 self.tamed = true
             elseif self.naked then
-                if not minetest.settings:get_bool("creative_mode", false) then
-                    item:take_item()
-                    clicker:set_wielded_item(item)
-                end
                 self.food = (self.food or 0) + 1
                 if self.food >= 8 then
                     self.food = 0
@@ -78,9 +72,7 @@ mobs:register_mob("sheep", {
         end
         if clicker:get_inventory() and not self.naked then
             self.naked = true
-            if minetest.registered_items["wool:white"] then
-                clicker:get_inventory():add_item("main", ItemStack("wool:white "..math.random(1,3)))
-            end
+            clicker:get_inventory():add_item("main", ItemStack("wool:white "..math.random(1,2)))
             self.object:set_properties({
                 textures = USE_SPRITES and {"mobs_sheep_naked.png", "mobs_sheep_naked.png"} or {"mobs_sheep_shaved.png"},
                 mesh = "mobs_sheep_shaved.x",
