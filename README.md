@@ -110,23 +110,29 @@ Mobs are added using the **mobs:register_mob(name, def)** function, where `name`
    - **max** = the maximum quantity of items,
 
 ### Callbacks ###
-Besides the regular [entity](https://dev.minetest.net/LuaEntitySAO) callbacks, the mobs api adds some more that you may take advantage of.
+Besides the regular [entity](https://dev.minetest.net/LuaEntitySAO) callbacks, the mobs api adds some more that you may take advantage of. Additionally, there are helper functions availabe for assisting in the implementation of these callbacks.
 
 #### attack( self, target ) ####
 Monsters should provide an attack method in order to inflict damage on players. The function receives two parameters, the `self` entity which is performing the attack and the `target` of the attack. The target will be a table with **player**, **pos**ition, and **dist**ance attributes. Return *true* if the attack was performed, or else *false*.
 
-It can be as simple as using the provided **mobs:slap(self, target, damage)** function, as most of these mobs do. For example:
-
-    attack = function(self, target)
-        return mobs:slap(self, target.player, {fleshy=2})
-    end
-
-The mob entity has a a `self.timer` which should be checked to control how often the attack will take place. This is handled automatically if you use the provided `mobs:slap` method. *However, if you wish for your mob to shoot: you will need to register the projectile via `register_arrow`, and verify/update the timing yourself as is done by the Dungeon Master mob.* There is a **mobs:shoot(name, pos, target)** method provided to launch projectiles at a target. `name` is the name of the projectile, and `pos` and `target` are the *positions* of the shooter and the target respectively.
+The mob entity has a a `self.timer` which should be checked to control how often the attack will take place. This is handled automatically if you use the provided `mobs:slap` method. *However, if you wish for your mob to shoot: you will need to register the projectile via `mobs:register_arrow`, and verify/update the timing yourself as is done by the Dungeon Master mob.*
 
 #### try_jump( self ) ####
 *You don't need to provide a callback to handle mobs jumping.* However, you may. Or if you simply want to *prevent* a mob from jumping, use something like the following for your mob:
 
     try_jump = function(self) return end
+
+#### Helper Functions ####
+
+##### mobs:slap(self, target, damage) #####
+Punch the `target` with `damage` damage groups for use as an `attack` callback. This is what most mobs use. For example:
+
+    attack = function(self, target)
+        return mobs:slap(self, target.player, {fleshy=2})
+    end
+
+##### mobs:shoot(name, pos, target) #####
+Launch projectiles at a target. `name` is the name of the projectile. `pos` and `target` are the *positions* of the shooter and the target respectively.
 
 ## Issues ##
  - [ ] If you drink milk from a stack of vessels, you will not recieve the empty vessel.
