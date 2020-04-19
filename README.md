@@ -124,6 +124,9 @@ The mob entity has a a `self.timer` which should be checked to control how often
 
 #### Helper Functions ####
 
+##### mobs:orient(self, pos, target) #####
+Returns a heading, in radians, which can be used with `set_yaw` to orient `self` in the direction from `pos` to `target`.
+
 ##### mobs:slap(self, target, damage) #####
 Punch the `target` with `damage` damage groups for use as an `attack` callback. This is what most mobs use. For example:
 

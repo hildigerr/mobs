@@ -334,17 +334,7 @@ function mobs:register_mob(name, def, disabled)
                     self.set_animation(self, "stand")
                 end
             elseif self.state == "chase" then
-                local s = pos
-                local p = self.target.pos
-                local vec = {x=p.x-s.x, y=p.y-s.y, z=p.z-s.z}
-                local yaw = math.atan(vec.z/vec.x)
-                if self.drawtype == "front" then
-                    yaw = yaw+(math.pi/2)
-                end
-                if p.x > s.x then
-                    yaw = yaw+math.pi
-                end
-                self.object:set_yaw(yaw)
+                self.object:set_yaw(mobs:orient(self, pos, self.target.pos))
                 if self.target.dist > self.attack_range then
                     if not self.v_start then
                         self.v_start = true
@@ -516,6 +506,22 @@ function mobs:register_arrow(name, def)
             end
         end
     })
+end
+
+function mobs:orient(self, pos, target)
+    local vec = {
+        x = target.x-pos.x,
+        y = target.y-pos.y,
+        z = target.z-pos.z
+    }
+    local yaw = math.atan(vec.z/vec.x)
+    if self.drawtype == "front" then
+        yaw = yaw+(math.pi/2)
+    end
+    if target.x > pos.x then
+        yaw = yaw+math.pi
+    end
+    return yaw
 end
 
 function mobs:slap(self, target, damage)
