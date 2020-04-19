@@ -10,15 +10,15 @@ minetest.register_craftitem("mobs:milk_bucket", {
 minetest.register_craftitem("mobs:milk_bottle_glass", {
     description = "Bottle of Milk",
     image = "mobs_glass_bottle_milk.png",
-    wield_image = "mobs_glass_bottle_milk_wield.png",
+    wield_image = "mobs_glass_bottle_milk.png",
     on_use = minetest.item_eat(4, "vessels:glass_bottle"),
     groups = { eatable=1 },
 })
 
 minetest.register_craftitem("mobs:milk_glass_cup", {
-    description = "Bottle of Milk",
+    description = "Cup of Milk",
     image = "mobs_drinking_glass_milk.png",
-    wield_image = "mobs_drinking_glass_milk_wield.png",
+    wield_image = "mobs_drinking_glass_milk.png",
     on_use = minetest.item_eat(2, "vessels:drinking_glass"),
     groups = { eatable=1 },
 })

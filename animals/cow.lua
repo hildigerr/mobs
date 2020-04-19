@@ -34,98 +34,31 @@ mobs:register_mob("cow", {
     drops = {
         {
             name = "mobs:meat_raw",
-           chance = 1,
-          min = 2,
-          max = 4,
+            chance = 1,
+            min = 2,
+            max = 4,
         },
     },
 
     on_rightclick = function(self, clicker)
-        tool = clicker:get_wielded_item():get_name()
-        if tool == "bucket:bucket_empty" then
-            if self.milked then
-                minetest.sound_play("mobs_cow_mad", {
-                    object = self.object,
-                    gain = 1.0, -- default
-                    max_hear_distance = 32, -- default
-                    loop = false,
-                })
-                do return end
+        local item = clicker:get_wielded_item()
+        local tool = item:get_name()
+        local drop = 
+            (tool == "bucket:bucket_empty"    and "mobs:milk_bucket")       or
+            (tool == "vessels:glass_bottle"   and "mobs:milk_bottle_glass") or
+            (tool == "vessels:drinking_glass" and "mobs:milk_glass_cup")    or
+            (tool == "vessels:steel_bottle"   and "mobs:milk_bottle_steel")
+        if drop then
+            if self.dry then
+                minetest.sound_play("mobs_cow_mad", {object = self.object})
             else
                 minetest.sound_play("mobs_milk_splash", {
                     to_player = clicker:get_player_name(),
---                    object = self.object,
-                    gain = 1.0, -- default
---                    max_hear_distance = 32, -- default
---                    loop = false,
                 })
+                clicker:get_inventory():remove_item("main", tool)
+                clicker:get_inventory():add_item("main", drop)
+                if math.random(1,100) <= 50 then self.dry = true end
             end
-            clicker:get_inventory():remove_item("main", "bucket:bucket_empty")
-            clicker:get_inventory():add_item("main", "mobs:milk_bucket")
-            if math.random(1,2) > 1 then self.milked = true    end
-        elseif tool == "vessels:glass_bottle" then
-            if self.milked then
-                minetest.sound_play("mobs_cow_mad", {
-                    object = self.object,
-                    gain = 1.0, -- default
-                    max_hear_distance = 32, -- default
-                    loop = false,
-                })
-                do return end
-            else
-                minetest.sound_play("mobs_milk_splash", {
-                    to_player = clicker:get_player_name(),
---                    object = self.object,
-                    gain = 1.0, -- default
---                    max_hear_distance = 32, -- default
---                    loop = false,
-                })
-            end
-            clicker:get_inventory():remove_item("main", "vessels:glass_bottle")
-            clicker:get_inventory():add_item("main", "mobs:milk_bottle_glass")
-            if math.random(1,3) > 2 then self.milked = true    end
-        elseif tool == "vessels:drinking_glass" then
-            if self.milked then
-                minetest.sound_play("mobs_cow_mad", {
-                    object = self.object,
-                    gain = 1.0, -- default
-                    max_hear_distance = 32, -- default
-                    loop = false,
-                })
-                do return end
-            else
-                minetest.sound_play("mobs_milk_splash", {
-                    to_player = clicker:get_player_name(),
---                    object = self.object,
-                    gain = 1.0, -- default
---                    max_hear_distance = 32, -- default
---                    loop = false,
-                })
-            end
-            clicker:get_inventory():remove_item("main", "vessles:drinking_glass")
-            clicker:get_inventory():add_item("main", "mobs:milk_glass_cup")
-            if math.random(1,4) > 3 then self.milked = true    end
-        elseif tool == "vessels:steel_bottle" then
-            if self.milked then
-                minetest.sound_play("mobs_cow_mad", {
-                    object = self.object,
-                    gain = 1.0, -- default
-                    max_hear_distance = 32, -- default
-                    loop = false,
-                })
-                do return end
-            else
-                minetest.sound_play("mobs_milk_splash", {
-                    to_player = clicker:get_player_name(),
---                    object = self.object,
-                    gain = 1.0, -- default
---                    max_hear_distance = 32, -- default
---                    loop = false,
-                })
-            end
-            clicker:get_inventory():remove_item("main", "vessels:steel_bottle")
-            clicker:get_inventory():add_item("main", "mobs:milk_bottle_steel")
-            if math.random(1,3) > 2 then self.milked = true end
-        end -- tool ifs
-    end, -- on_rightclick func
+        end
+    end
 })
