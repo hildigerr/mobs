@@ -41,6 +41,7 @@ mobs:register_mob("rabbit_"..v, {
     makes_footstep_sound = false,
     follow = function(item)
         return item == "mobs:carrot"
+            or minetest.get_item_group(item, "food_berry") ~= 0
     end,
 
     attack = function(self, target)
@@ -54,7 +55,9 @@ mobs:register_mob("rabbit_"..v, {
                     self.timer = 0
                     minetest.chat_send_player(
                         target.player:get_player_name(),
-                        "[Rabbit] Please, may I have another carrot?"
+                        "[Rabbit] May I have your "..
+                            string.match(target.player:get_wielded_item():get_name(), ":(%a+)")..
+                            " please?"
                     )
                 end
                 return false
