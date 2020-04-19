@@ -109,6 +109,9 @@ Mobs are added using the **mobs:register_mob(name, def)** function, where `name`
    - **min** = the minimum quantity of items,
    - **max** = the maximum quantity of items,
 
+### States ###
+Mobs start out in the **stand**ing state. They will then start **walk**ing around randomly, ocasionally stopping to *stand* around again. If a `monster` type notices a player--and damage is enabled--the mob will give **chase**! If the player is holding something that a mob likes to follow, it will do so in the *chase* state. Once in range, mobs in the *chase* state will attack (if they have an attack). When the target a mob is attacking dies or otherwise is out of view, they will stop and *stand* again. If a player stops wielding an item that a mob follows, then it will stop *chase*ing--unless, of course, it still wants to attack.
+
 ### Callbacks ###
 Besides the regular [entity](https://dev.minetest.net/LuaEntitySAO) callbacks, the mobs api adds some more that you may take advantage of. Additionally, there are helper functions availabe for assisting in the implementation of these callbacks.
 
@@ -116,6 +119,9 @@ Besides the regular [entity](https://dev.minetest.net/LuaEntitySAO) callbacks, t
 Monsters should provide an attack method in order to inflict damage on players. The function receives two parameters, the `self` entity which is performing the attack and the `target` of the attack. The target will be a table with **player**, **pos**ition, and **dist**ance attributes. Return *true* if the attack was performed, or else *false*.
 
 The mob entity has a a `self.timer` which should be checked to control how often the attack will take place. This is handled automatically if you use the provided `mobs:slap` method. *However, if you wish for your mob to shoot: you will need to register the projectile via `mobs:register_arrow`, and verify/update the timing yourself as is done by the Dungeon Master mob.*
+
+#### follow( item ) ####
+The mob's optional `follow` callback is used to check if a player is wielding something the mob likes. The input `item` will be the wielded item's name. The function should return `true` if the mob is attracted to the item.
 
 #### try_jump( self ) ####
 *You don't need to provide a callback to handle mobs jumping.* However, you may. Or if you simply want to *prevent* a mob from jumping, use something like the following for your mob:
