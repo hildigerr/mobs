@@ -38,10 +38,21 @@ mobs:register_mob("racoon", {
     },
 
     on_rightclick = function(self, clicker)
-        if self.type == "animal" then
-            self.type = "monster"
-            self.attack = function(self, target)
-                return mobs:slap(self, target.player, {fleshy=1})
+        local item = clicker:get_wielded_item()
+        local item_name = item:get_name()
+        local aggrivate = minetest.get_item_group(item_name, "eatable") == 0
+        item:take_item()
+        clicker:set_wielded_item(item)
+        if aggrivate then
+            table.insert(self.drops, {
+                name = item_name,
+                chance = 1, min = 1, max = 1
+            })
+            if self.type == "animal" then
+                self.type = "monster"
+                self.attack = function(self, target)
+                    return mobs:slap(self, target.player, {fleshy=2})
+                end
             end
         end
     end,
