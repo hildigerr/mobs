@@ -5,3 +5,4 @@ vessels
 food?
 farming_plus?
 docfarming?
+homedecor?

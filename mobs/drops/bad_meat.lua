@@ -1,11 +1,12 @@
 ---------------------------------SPOILING MEAT----------------------------------
 if not minetest.settings:get_bool("mobs.meat_rots", false) then return end
+local use_homedecor = minetest.get_modpath("homedecor")
 
 ----CONFIG OPTIONS:
 --Chances of meat rotting [1-100] Lower number = Greater chance
 --if math.random(1,100) > CHANCE then it will rot
-local ROT_IN_WATER_CHANCE = 50 --DEFAULT:50
-local ROT_ON_GROUND_CHANCE = 66 --DEFAULT:66
+local ROT_IN_WATER_CHANCE = 100 --DEFAULT:50
+local ROT_ON_GROUND_CHANCE = 100 --DEFAULT:66
 local ROT_IN_POCKET_CHANCE = 66 --DEFAULT:66
 local ROT_IN_STORAGE_CHANCE = 66 --DEFAULT:66
 local ROT_WHILE_COOKING_CHANCE = 66 --DEFAULT:66
@@ -24,7 +25,7 @@ function spoil_meat( inv, title, chance, warn, owner )
 --chance = [1-100]
 --warn = boolean
 --owner = player name (string)
-        for i=1,inv:get_size(title) do
+    for i=1,inv:get_size(title) do
         local item = inv:get_stack(title, i)
         if item:get_name() == "mobs:meat_raw" then
             local qt = item:get_count()
@@ -32,108 +33,70 @@ function spoil_meat( inv, title, chance, warn, owner )
             for j=1,qt do
                 if math.random(1,100) > chance then
                     rotted = rotted +1
---                    minetest.chat_send_player( "singleplayer", ""..rotted)
-                end -- if by chance
-            end -- end count rotten portion of stack
+                end
+            end
             if rotted ~= 0 then
-                if rotted < qt then
-                    if inv:room_for_item(title, ItemStack{name = "mobs:meat_rotten", count = rotted, wear=0, metadata=""}) then
-                        item:take_item(rotted)
-                        inv:add_item(title, ItemStack({name = "mobs:meat_rotten", count = rotted, wear=0, metadata=""}))
-                    else -- not enough room
-                        --so rot it all:
-                        item:replace({name = "mobs:meat_rotten", count = qt, wear=0, metadata=""})
-                    end -- room for nu_stack if
-                else -- rotted == qt
+                local stack = ItemStack({name="mobs:meat_rotten", count=rotted, wear=0, metadata=""})
+                if rotted < qt and inv:room_for_item(title, stack) then
+                    item:take_item(rotted)
+                    inv:add_item(title, stack)
+                else -- (rotted == qt) or not enough room so rot it all:
                     item:replace({name = "mobs:meat_rotten", count = qt, wear=0, metadata=""})
-                end -- if rotted < qt
+                end
                 inv:set_stack(title, i, item)
                 if warn then
-                    minetest.sound_play("ugh_rot_warn", { to_player = owner,    gain = 1.0,})
-                    -- Change or have multiple strings to choose from randomly:
-                    minetest.chat_send_player( owner, "Something in your inventory is starting to smell bad!")
-                end -- if warn
-            end -- if some meat spoiled
-        end -- if found raw meat
-    end -- for each inv slot [i]
-end -- spoil_meat func
+                    minetest.sound_play("ugh_rot_warn", {to_player = owner})
+                    -- TODO: Have multiple strings to choose from randomly:
+                    minetest.chat_send_player(owner, "Something in your inventory is starting to smell bad!")
+                end
+                mobs.barf("info", "meat", "rotted", title, owner or "xxx")
+            end
+        end
+    end
+end
 
 
 --Rot Stored Meat
-if not minetest.get_modpath("homedecor") then
+if ROT_IN_STORAGE_CHANCE < 100 then
     minetest.register_abm({
-        nodenames = {  "default:chest", "default:chest_locked",
-                            "mobs:cage_empty", "mobs:cage_rat", "mobs:cage_rabbit",
-                        },
-        interval = STORAGE_TIMER, -- (operation interval)
-        chance = 1, -- (chance of trigger is 1.0/this)
+        nodenames = not use_homedecor and {
+            "default:chest",
+            "default:chest_locked"
+        } or {
+            "default:chest",
+            "default:chest_locked",
+            "homedecor:kitchen_cabinet",
+            "homedecor:kitchen_cabinet_half",
+            "homedecor:kitchen_cabinet_with_sink",
+            "homedecor:nightstand_oak_one_drawer",
+            "homedecor:nightstand_oak_two_drawers",
+            "homedecor:nightstand_mahogany_one_drawer",
+            "homedecor:nightstand_mahogany_two_drawers",
+        },
+        interval = STORAGE_TIMER,
+        chance = 1,
         action = function(pos, node)
-            spoil_meat( minetest.get_meta(pos):get_inventory(),
-                            "main",
-                            ROT_IN_STORAGE_CHANCE,
-                            false, nil )
-        end -- action func
+            spoil_meat(minetest.get_meta(pos):get_inventory(), "main", ROT_IN_STORAGE_CHANCE)
+        end
     })
+end
+
+--Rot Cooking Meat
+if ROT_WHILE_COOKING_CHANCE < 100 then
     minetest.register_abm({
-        nodenames = { "default:furnace" },
-        interval = STORAGE_TIMER, -- (operation interval)
-        chance = 1, -- (chance of trigger is 1.0/this)
+        nodenames = not use_homedecor and {"default:furnace"}
+            or {"default:furnace", "homedecor:oven"},
+        interval = STORAGE_TIMER,
+        chance = 1,
         action = function(pos, node)
-            spoil_meat( minetest.get_meta(pos):get_inventory(),
-                            "fuel",
-                            ROT_WHILE_COOKING_CHANCE,
-                            false, nil )
-            spoil_meat( minetest.get_meta(pos):get_inventory(),
-                            "src",
-                            ROT_WHILE_COOKING_CHANCE,
-                            false, nil )
-            spoil_meat( minetest.get_meta(pos):get_inventory(),
-                            "dst",
-                            ROT_WHILE_COOKING_CHANCE,
-                            false, nil )
-        end -- action func
-    })
-else
-    minetest.register_abm({
-        nodenames = {  "default:chest", "default:chest_locked",
-                            "homedecor:kitchen_cabinet", "homedecor:kitchen_cabinet_half",
-                            "homedecor:kitchen_cabinet_with_sink", "homedecor:nightstand_oak_one_drawer",
-                            "homedecor:nightstand_oak_two_drawers", "homedecor:nightstand_mahogany_one_drawer",
-                            "homedecor:nightstand_mahogany_two_drawers",
-                            "mobs:cage_empty", "mobs:cage_rat", "mobs:cage_rabbit",
-                        },
-        interval = STORAGE_TIMER, -- (operation interval)
-        chance = 1, -- (chance of trigger is 1.0/this)
-        action = function(pos, node)
-            spoil_meat( minetest.get_meta(pos):get_inventory(),
-                            "main",
-                            ROT_IN_STORAGE_CHANCE,
-                            false, nil )
-        end -- action func
-    })
-    minetest.register_abm({
-        nodenames = { "default:furnace","homedecor:oven" },
-        interval = STORAGE_TIMER, -- (operation interval)
-        chance = 1, -- (chance of trigger is 1.0/this)
-        action = function(pos, node)
-            spoil_meat( minetest.get_meta(pos):get_inventory(),
-                            "fuel",
-                            ROT_WHILE_COOKING_CHANCE,
-                            false, nil )
-            spoil_meat( minetest.get_meta(pos):get_inventory(),
-                            "src",
-                            ROT_WHILE_COOKING_CHANCE,
-                            false, nil )
-            spoil_meat( minetest.get_meta(pos):get_inventory(),
-                            "dst",
-                            ROT_WHILE_COOKING_CHANCE,
-                            false, nil )
-        end -- action func
+            spoil_meat(minetest.get_meta(pos):get_inventory(), "src", ROT_WHILE_COOKING_CHANCE)
+        end
     })
 end
 
 
 --Rot Held Meat
+if ROT_IN_POCKET_CHANCE < 100 then
 local rotting_timer = 0
 minetest.register_globalstep( function(dtime)
     rotting_timer = rotting_timer + dtime
@@ -147,9 +110,10 @@ minetest.register_globalstep( function(dtime)
         rotting_timer = 0 --reset the timer
     end -- timer
 end)
-
+end
 
 --Rot Droped Meat
+if ROT_ON_GROUND_CHANCE < 100 then
 minetest.register_abm({
      nodenames = {"air"},
      neighbors = { "group:stone", "group:sand",
@@ -169,9 +133,6 @@ minetest.register_abm({
                 if k then
                     local str = k.itemstring
                     if str ~= nil then
---                         if str == "mobs:meat_rotten" then -- add fresh meat and reimplement
---                             objs[i]:remove()
---                         else
                         if str == "mobs:meat_raw" then
                             if math.random(1,100) > ROT_ON_GROUND_CHANCE then -- about 1/3 chance --TESTING
                                 objs[i]:remove()
@@ -184,7 +145,9 @@ minetest.register_abm({
         end -- objects exist
      end -- func
 })
+end
 
+if ROT_IN_WATER_CHANCE < 100 then
 minetest.register_abm({
      nodenames = {"default:water_source", "default:water_flowing"},
      neighbors = { "group:stone", "group:sand",
@@ -219,5 +182,5 @@ minetest.register_abm({
         end -- objects exist
      end -- func
 })
-
+end
 -------------------------------------EOF----------------------------------------

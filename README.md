@@ -53,7 +53,7 @@ Upstream contributions have been included from:
 ## Miscellaneous ##
  - [x] Raw and Cooked Meat
  - [ ] Meat spoilage if it remains uncooked (untested)
-  -- [ ] Raw meet can be preserved through "cheating" or using a refridgerator provided
+  -- [X] Raw meet can be preserved through "cheating" or using a refridgerator provided
  by VanessaE's [Home Decor](https://gitlab.com/VanessaE/homedecor_modpack) Mod
  - [x] Overcooking and using the result to make dye
  - [ ] Cages for Pet Rodents (TODO: move into separate mod)
