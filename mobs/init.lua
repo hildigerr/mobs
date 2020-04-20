@@ -4,6 +4,7 @@ local modpath = minetest.get_modpath("mobs")
 
 dofile(modpath.."/api.lua")
 dofile(modpath.."/drops/meat.lua")
+dofile(modpath.."/drops/bad_meat.lua")
 dofile(modpath.."/drops/milk.lua")
 dofile(modpath.."/drops/carrot.lua")
 
