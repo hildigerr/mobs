@@ -16,7 +16,7 @@ mobs:register_mob("rat", {
     max_spawn_count = 1,
     max_spawn_height = 31000,
 
-    damage = {water = 0, lava = 1, light = 0},
+    damage = {water = 0, lava = 10, light = 0},
 
     visual = USE_SPRITES and "upright_sprite" or "mesh",
     drawtype = "front",

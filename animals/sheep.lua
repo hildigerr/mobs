@@ -17,7 +17,7 @@ mobs:register_mob("sheep", {
     max_spawn_count = 1,
     max_spawn_height = 31000,
 
-    damage = {water = 1, lava = 5, light = 0},
+    damage = {water = 5, lava = 8, light = 0},
 
     visual = USE_SPRITES and "upright_sprite" or "mesh",
     drawtype = USE_SPRITES and "side" or "front",
