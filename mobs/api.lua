@@ -447,7 +447,7 @@ function mobs:register_mob(name, def, disabled)
         minetest.register_abm({
             nodenames = def.spawning_nodes,
             neighbors = {"air"},
-            interval = 30,
+            interval = tonumber(minetest.settings:get("mobs.interval")) or 30,
             chance = def.spawn_chance,
             action = function(pos, node, _, active_object_count_wider)
                 if active_object_count_wider > def.max_spawn_count then

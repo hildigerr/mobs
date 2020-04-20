@@ -13,6 +13,7 @@ Upstream contributions have been included from:
 ## Settings Options ##
 
  - **Notify of Spawns** for debugging, *disabled* by default
+ - **Spawn Interval** will determine how often the spawning ABM is executed, *30* seconds by default
  - **Drop Litter** if mobs should drop dropps when dying naturally, *disabled* by default
  - **Meat Rots** if raw meat should rot periodically, *disabled* by default
  - **Rats**, **Sheep**, and **monsters** can be drawn with a default 3D *mesh*, a 2D sprite, or be disabled.
