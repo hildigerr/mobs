@@ -218,8 +218,9 @@ function mobs:register_mob(name, def, disabled)
                     end
                 end
 
+                local head_loc = {x=pos.x, y=pos.y+self.collisionbox[5], z=pos.z}
                 if self.damage.water and self.damage.water ~= 0 and
-                    minetest.get_item_group(n.name, "water") ~= 0
+                    minetest.get_item_group(minetest.get_node(head_loc).name, "water") ~= 0
                 then
                     self.object:set_hp(self.object:get_hp()-self.damage.water)
                     if self.object:get_hp() == 0 then
