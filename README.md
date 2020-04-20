@@ -134,6 +134,16 @@ The mob's optional `follow` callback is used to check if a player is wielding so
 ##### mobs:orient(self, pos, target) #####
 Returns a heading, in radians, which can be used with `set_yaw` to orient `self` in the direction from `pos` to `target`.
 
+##### mobs:register_arrow(name, def) #####
+Projectiles can be registered with this function, and then be launched using the `mobs:shoot` function. They are referened by `name` such as the Dungeon Master's `mobs:fireball`. The `def`inition is a table with attributes with the following values:
+
+ - `visual` = "cube" or "sprite" or "upright_sprite", [TODO: "mesh"]
+ - `visual_size` = {x,y},
+ - `textures` = a table of textures, the quantity of which depend on *visual*,
+ - `velocity` = the speed with which the projectile witll travel on its trajectory,
+ - `hit_player` = a callback function(self, player) to be called when the projectile hits a player,
+ - `hit_node` = a callback function(self, pos, node) to be called when the projectile hits a node
+
 ##### mobs:slap(self, target, damage) #####
 Punch the `target` with `damage` damage groups for use as an `attack` callback. This is what most mobs use. For example:
 
