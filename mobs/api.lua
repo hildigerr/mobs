@@ -1,4 +1,3 @@
-mobs = {}
 
 function mobs:register_mob(name, def, disabled)
     name = "mobs:"..name
@@ -144,6 +143,7 @@ function mobs:register_mob(name, def, disabled)
                     end
                 end
                 if not player_near then
+                    mobs.barf("verbose", "Despawned", self.name, minetest.pos_to_string(pos), "end of life")
                     self.object:remove()
                     return
                 end
@@ -172,6 +172,7 @@ function mobs:register_mob(name, def, disabled)
                                 minetest.sound_play(self.sounds.death_fall, {oject = self.object})
                             end
                             self.drop_litter(self.drops, pos)
+                            mobs.barf("info", self.name, "fell", minetest.pos_to_string(pos), "killed")
                             self.object:remove()
                             return
                         elseif self.sounds and self.sounds.damage_fall then
@@ -211,6 +212,7 @@ function mobs:register_mob(name, def, disabled)
                             minetest.sound_play(self.sounds.death_light, {oject = self.object})
                         end
                         self.drop_litter(self.drops, pos)
+                        mobs.barf("info", "sunburned", self.name, minetest.pos_to_string(pos), "killed")
                         self.object:remove()
                         return
                     elseif self.sounds and self.sounds.damage_light then
@@ -228,6 +230,7 @@ function mobs:register_mob(name, def, disabled)
                             minetest.sound_play(self.sounds.death_drown, {oject = self.object})
                         end
                         self.drop_litter(self.drops, pos)
+                        mobs.barf("info", self.name, "drowned", minetest.pos_to_string(pos), "killed")
                         self.object:remove()
                         return
                     elseif self.sounds and self.sounds.damage_drown then
@@ -243,6 +246,7 @@ function mobs:register_mob(name, def, disabled)
                         if self.sounds and self.sounds.death_lava then
                             minetest.sound_play(self.sounds.death_lava, {oject = self.object})
                         end
+                        mobs.barf("info", "burned", self.name, minetest.pos_to_string(pos), "lava")
                         self.object:remove()
                         return
                     elseif self.sounds and self.sounds.damage_lava then
@@ -387,6 +391,7 @@ function mobs:register_mob(name, def, disabled)
                 end
             end
             if self.lifetimer <= 0 and not self.tamed then
+                mobs.barf("verbose", "Activation prevented", self.name, minetest.pos_to_string(self.object:get_pos()), "end of life" )
                 self.object:remove()
             end
         end,
@@ -410,6 +415,7 @@ function mobs:register_mob(name, def, disabled)
                 if self.sounds and self.sounds.death then
                     minetest.sound_play(self.sounds.death, {oject = self.object})
                 end
+                mobs.barf("info", self.name, "killed", minetest.pos_to_string(self.object:get_pos()), hitter:get_player_name())
                 for _,drop in ipairs(self.drops) do
                     if math.random(1, drop.chance) == 1 then
                         hitter:get_inventory():add_item("main", ItemStack(drop.name.." "..math.random(drop.min, drop.max)))
@@ -476,10 +482,7 @@ function mobs:register_mob(name, def, disabled)
                 if def.spawn_func and not def.spawn_func(pos, node) then
                     return
                 end
-
-                if minetest.settings:get_bool("mobs.display_mob_spawn", false) then
-                    minetest.chat_send_all("[mobs] Spawned "..name.." at "..minetest.pos_to_string(pos))
-                end
+                mobs.barf("info", "Spawned", name, minetest.pos_to_string(pos), tostring(active_object_count_wider))
                 minetest.add_entity(pos, name)
             end
         })
