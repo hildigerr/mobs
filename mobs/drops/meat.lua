@@ -7,14 +7,14 @@ minetest.register_craftitem("mobs:meat_raw", {
     on_use = function(itemstack, user, pointed_thing)
         minetest.do_item_eat(math.random(-4,2), nil, itemstack, user, pointed_thing)
     end,
-    groups = { eatable=1 },
+    groups = { eatable=1, meat=1 },
 })
 
 minetest.register_craftitem("mobs:meat", {
     description = "Meat",
     inventory_image = "mobs_meat.png",
     on_use = minetest.item_eat(4),
-    groups = { eatable=1 },
+    groups = { eatable=2, meat=1 },
 })
 
 minetest.register_craftitem("mobs:meat_rotten", {
