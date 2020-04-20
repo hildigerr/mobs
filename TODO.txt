@@ -1,19 +1,27 @@
 --------------------------------------------------------------------------------
 --BUGS:
 --        drinking from a stack of vessels does not return an empty vessel
---         cages are sometimes placed sideways or upsidedown
+--        cages are sometimes placed sideways or upsidedown
+--        rabbits mesh is backwards
 --HIGH PRIORITY:
---        death sounds
 --        support more food, --check balance-- [cheese]
---        add fresh meat and remove rotten meat litter periodically
+--        refactor rotten meat, add fresh meat, and remove rotten meat litter eventually:
+--          "fresh meat" --> "meat" --> "rotten meat" --> ""
+--        update images (including texture pack)
 --MED PRIORITY:
---        add more animals, (chicken/eggs),(pigs/piglets[catchable])
---        fork mobs and add ai tweaks and rebalances, and for animals:
---            breeding & extinction possibility
+--        add more animals: (continue pulling)
+--          chicken/eggs
+--          pigs/piglets
+--          black sheep
+--        animal breeding & extinction possibility
 --        add monsters,
 --        cows lift head in water and when walking sometimes
+--        Racoons: drop furs, craft coonskin hats
+--        taxedermy
 --LOW PRIORITY:
 --        add sound effect variety
 --        cows "eat" grass
+--        on_punch knockback, oerkki arm flail
+--        document optional attributes and default values, verify balance
 
 -------------------------------------EOF----------------------------------------

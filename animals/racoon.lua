@@ -1,7 +1,4 @@
---TODO:
-    --drop furs and craft coonskin hats and taxedermy
 
-----Racoons:
 mobs:register_mob("racoon", {
     type = "animal",
 
