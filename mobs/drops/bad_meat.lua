@@ -3,13 +3,13 @@ if not minetest.settings:get_bool("mobs.meat_rots", false) then return end
 local use_homedecor = minetest.get_modpath("homedecor")
 
 ----CONFIG OPTIONS:
---Chances of meat rotting [1-100] Lower number = Greater chance
---if math.random(1,100) > CHANCE then it will rot
-local ROT_IN_WATER_CHANCE = 100 --DEFAULT:50
-local ROT_ON_GROUND_CHANCE = 100 --DEFAULT:66
-local ROT_IN_POCKET_CHANCE = 66 --DEFAULT:66
-local ROT_IN_STORAGE_CHANCE = 66 --DEFAULT:66
-local ROT_WHILE_COOKING_CHANCE = 66 --DEFAULT:66
+--Chances of meat rotting [1-100]
+--if math.random(1,100) <= CHANCE then it will rot
+local ROT_IN_WATER_CHANCE = 1 --DEFAULT:50
+local ROT_ON_GROUND_CHANCE = 1 --DEFAULT:33
+local ROT_IN_POCKET_CHANCE = 33 --DEFAULT:33
+local ROT_IN_STORAGE_CHANCE = 33 --DEFAULT:33
+local ROT_WHILE_COOKING_CHANCE = 33 --DEFAULT:33
 
 --Time to Rot intervals
 --Aproximetley equivalent to seconds
@@ -31,7 +31,7 @@ function spoil_meat( inv, title, chance, warn, owner )
             local qt = item:get_count()
             local rotted = 0
             for j=1,qt do
-                if math.random(1,100) > chance then
+                if math.random(1,100) <= chance then
                     rotted = rotted +1
                 end
             end
@@ -57,7 +57,7 @@ end
 
 
 --Rot Stored Meat
-if ROT_IN_STORAGE_CHANCE < 100 then
+if ROT_IN_STORAGE_CHANCE > 0 then
     minetest.register_abm({
         nodenames = not use_homedecor and {
             "default:chest",
@@ -82,7 +82,7 @@ if ROT_IN_STORAGE_CHANCE < 100 then
 end
 
 --Rot Cooking Meat
-if ROT_WHILE_COOKING_CHANCE < 100 then
+if ROT_WHILE_COOKING_CHANCE > 0 then
     minetest.register_abm({
         nodenames = not use_homedecor and {"default:furnace"}
             or {"default:furnace", "homedecor:oven"},
@@ -96,7 +96,7 @@ end
 
 
 --Rot Held Meat
-if ROT_IN_POCKET_CHANCE < 100 then
+if ROT_IN_POCKET_CHANCE > 0 then
 local rotting_timer = 0
 minetest.register_globalstep( function(dtime)
     rotting_timer = rotting_timer + dtime
@@ -113,7 +113,7 @@ end)
 end
 
 --Rot Droped Meat
-if ROT_ON_GROUND_CHANCE < 100 then
+if ROT_ON_GROUND_CHANCE > 0 then
 minetest.register_abm({
      nodenames = {"air"},
      neighbors = { "group:stone", "group:sand",
@@ -134,7 +134,7 @@ minetest.register_abm({
                     local str = k.itemstring
                     if str ~= nil then
                         if str == "mobs:meat_raw" then
-                            if math.random(1,100) > ROT_ON_GROUND_CHANCE then -- about 1/3 chance --TESTING
+                            if math.random(1,100) <= ROT_ON_GROUND_CHANCE then -- about 1/3 chance --TESTING
                                 objs[i]:remove()
                                 minetest.add_item(pos, "mobs:meat_rotten")
                             end -- if by chance
@@ -147,7 +147,7 @@ minetest.register_abm({
 })
 end
 
-if ROT_IN_WATER_CHANCE < 100 then
+if ROT_IN_WATER_CHANCE > 0 then
 minetest.register_abm({
      nodenames = {"default:water_source", "default:water_flowing"},
      neighbors = { "group:stone", "group:sand",
@@ -171,7 +171,7 @@ minetest.register_abm({
 --                             objs[i]:remove()
 --                         else
                         if str == "mobs:meat_raw" then
-                            if math.random(1,100) > ROT_IN_WATER_CHANCE then
+                            if math.random(1,100) <= ROT_IN_WATER_CHANCE then
                                 objs[i]:remove()
                                 minetest.add_item(pos, "mobs:meat_rotten")
                             end -- if by chance
