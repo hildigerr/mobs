@@ -1,5 +1,6 @@
 local sand_monster_setting = minetest.settings:get("mobs.sand_monsters") or "mesh"
 local USE_SPRITES = sand_monster_setting ~= "mesh"
+minetest.log("info", "mobs : monsters : sand monster : "..sand_monster_setting)
 
 mobs:register_mob("sand_monster", {
     type = "monster",

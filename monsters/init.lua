@@ -7,5 +7,3 @@ dofile(modpath.."/oerkki.lua")
 dofile(modpath.."/sand_monster.lua")
 dofile(modpath.."/stone_monster.lua")
 dofile(modpath.."/tree_monster.lua")
-
-minetest.log("info", "mobs monsters loaded")

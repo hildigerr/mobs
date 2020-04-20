@@ -1,5 +1,6 @@
 local oerkki_setting = minetest.settings:get("mobs.oerkki") or "mesh"
 local USE_SPRITES = oerkki_setting ~= "mesh"
+minetest.log("info", "mobs : monsters : oerkki : "..oerkki_setting)
 
 mobs:register_mob("oerkki", {
     type = "monster",

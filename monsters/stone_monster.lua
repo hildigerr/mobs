@@ -1,5 +1,6 @@
 local stone_monster_setting = minetest.settings:get("mobs.stone_monsters") or "mesh"
 local USE_SPRITES = stone_monster_setting ~= "mesh"
+minetest.log("info", "mobs : monsters : stone monster : "..stone_monster_setting)
 
 mobs:register_mob("stone_monster", {
     type = "monster",

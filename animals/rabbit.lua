@@ -1,8 +1,8 @@
 local rabbit_setting = minetest.settings:get("mobs.rabbits") or "mesh"
 local USE_SPRITES = rabbit_setting ~= "mesh"
+minetest.log("info", "mobs : animals : rabbits : "..rabbit_setting)
 
 local rabbit_colors = { "white", "grey", "brown" }
-minetest.register_alias( "mobs:rabbit", "mobs:rabbit_white" )
 
 for i,v in ipairs( rabbit_colors ) do
 mobs:register_mob("rabbit_"..v, {

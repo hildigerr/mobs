@@ -1,5 +1,6 @@
 local dirt_monster_setting = minetest.settings:get("mobs.dirt_monsters") or "mesh"
 local USE_SPRITES = dirt_monster_setting ~= "mesh"
+minetest.log("info", "mobs : monsters : dirt monster : "..dirt_monster_setting)
 
 mobs:register_mob("dirt_monster", {
     type = "monster",

@@ -6,5 +6,3 @@ dofile(modpath.."/rabbit.lua")
 dofile(modpath.."/racoon.lua")
 dofile(modpath.."/rat.lua")
 dofile(modpath.."/sheep.lua")
-
-minetest.log("verbose", "mobs animals loaded")

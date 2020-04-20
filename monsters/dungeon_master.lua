@@ -1,5 +1,6 @@
 local dungeon_master_setting = minetest.settings:get("mobs.dms") or "mesh"
 local USE_SPRITES = dungeon_master_setting ~= "mesh"
+minetest.log("info", "mobs : monsters : dungeon master : "..dungeon_master_setting)
 
 mobs:register_mob("dungeon_master", {
     type = "monster",

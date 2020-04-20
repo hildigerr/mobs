@@ -1,5 +1,6 @@
 local sheep_setting = minetest.settings:get("mobs.sheep") or "mesh"
 local USE_SPRITES = sheep_setting ~= "mesh"
+minetest.log("info", "mobs : animals : sheep : "..sheep_setting)
 
 mobs:register_mob("sheep", {
     type = "animal",
