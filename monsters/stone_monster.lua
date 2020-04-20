@@ -17,7 +17,7 @@ mobs:register_mob("stone_monster", {
     max_spawn_count = 3,
     max_spawn_height = 0,
 
-    damage = {water = 0, lava = 0, light = 0},
+    damage = {water = 0, lava = 5, light = 0},
     light_resistant = true,
 
     visual = USE_SPRITES and "upright_sprite" or "mesh",
@@ -44,9 +44,9 @@ mobs:register_mob("stone_monster", {
     drops = {
         {
             name = "default:mossycobble",
-            chance = 1,
-            min = 3,
-            max = 5,
+            chance = 2,
+            min = 2,
+            max = 6,
         },
     },
     attack = function(self, target)

@@ -17,7 +17,7 @@ mobs:register_mob("dirt_monster", {
     max_spawn_count = 3,
     max_spawn_height = 31000,
 
-    damage = {water = 1, lava = 5, light = 2},
+    damage = {water = 14, lava = 5, light = 3},
 
     visual = USE_SPRITES and "upright_sprite" or "mesh",
     drawtype = "front",
@@ -43,9 +43,9 @@ mobs:register_mob("dirt_monster", {
     drops = {
         {
             name = "default:dirt",
-            chance = 1,
-            min = 3,
-            max = 5,
+            chance = 2,
+            min = 1,
+            max = 4,
         },
     },
 
