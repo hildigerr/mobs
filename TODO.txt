@@ -5,8 +5,8 @@
 --        rabbits mesh is backwards
 --HIGH PRIORITY:
 --        support more food, --check balance-- [cheese]
---        refactor rotten meat, add fresh meat, and remove rotten meat litter eventually:
---          "fresh meat" --> "meat" --> "rotten meat" --> ""
+--        add fresh meat, and remove rotten meat litter eventually:
+--          "fresh meat" --> "raw meat" --> "cooked meat" | ("rotten meat" --> "")
 --        update images (including texture pack)
 --MED PRIORITY:
 --        add more animals: (continue pulling)

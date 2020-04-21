@@ -10,7 +10,7 @@ mobs.interval (Spawn Interval) int 30 30 300
 mobs.drop_litter (Drop Litter) bool false
 
 #    Meat will rot if not cooked or refridgerated
-mobs.meat_rots (Meat Rots) bool false
+mobs.meat_rots (Meat Rots) bool true
 
 [animals]
 

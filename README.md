@@ -15,7 +15,7 @@ Upstream contributions have been included from:
  - **Notify of Spawns** for debugging, *disabled* by default
  - **Spawn Interval** will determine how often the spawning ABM is executed, *30* seconds by default
  - **Drop Litter** if mobs should drop dropps when dying naturally, *disabled* by default
- - **Meat Rots** if raw meat should rot periodically, *disabled* by default
+ - **Meat Rots** if raw meat should rot periodically, *enabled* by default
  - **Rats**, **Sheep**, and **monsters** can be drawn with a default 3D *mesh*, a 2D sprite, or be disabled.
 
 ## The Mobs ##
@@ -52,9 +52,8 @@ Upstream contributions have been included from:
 
 ## Miscellaneous ##
  - [x] Raw and Cooked Meat
- - [ ] Meat spoilage if it remains uncooked (untested)
-  -- [X] Raw meet can be preserved through "cheating" or using a refridgerator provided
- by VanessaE's [Home Decor](https://gitlab.com/VanessaE/homedecor_modpack) Mod
+ - [x] Meat spoilage if it remains uncooked
+  -- [ ] Raw meet can be preserved using VanessaE's [Home Decor](https://gitlab.com/VanessaE/homedecor_modpack) refridgerator. (Not re-tested)
  - [x] Overcooking and using the result to make dye
  - [ ] Cages for Pet Rodents (TODO: move into separate mod)
   -- They must be fed apples and have a bucket of water available to survive
