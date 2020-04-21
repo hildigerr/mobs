@@ -1,4 +1,3 @@
-# TODO bad_meat and pet_cages configuration options
 
 #   Primarily for debugging, so 'disabled' by default.
 #       'barf' to send messages as chat broadcasts.

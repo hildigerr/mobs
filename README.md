@@ -63,8 +63,6 @@ Upstream contributions have been included from:
  - [x] Meat spoilage if it remains uncooked
   -- [ ] Raw meet can be preserved using VanessaE's [Home Decor](https://gitlab.com/VanessaE/homedecor_modpack) refridgerator. (Not re-tested)
  - [x] Overcooking and using the result to make dye
- - [ ] Cages for Pet Rodents (TODO: move into separate mod)
-  -- They must be fed apples and have a bucket of water available to survive
 
 ## API ##
 Mobs are added using the **mobs:register_mob(name, def)** function, where `name` is the name of the mob. The entity should then be referenced as `"mob:name"`. The`def` parameter is a table with all the defining attributes of the mob. For the most part, these are the same as in `minetest.register_entity()`. Other attributes are described below:

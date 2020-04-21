@@ -14,7 +14,6 @@ V0.1-->0.2:
 v0.2-->0.3:
 -Commented out residual debug barf line
 -moved cow right-click sound effects to only sound with poper tool
--added cages for pet rodents, require apples for food and buckets of water to drink
 
 v0.3--0.4:
 -Shortened cooking time for scorched stuff and meat
@@ -30,9 +29,6 @@ v0.3--0.4:
 -only player who milks cow hears splash sound
 -moved everything to a separate files and
 - added config option to enable/disable their use
--fixed bug in cages:
-        where the cage would be placed sideways or upside down
-        (removed    paramtype2 = "facedir")
 
 v0.4-->0.5:
 -milk in steel bottles uses same image as steel bottles (was missing)

@@ -1,6 +1,5 @@
 --------------------------------------------------------------------------------
 --BUGS:
---        cages are sometimes placed sideways or upsidedown
 --        rabbits mesh is backwards
 --HIGH PRIORITY:
 --        support more food, --check balance-- [cheese]
