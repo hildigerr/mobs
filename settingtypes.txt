@@ -14,10 +14,6 @@ mobs.drop_litter (Drop Litter) bool false
 
 [meat]
 
-#    Meat will rot if not cooked or refridgerated
-mobs.meat_rots (Meat Rots) bool true
-
-
 #   Chances of raw meat rotting [0-100]% while laying around. Set to 0 to disable.
 mobs.meat_chance_rot_litter (Litter Rot Chance) int 33 0 100
 

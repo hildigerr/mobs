@@ -64,25 +64,25 @@ minetest.register_entity("mobs:meat_raw_item", {
         self:on_step(dtime_s)
     end,
 
-    on_step = minetest.settings:get_bool("mobs.meat_rots", true) and
-    function(self, dtime)
-        if self.object:get_velocity().y == 0 then
-            self.object:set_velocity({x=0, y=0, z=0})
-        end
-        self.staticdata.timer = self.staticdata.timer+dtime
-        if self.staticdata.timer > GROUND_TIMER then
-            if math.random(1, 100) <= CHANCE_ROT_LITTER then
-                pos = self.object:get_pos()
-                quantity_string = tostring(self.staticdata.quantity)
-                if minetest.add_item(pos, "mobs:meat_rotten "..quantity_string) then
-                    mobs.barf("info", "meat", "rotted", minetest.pos_to_string(pos), quantity_string)
-                    self.object:remove()
-                    return
-                end
+    on_step = CHANCE_ROT_LITTER > 0 and
+        function(self, dtime)
+            if self.object:get_velocity().y == 0 then
+                self.object:set_velocity({x=0, y=0, z=0})
             end
             self.staticdata.timer = self.staticdata.timer+dtime
-        end
-    end,
+            if self.staticdata.timer > GROUND_TIMER then
+                if math.random(1, 100) <= CHANCE_ROT_LITTER then
+                    pos = self.object:get_pos()
+                    quantity_string = tostring(self.staticdata.quantity)
+                    if minetest.add_item(pos, "mobs:meat_rotten "..quantity_string) then
+                        mobs.barf("info", "meat", "rotted", minetest.pos_to_string(pos), quantity_string)
+                        self.object:remove()
+                        return
+                    end
+                end
+                self.staticdata.timer = self.staticdata.timer+dtime
+            end
+        end,
 
     on_punch = function(self, puncher, time_from_last_punch, tool_capabilities, dir)
         if puncher and puncher:is_player() and puncher:get_inventory() then

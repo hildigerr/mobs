@@ -1,5 +1,4 @@
 ---------------------------------SPOILING MEAT----------------------------------
-if not minetest.settings:get_bool("mobs.meat_rots", false) then return end
 local use_homedecor = minetest.get_modpath("homedecor")
 
 local CHANCE_ROT_POCKET = tonumber(minetest.settings:get("mobs.meat_chance_rot_inventory")) or 33
@@ -89,19 +88,19 @@ end
 
 --Rot Held Meat
 if CHANCE_ROT_POCKET > 0 then
-local rotting_timer = 0
-minetest.register_globalstep( function(dtime)
-    rotting_timer = rotting_timer + dtime
-    if rotting_timer >= POCKET_TIMER then
-        for _,player in ipairs(minetest.get_connected_players()) do
-            local who = player:get_player_name()
-            local stuff = player:get_inventory()
-            spoil_meat(stuff, "main", CHANCE_ROT_POCKET, true, who)
-            spoil_meat(stuff, "craft", CHANCE_ROT_POCKET, true, who)
-        end -- for each player
-        rotting_timer = 0 --reset the timer
-    end -- timer
-end)
+    local rotting_timer = 0
+    minetest.register_globalstep( function(dtime)
+        rotting_timer = rotting_timer + dtime
+        if rotting_timer >= POCKET_TIMER then
+            for _,player in ipairs(minetest.get_connected_players()) do
+                local who = player:get_player_name()
+                local stuff = player:get_inventory()
+                spoil_meat(stuff, "main", CHANCE_ROT_POCKET, true, who)
+                spoil_meat(stuff, "craft", CHANCE_ROT_POCKET, true, who)
+            end -- for each player
+            rotting_timer = 0 --reset the timer
+        end -- timer
+    end)
 end
 
 -------------------------------------EOF----------------------------------------

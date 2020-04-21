@@ -19,8 +19,7 @@ Upstream contributions have been included from:
    - *verbose* to send to both.
  - **Spawn Interval** will determine how often the spawning ABM is executed, *30* seconds by default
  - **Drop Litter** if mobs should drop dropps when dying naturally, *disabled* by default
- - **Meat Rots** if raw meat should rot periodically, *enabled* by default
- - **Rot Chance**s and **Rot Timer**s can be set individually for:
+ - **Rot Chance**s and **Rot Timer**s determine how often raw meat may rot. Set chances all to zero to disable. They can be set individually for:
    - **Litter**ed meat that has been dropped and is laying around,
    - **Inventory** meat that a player is carrying,
    - **Storage** meat that is stored in a container such as a chest,
