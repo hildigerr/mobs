@@ -11,7 +11,9 @@ Upstream contributions have been included from:
  - [MirceaKitsune](https://github.com/MirceaKitsune)
 
 ## Settings Options ##
+For each **animal** and **monster**, there is a setting for them to be *disabled*. They will not spawn if disabled, but will still be registered in case a world already has them. Any residual mobs that are disabled will be removed once the world is loaded again. Additionally, if a mob can be drawn with a 3D *mesh* or 2D *sprite* then there is an option to select which to use.
 
+There are also these additional setting options:
  - **Log level** primarily for debugging:
    - *disabled* by default
    - *barf* to send messages as chat broadcasts.
@@ -24,7 +26,6 @@ Upstream contributions have been included from:
    - **Inventory** meat that a player is carrying,
    - **Storage** meat that is stored in a container such as a chest,
    - **Cooking** meat. This may cause meat to seem to overcook, if a player starts cooking a stack of raw meat and it turns rotten before finishing.
- - **Rats**, **Sheep**, and **monsters** can be drawn with a default 3D *mesh*, a 2D sprite, or be disabled.
 
 ## The Mobs ##
 

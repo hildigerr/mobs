@@ -3,7 +3,7 @@
 #       'barf' to send messages as chat broadcasts.
 #       'info' to direct messages to the logfile.
 #       'verbose' to send to both.
-mobs.barf (Log Level) enum disabled,barf,info,verbose
+mobs.barf (Log Level) enum disabled disabled,barf,info,verbose
 
 #   The mob spawning ABM will be registered to execute at this interval (in seconds).
 mobs.interval (Spawn Interval) int 30 30 300
@@ -46,8 +46,14 @@ mobs.meat_timer_rot_cooking (Rot Cooking Timer) int 20 1 60
 
 [animals]
 
+#   Cows can be drawn with a 2D sprite or be disabled.
+mobs.cows (Cows) enum sprite sprite,disabled
+
 #   Rabbits can be drawn with a 3D mesh, a 2D sprite, or be disabled.
 mobs.rabbits (Rabbits) enum  mesh mesh,sprite,disabled
+
+#   Racoons can be drawn with a 2D sprite or be disabled.
+mobs.racoons (Racoons) enum sprite sprite,disabled
 
 #	Rats can be drawn with a 3D mesh, a 2D sprite, or be disabled.
 mobs.rats (Rats) enum  mesh mesh,sprite,disabled

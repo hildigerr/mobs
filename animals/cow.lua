@@ -1,3 +1,5 @@
+local cow_setting = minetest.settings:get("mobs.cows") or "sprite"
+minetest.log("info", "mobs : animals : cow : "..cow_setting)
 
 mobs:register_mob("cow", {
     type = "animal",
@@ -43,7 +45,7 @@ mobs:register_mob("cow", {
     on_rightclick = function(self, clicker)
         local item = clicker:get_wielded_item()
         local tool = item:get_name()
-        local drop = 
+        local drop =
             (tool == "bucket:bucket_empty"    and "mobs:milk_bucket")       or
             (tool == "vessels:glass_bottle"   and "mobs:milk_bottle_glass") or
             (tool == "vessels:drinking_glass" and "mobs:milk_glass_cup")    or
@@ -61,4 +63,4 @@ mobs:register_mob("cow", {
             end
         end
     end
-})
+}, cow_setting == "disabled")

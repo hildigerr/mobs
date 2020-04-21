@@ -1,3 +1,5 @@
+local racoon_setting = minetest.settings:get("mobs.racoons") or "sprite"
+minetest.log("info", "mobs : animals : racoons : "..racoon_setting)
 
 mobs:register_mob("racoon", {
     type = "animal",
@@ -53,4 +55,4 @@ mobs:register_mob("racoon", {
             end
         end
     end,
-})
+}, racoon_setting == "disabled")
