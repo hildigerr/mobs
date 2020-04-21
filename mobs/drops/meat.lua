@@ -15,6 +15,10 @@ minetest.register_craftitem("mobs:meat_raw", {
             data.velocity.x = data.velocity.x * 2.9
             data.velocity.y = data.velocity.y * 2.9 + 2
             data.velocity.z = data.velocity.z * 2.9
+            local inertia = dropper:get_player_velocity()
+            data.velocity.x = data.velocity.x + inertia.x
+            data.velocity.y = data.velocity.y + inertia.y
+            data.velocity.z = data.velocity.z + inertia.z
         end
         minetest.add_entity(pos, "mobs:meat_raw_item", minetest.serialize(data))
         itemstack:clear()
