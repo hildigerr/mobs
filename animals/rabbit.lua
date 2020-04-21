@@ -2,7 +2,7 @@ local rabbit_setting = minetest.settings:get("mobs.rabbits") or "mesh"
 local USE_SPRITES = rabbit_setting ~= "mesh"
 minetest.log("info", "mobs : animals : rabbits : "..rabbit_setting)
 
-local rabbit_colors = { "white", "grey", "brown" }
+local rabbit_colors = { "white", "grey", "brown", "black" }
 
 for i,v in ipairs( rabbit_colors ) do
 mobs:register_mob("rabbit_"..v, {
@@ -88,6 +88,12 @@ mobs:register_mob("rabbit_"..v, {
         {
             name = "mobs:carrot",
             chance = 4,
+            min = 1,
+            max = 1,
+        },
+        {
+            name = "wool:"..v,
+            chance = 60,
             min = 1,
             max = 1,
         }
