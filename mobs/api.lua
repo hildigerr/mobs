@@ -487,7 +487,10 @@ function mobs:register_arrow(name, def)
         visual = def.visual,
         visual_size = def.visual_size,
         textures = def.textures,
+        spritediv = def.spritediv,
+        initial_sprite_basepos = def.initial_sprite_basepos,
         velocity = def.velocity,
+        on_activate = def.on_activate,
         hit_player = def.hit_player,
         hit_node = def.hit_node,
 

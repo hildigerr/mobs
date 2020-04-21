@@ -70,9 +70,13 @@ mobs:register_mob("dungeon_master", {
 mobs:register_arrow(":mobs:fireball", {
     visual = "sprite",
     visual_size = {x=1, y=1},
-    --textures = {{name="mobs_fireball.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=0.5}}}, FIXME
-    textures = {"mobs_fireball.png"},
+    textures = {"mobs_fireball_animated.png"},
+    spritediv = {x=1, y=3},
+    initial_sprite_basepos = {x=0, y=0},
     velocity = 5,
+    on_activate = function(self, staticdata, dtime_s)
+       self.object:set_sprite({x=0, y=0}, 3, 0.15)
+    end,
     hit_player = function(self, player)
         local s = self.object:get_pos()
         local p = player:get_pos()
