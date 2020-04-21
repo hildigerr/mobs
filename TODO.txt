@@ -1,6 +1,5 @@
 --------------------------------------------------------------------------------
 --BUGS:
---        drinking from a stack of vessels does not return an empty vessel
 --        cages are sometimes placed sideways or upsidedown
 --        rabbits mesh is backwards
 --HIGH PRIORITY:

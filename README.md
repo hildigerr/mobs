@@ -162,7 +162,6 @@ Punch the `target` with `damage` damage groups for use as an `attack` callback. 
 Launch projectiles at a target. `name` is the name of the projectile. `pos` and `target` are the *positions* of the shooter and the target respectively.
 
 ## Issues ##
- - [ ] If you drink milk from a stack of vessels, you will not recieve the empty vessel.
  - [ ] When an entity is slain both the `on_punch` and `on_death` callbacks are triggered. So, if you have sounds for punch and death both will be heard. Take this into account while creating your sounds.
 
 ## ETHICAL DISCLOSURE ##
