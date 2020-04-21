@@ -171,7 +171,7 @@ function mobs:register_mob(name, def, disabled)
                             if self.sounds and self.sounds.death_fall then
                                 minetest.sound_play(self.sounds.death_fall, {oject = self.object})
                             end
-                            self.drop_litter(self.drops, pos)
+                            self:drop_litter(self.drops, pos)
                             mobs.barf("info", self.name, "fell", minetest.pos_to_string(pos), "killed")
                             self.object:remove()
                             return
@@ -211,7 +211,7 @@ function mobs:register_mob(name, def, disabled)
                         if self.sounds and self.sounds.death_light then
                             minetest.sound_play(self.sounds.death_light, {oject = self.object})
                         end
-                        self.drop_litter(self.drops, pos)
+                        self:drop_litter(self.drops, pos)
                         mobs.barf("info", "sunburned", self.name, minetest.pos_to_string(pos), "killed")
                         self.object:remove()
                         return
@@ -229,7 +229,7 @@ function mobs:register_mob(name, def, disabled)
                         if self.sounds and self.sounds.death_drown then
                             minetest.sound_play(self.sounds.death_drown, {oject = self.object})
                         end
-                        self.drop_litter(self.drops, pos)
+                        self:drop_litter(self.drops, pos)
                         mobs.barf("info", self.name, "drowned", minetest.pos_to_string(pos), "killed")
                         self.object:remove()
                         return
@@ -424,24 +424,16 @@ function mobs:register_mob(name, def, disabled)
             end
         end,
 
-        drop_litter = function(drops, pos)
+        drop_litter = function(self, drops, pos)
             if minetest.settings:get_bool("mobs.drop_litter", false) then
                 for _,drop in ipairs(drops) do
                     if math.random(1, drop.chance) == 1 then
-                        for i=1,math.random(drop.min, drop.max) do
-                            local obj = minetest.add_item(pos, drop.name)
-                            if obj then
-                                obj:get_luaentity().collect = true
-                                local x = math.random(1, 5)
-                                if math.random(1,2) == 1 then
-                                    x = -x
-                                end
-                                local z = math.random(1, 5)
-                                if math.random(1,2) == 1 then
-                                    z = -z
-                                end
-                                obj:set_velocity({x=1/x, y=obj:get_velocity().y, z=1/z})
-                            end
+                        stack = ItemStack(drop.name.." "..tostring(math.random(drop.min, drop.max)))
+                        item = stack:get_definition()
+                        if item and item.on_drop then
+                            item.on_drop(stack, self.object, pos)
+                        else
+                            minetest.item_drop(stack, self.object, pos)
                         end
                     end
                 end
