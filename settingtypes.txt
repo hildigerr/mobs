@@ -12,8 +12,42 @@ mobs.interval (Spawn Interval) int 30 30 300
 #   Do drop drops when dying naturally
 mobs.drop_litter (Drop Litter) bool false
 
+[meat]
+
 #    Meat will rot if not cooked or refridgerated
 mobs.meat_rots (Meat Rots) bool true
+
+
+#   Chances of raw meat rotting [0-100]% while laying around. Set to 0 to disable.
+mobs.meat_chance_rot_litter (Litter Rot Chance) int 33 0 100
+
+#   Time to rot interval for droped meat in minutes.
+#   Raw meat will last at least this long onced dropped. There is a chance of it rotting whenever this amount of time has passed.
+mobs.meat_timer_rot_litter (Litter Rot Timer) int 3 1 60
+
+
+#   Chances of raw meat in the player's inventory turning into rotten meat. [0-100]% Set to 0 to disable.
+mobs.meat_chance_rot_inventory (Rot Inventory Chance) int 33 0 100
+
+#   Time to rot interval for carried meat in minutes.
+mobs.meat_timer_rot_inventory (Rot Inventory Timer) int 5 1 60
+
+
+#   Chances of raw meat rotting [0-100]% in the chests.
+#   Also works with homedecor nightstands and kitchen cabinets. Meat will not rot if refridgerated. Set to 0 to disable.
+mobs.meat_chance_rot_chest (Rot Storage Chance) int 50 0 100
+
+#   Time to rot interval for stored meat in minutes.
+mobs.meat_timer_rot_chest (Rot Storage Timer) int 10 12 60
+
+
+#   Chances of meat rotting [0-100]% while being cooked. Set to 0 to disable.
+#   This may cause meat to seem to overcook, if a player starts cooking a stack of raw meat and it turns rotten before finishing.
+mobs.meat_chance_rot_cooking (Rot Cooking Chance) int 66 0 100
+
+#   Time to rot interval for cooking meat in minutes.
+#   Raw meat that is cooking has a chance of rotting whenever this amount of time has passed. Meat will not rot once it has been cooked.
+mobs.meat_timer_rot_cooking (Rot Cooking Timer) int 20 1 60
 
 [animals]
 

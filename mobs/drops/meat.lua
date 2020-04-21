@@ -1,3 +1,5 @@
+local CHANCE_ROT_LITTER = tonumber(minetest.settings:get("mobs.meat_chance_rot_litter")) or 33
+local GROUND_TIMER = 60 * (tonumber(minetest.settings:get("mobs.meat_timer_rot_litter")) or 3)
 
 --- Craft Items ---
 
@@ -68,8 +70,8 @@ minetest.register_entity("mobs:meat_raw_item", {
             self.object:set_velocity({x=0, y=0, z=0})
         end
         self.staticdata.timer = self.staticdata.timer+dtime
-        if self.staticdata.timer > 360 then -- GROUND_TIMER
-            if math.random(1, 100) <= 33 then -- ROT_ON_GROUND_CHANCE
+        if self.staticdata.timer > GROUND_TIMER then
+            if math.random(1, 100) <= CHANCE_ROT_LITTER then
                 pos = self.object:get_pos()
                 quantity_string = tostring(self.staticdata.quantity)
                 if minetest.add_item(pos, "mobs:meat_rotten "..quantity_string) then

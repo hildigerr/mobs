@@ -20,6 +20,11 @@ Upstream contributions have been included from:
  - **Spawn Interval** will determine how often the spawning ABM is executed, *30* seconds by default
  - **Drop Litter** if mobs should drop dropps when dying naturally, *disabled* by default
  - **Meat Rots** if raw meat should rot periodically, *enabled* by default
+ - **Rot Chance**s and **Rot Timer**s can be set individually for:
+   - **Litter**ed meat that has been dropped and is laying around,
+   - **Inventory** meat that a player is carrying,
+   - **Storage** meat that is stored in a container such as a chest,
+   - **Cooking** meat. This may cause meat to seem to overcook, if a player starts cooking a stack of raw meat and it turns rotten before finishing.
  - **Rats**, **Sheep**, and **monsters** can be drawn with a default 3D *mesh*, a 2D sprite, or be disabled.
 
 ## The Mobs ##

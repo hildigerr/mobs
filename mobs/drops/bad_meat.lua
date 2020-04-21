@@ -2,19 +2,13 @@
 if not minetest.settings:get_bool("mobs.meat_rots", false) then return end
 local use_homedecor = minetest.get_modpath("homedecor")
 
-----CONFIG OPTIONS:
---Chances of meat rotting [1-100]
---if math.random(1,100) <= CHANCE then it will rot
-local ROT_IN_POCKET_CHANCE = 33 --DEFAULT:33
-local ROT_IN_STORAGE_CHANCE = 33 --DEFAULT:33
-local ROT_WHILE_COOKING_CHANCE = 33 --DEFAULT:33
+local CHANCE_ROT_POCKET = tonumber(minetest.settings:get("mobs.meat_chance_rot_inventory")) or 33
+local CHANCE_ROT_STORAGE = tonumber(minetest.settings:get("mobs.meat_chance_rot_storage")) or 50
+local CHANCE_ROT_COOKING = tonumber(minetest.settings:get("mobs.meat_chance_rot_cooking")) or 66
 
---Time to Rot intervals
---Aproximetley equivalent to seconds
-local WATER_TIMER = 240 --DEFAULT:240 [4 min]
-local GROUND_TIMER = 360 --DEFAULT:360 [6 min]
-local POCKET_TIMER = 720 --DEFAULT:720 [12 min]
-local STORAGE_TIMER = 720 --DEFAULT:720 [12 min]
+local POCKET_TIMER  = 60 * (tonumber(minetest.settings:get("mobs.meat_timer_rot_inventory")) or 5)
+local STORAGE_TIMER = 60 * (tonumber(minetest.settings:get("mobs.meat_timer_rot_storage")) or 10)
+local COOKING_TIMER = 60 * (tonumber(minetest.settings:get("mobs.meat_timer_rot_cooking")) or 20)
 --------------------------------------------------------------------------------
 
 function spoil_meat( inv, title, chance, warn, owner )
@@ -55,7 +49,7 @@ end
 
 
 --Rot Stored Meat
-if ROT_IN_STORAGE_CHANCE > 0 then
+if CHANCE_ROT_STORAGE > 0 then
     minetest.register_abm({
         nodenames = not use_homedecor and {
             "default:chest",
@@ -74,36 +68,36 @@ if ROT_IN_STORAGE_CHANCE > 0 then
         interval = STORAGE_TIMER,
         chance = 1,
         action = function(pos, node)
-            spoil_meat(minetest.get_meta(pos):get_inventory(), "main", ROT_IN_STORAGE_CHANCE)
+            spoil_meat(minetest.get_meta(pos):get_inventory(), "main", CHANCE_ROT_STORAGE)
         end
     })
 end
 
 --Rot Cooking Meat
-if ROT_WHILE_COOKING_CHANCE > 0 then
+if CHANCE_ROT_COOKING > 0 then
     minetest.register_abm({
         nodenames = not use_homedecor and {"default:furnace"}
             or {"default:furnace", "homedecor:oven"},
-        interval = STORAGE_TIMER,
+        interval = COOKING_TIMER,
         chance = 1,
         action = function(pos, node)
-            spoil_meat(minetest.get_meta(pos):get_inventory(), "src", ROT_WHILE_COOKING_CHANCE)
+            spoil_meat(minetest.get_meta(pos):get_inventory(), "src", CHANCE_ROT_COOKING)
         end
     })
 end
 
 
 --Rot Held Meat
-if ROT_IN_POCKET_CHANCE > 0 then
+if CHANCE_ROT_POCKET > 0 then
 local rotting_timer = 0
 minetest.register_globalstep( function(dtime)
     rotting_timer = rotting_timer + dtime
-    if rotting_timer >= POCKET_TIMER then --TEST WiTH: 2 then --
+    if rotting_timer >= POCKET_TIMER then
         for _,player in ipairs(minetest.get_connected_players()) do
             local who = player:get_player_name()
             local stuff = player:get_inventory()
-            spoil_meat(stuff, "main", ROT_IN_POCKET_CHANCE, true, who)
-            spoil_meat(stuff, "craft", ROT_IN_POCKET_CHANCE, true, who)
+            spoil_meat(stuff, "main", CHANCE_ROT_POCKET, true, who)
+            spoil_meat(stuff, "craft", CHANCE_ROT_POCKET, true, who)
         end -- for each player
         rotting_timer = 0 --reset the timer
     end -- timer
