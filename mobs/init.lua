@@ -3,11 +3,17 @@
 local modpath = minetest.get_modpath("mobs")
 
 mobs = {
-    barf = minetest.settings:get_bool("mobs.display_mob_spawn", false)
-        and function(level, action, name, position, reason)
-            minetest.chat_send_all(string.format("[mobs] %s %s at %s (%s)", action, name, position, reason))
-        end or function(level, action, name, position, reason, level)
-            minetest.log(level, string.format("mobs : %s : %s : %s : %s", reason, action, name, position))
+    barf =
+        function(level, action, name, position, reason)
+            local barf_setting = minetest.settings:get("mobs.barf") or "disabled"
+            if barf_setting ~= "disabled" then
+                if barf_setting ~= "info" then
+                    minetest.chat_send_all(string.format("[mobs] %s %s at %s (%s)", action, name, position, reason))
+                end
+                if barf_setting ~= "barf" then
+                    minetest.log(level, string.format("mobs : %s : %s : %s : %s", reason, action, name, position))
+                end
+            end
         end
 }
 

@@ -12,7 +12,11 @@ Upstream contributions have been included from:
 
 ## Settings Options ##
 
- - **Notify of Spawns** for debugging, *disabled* by default
+ - **Log level** primarily for debugging:
+   - *disabled* by default
+   - *barf* to send messages as chat broadcasts.
+   - *info* to direct messages to the logfile.
+   - *verbose* to send to both.
  - **Spawn Interval** will determine how often the spawning ABM is executed, *30* seconds by default
  - **Drop Litter** if mobs should drop dropps when dying naturally, *disabled* by default
  - **Meat Rots** if raw meat should rot periodically, *enabled* by default

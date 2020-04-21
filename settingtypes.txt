@@ -1,7 +1,10 @@
 # TODO bad_meat and pet_cages configuration options
 
-#   Notify players of mob spawns
-mobs.display_mob_spawn (Notify of Spawns) bool false
+#   Primarily for debugging, so 'disabled' by default.
+#       'barf' to send messages as chat broadcasts.
+#       'info' to direct messages to the logfile.
+#       'verbose' to send to both.
+mobs.barf (Log Level) enum disabled,barf,info,verbose
 
 #   The mob spawning ABM will be registered to execute at this interval (in seconds).
 mobs.interval (Spawn Interval) int 30 30 300
