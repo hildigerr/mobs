@@ -22,7 +22,7 @@ mobs:register_mob("rabbit_"..v, {
     max_spawn_count = 1,
     max_spawn_height = 31000,
 
-    damage = {water = 4, lava = 12, light = 0},
+    damage = {fall = 1, water = 4, lava = 12, light = 0},
 
     visual = USE_SPRITES and "upright_sprite" or "mesh",
     drawtype = "front",

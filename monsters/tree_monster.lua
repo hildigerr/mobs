@@ -18,9 +18,8 @@ mobs:register_mob("tree_monster", {
     max_spawn_count = 3,
     max_spawn_height = 31000,
 
-    damage = {water = 1, lava = 16, light = 2},
+    damage = {fall = 0, water = 1, lava = 16, light = 2},
     light_resistant = true,
-    disable_fall_damage = true,
 
     visual = USE_SPRITES and "upright_sprite" or "mesh",
     drawtype = "front",

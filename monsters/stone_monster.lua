@@ -18,7 +18,7 @@ mobs:register_mob("stone_monster", {
     max_spawn_count = 3,
     max_spawn_height = 0,
 
-    damage = {water = 0, lava = 5, light = 0},
+    damage = {fall = 2, water = 0, lava = 5, light = 0},
     light_resistant = true,
 
     visual = USE_SPRITES and "upright_sprite" or "mesh",

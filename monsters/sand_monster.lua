@@ -18,7 +18,7 @@ mobs:register_mob("sand_monster", {
     max_spawn_count = 3,
     max_spawn_height = 31000,
 
-    damage = {water = 14, lava = 14, light = 0},
+    damage = {fall = 3, water = 14, lava = 14, light = 0},
     light_resistant = true,
 
     visual = USE_SPRITES and "upright_sprite" or "mesh",

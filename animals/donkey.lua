@@ -53,7 +53,7 @@ mobs:register_mob("donkey", {
     max_spawn_count = 1,
     max_spawn_height = 31000,
 
-    damage = {water = 5, lava = 8, light = 0},
+    damage = {fall = 1, water = 5, lava = 8, light = 0},
 
     visual = "mesh",
     drawtype = "backside",

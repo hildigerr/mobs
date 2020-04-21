@@ -18,7 +18,7 @@ mobs:register_mob("oerkki", {
     max_spawn_count = 3,
     max_spawn_height = -10,
 
-    damage = {water = 1, lava = 1, light = 0},
+    damage = {fall = 1, water = 1, lava = 1, light = 0},
     light_resistant = true,
 
     visual = USE_SPRITES and "upright_sprite" or "mesh",

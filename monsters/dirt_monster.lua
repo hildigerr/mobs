@@ -6,7 +6,7 @@ mobs:register_mob("dirt_monster", {
     type = "monster",
 
     hp_max = 14,
-    armor = {crumbly = 85, cracky = 50, choppy = 40, fleshy = 50},
+    armor = {fall = 2, crumbly = 85, cracky = 50, choppy = 40, fleshy = 50},
     view_range = 15,
     walk_velocity = 1,
     run_velocity = 3,

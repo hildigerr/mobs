@@ -17,7 +17,7 @@ mobs:register_mob("racoon", {
     max_spawn_count = 1,
     max_spawn_height = 31000,
 
-    damage = {water = 3, lava = 5, light = 0},
+    damage = {fall = 1, water = 3, lava = 5, light = 0},
 
     visual = "upright_sprite",
     drawtype = "front",

@@ -167,11 +167,11 @@ function mobs:register_mob(name, def, disabled)
                 self.object:set_acceleration({x=0, y=-10, z=0})
             end
 
-            if not self.disable_fall_damage and self.object:get_velocity().y == 0 then
+            if self.damage.fall ~= 0 and self.object:get_velocity().y == 0 then
                 if self.old_y then
                     local d = self.old_y - pos.y
                     if d > 5 and minetest.get_item_group(n.name, "water") == 0 then
-                        local damage = d-5
+                        local damage = self.damage.fall*(d-5)
                         self.object:set_hp(self.object:get_hp()-damage)
                         if self.object:get_hp() <= 0 then
                             if self.sounds and self.sounds.death_fall then

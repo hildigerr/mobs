@@ -18,7 +18,7 @@ mobs:register_mob("dungeon_master", {
     max_spawn_count = 1,
     max_spawn_height = -50,
 
-    damage = {water = 3, lava = 3, light = 0},
+    damage = {fall = 2, water = 3, lava = 3, light = 0},
 
     visual = USE_SPRITES and "upright_sprite" or "mesh",
     drawtype = "front",
