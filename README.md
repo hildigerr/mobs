@@ -69,7 +69,9 @@ There are also these additional setting options:
  - [x] Overcooking and using the result to make dye
 
 ## API ##
-Mobs are added using the **mobs:register_mob(name, def)** function, where `name` is the name of the mob. The entity should then be referenced as `"mob:name"`. The`def` parameter is a table with all the defining attributes of the mob. For the most part, these are the same as in `minetest.register_entity()`. Other attributes are described below:
+Mobs are added using the **mobs:register_mob(name, def, disabled)** function, where `name` is the name of the mob. The entity should then be referenced as `"mob:name"`. The `disabled` parameter is used by all mobs to prevent spawning and to destroy any residual disabled mobs.
+
+The`def` parameter is a table with all the defining attributes of the mob. For the most part, these are the same as in `minetest.register_entity()`. Other attributes are described below:
 
 ### Mob Attributes ###
 
