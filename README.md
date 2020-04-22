@@ -94,7 +94,7 @@ The`def` parameter is a table with all the defining attributes of the mob. For t
 
  - **damage** = a table of damage per second done to the mob if it is in: **water**, **lava**, or **light**
 
- - **drawtype** = "front" or "side" to orient the mob's directional heading,
+ - **drawtype** = "front", "side", "back", or "backside" to adjust the mob's directional heading,
  - **animation** = a table with the animation ranges and speed of a model:
    - **stand_start**
    - **stand_end**

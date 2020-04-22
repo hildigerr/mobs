@@ -56,11 +56,20 @@ function mobs:register_mob(name, def, disabled)
         v_start = false,
         old_y = nil,
 
-        set_velocity = function(self, v)
+        get_yaw = function(self)
             local yaw = self.object:get_yaw()
             if self.drawtype == "side" then
                 yaw = yaw+(math.pi/2)
+            elseif self.drawtype == "back" then
+                yaw = yaw+math.pi
+            elseif self.drawtype == "backside" then
+                yaw = yaw-(math.pi/2)
             end
+            return yaw
+        end,
+
+        set_velocity = function(self, v)
+            local yaw = self:get_yaw()
             local x = math.sin(yaw) * -v
             local z = math.cos(yaw) * v
             self.object:set_velocity({x=x, y=self.object:get_velocity().y, z=z})
@@ -150,10 +159,7 @@ function mobs:register_mob(name, def, disabled)
             end
 
             if self.object:get_velocity().y > 0.1 then
-                local yaw = self.object:get_yaw()
-                if self.drawtype == "side" then
-                    yaw = yaw+(math.pi/2)
-                end
+                local yaw = self:get_yaw()
                 local x = math.sin(yaw) * -2
                 local z = math.cos(yaw) * 2
                 self.object:set_acceleration({x=x, y=-10, z=z})
@@ -523,6 +529,10 @@ function mobs:orient(self, pos, target)
     local yaw = math.atan(vec.z/vec.x)
     if self.drawtype == "front" then
         yaw = yaw+(math.pi/2)
+    elseif self.drawtype == "back" then
+        yaw = yaw+math.pi
+    elseif self.drawtype == "backside" then
+        yaw = yaw-(math.pi/2)
     end
     if target.x > pos.x then
         yaw = yaw+math.pi
