@@ -1,26 +1,11 @@
 --------------------------------------------------------------------------------
---BUGS:
---
---HIGH PRIORITY:
---        support more food, --check balance-- [cheese]
---        add fresh meat, and remove rotten meat litter eventually:
---          "fresh meat" --> "raw meat" --> "cooked meat" | ("rotten meat" --> "")
---        update images (including texture pack)
---MED PRIORITY:
---        add more animals: (continue pulling)
---          chicken/eggs
---          pigs/piglets
---          black sheep
---        animal breeding & extinction possibility
---        add monsters,
+-- screenshots of mobs and crafts for README and such
+-- update images (including texture pack):
 --        cows lift head in water and when walking sometimes
---        Donkeys: can be tamed and used to carry chests
---        Racoons: drop furs, craft coonskin hats
---        taxedermy
---LOW PRIORITY:
---        add sound effect variety
---        cows "eat" grass
---        on_punch knockback, oerkki arm flail
---        document optional attributes and default values, verify balance
-
--------------------------------------EOF----------------------------------------
+--        2d oerkki arm flail
+--        ensure 2&3D option for all
+-- add sound effect variety
+-- document optional attributes and default values, verify balance
+-- create mob template and/or app for generating/installing/sharing custom mobs
+-- create import script to import from other mob api
+-- become the one mob mod to rule them all

@@ -1,10 +1,13 @@
-# [MOD] Simple Mobs [mobs] for MINETEST-C55 #
+# [MOD] Mobs [mobs] for MINETEST-C55 #
 
-This mod, Forked from PilzAdam's [Simple Mobs](https://forum.minetest.net/viewtopic.php?id=3063), adds some basic hostile and friendly mobs to the game. It includes additional mobs and rotton meat, which were originally provided in another mod called [my_mobs](https://forum.minetest.net/viewtopic.php?f=11&t=4082). However my_mobs cages has not been included.
+This mod, Forked from PilzAdam's [Simple Mobs](https://forum.minetest.net/viewtopic.php?id=3063), adds hostile and friendly mobs to the game. It includes additional mobs and rotton meat, which were originally provided in another mod called [my_mobs](https://forum.minetest.net/viewtopic.php?f=11&t=4082). However my_mobs cages has not been included.
 
-Since the [original](https://github.com/PilzAdam/mobs) mod is no longer maintained and the author of my_mobs wished to continue it's development, the two have been merged.
+Since the [original](https://github.com/PilzAdam/mobs) mod is no longer maintained and the author of my_mobs wished to continue it's development, the two have been merged. Development continues with these primary goals:
+ - [X] Every mob should be able to be disabled through the Minetest settings interface, without disrupting a world.
+ - [ ] Every mob should have both 3D mesh and 2D sprite display options.
+ - [ ] Anyone should be able to add a customized mob as a drop in.
 
-Upstream contributions have been included from:
+Contributions have been included from:
  - [cnelsonsic](https://github.com/cnelsonsic)
  - [CSPS-HaydenWoods](https://github.com/CSPS-HaydenWoods)
  - [ElectricSolstice](https://github.com/ElectricSolstice)
@@ -32,7 +35,9 @@ There are also these additional setting options:
 
 ### Animals ###
  - [x] **Cows** are large beasts that can be milked--until they go dry. They are tasty when killed and cooked. They like grass.
- - [x] **Donkeys** are large beasts that don't do much yet. [See TODO.txt]
+ - [ ] **Chickens**
+ - [x] **Donkeys** are large beasts that don't do much yet. [TODO: can be tamed and used to carry chests]
+ - [ ] **Pigs** and **Piglets**
  - [x] **Rabbits** are cute little critters that you can pick up. They are tasty when cooked. They like berries and carrots, but are shy and get spooked easy. They can be white, grey, or brown.
  - [x] **Racoons** are cute little beasts. They will take whatever you give them, but only appreciate things that are *eatable*.
  - [x] **Rats** are cute little critters that you can pick up. They are tasty when cooked.
@@ -63,10 +68,23 @@ There are also these additional setting options:
 |Tree Monster|8|0%|10%|80%|70%|
 
 ## Miscellaneous ##
- - [x] Raw and Cooked Meat
- - [x] Meat spoilage if it remains uncooked
-  -- [ ] Raw meet can be preserved using VanessaE's [Home Decor](https://gitlab.com/VanessaE/homedecor_modpack) refridgerator. (Not re-tested)
- - [x] Overcooking and using the result to make dye
+
+### Meat ###
+Some tasty animals can be killed for raw meat. Raw meat can become rotten if it remains uncooked. Players should also be able to preserve it using VanessaE's [Home Decor](https://gitlab.com/VanessaE/homedecor_modpack) refridgerator. [TODO: re-test]
+
+You can purposefully overcook meat and use the result to make dye. Rotten meat cooks into *scorched stuff* as well, so it may seem like a player overcooked some meat if it becomes rotten while cooking unattended.
+
+### TODO Ideas ###
+ - [ ] AI Helper function for mob to maintain distance sans fleeing.
+ - [ ] Breeding tamed animals.
+ - [ ] Cheeze and eggs!
+ - [ ] Extinction if overkilled.
+ - [ ] Fresh meat: "fresh meat" --> "raw meat" --> "cooked meat" | ("rotten meat" --> "")
+ - [ ] Grazing and unprotected garden damage.
+ - [ ] Knockback
+ - [ ] NPCs: trading, minions, armies
+ - [ ] Tanning and furs for crafting.
+ - [ ] Taxedermy for dropped disabled mobs or as a craft.
 
 ## API ##
 Mobs are added using the **mobs:register_mob(name, def, disabled)** function, where `name` is the name of the mob. The entity should then be referenced as `"mob:name"`. The `disabled` parameter is used by all mobs to prevent spawning and to destroy any residual disabled mobs.
