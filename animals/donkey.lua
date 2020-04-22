@@ -17,7 +17,7 @@ donkey_def = {
     damage = {water = 5, lava = 8, light = 0},
 
     visual = "mesh",
-    drawtype = "front",
+    drawtype = "backside",
     mesh = "mobs_donkey.x",
     visual_size = {x=2.0, y=2.5},
     collisionbox = {-0.7, -0.01, -0.4, 0.7, 1.4, 0.4},
