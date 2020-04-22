@@ -3,8 +3,8 @@ local donkey_setting = minetest.settings:get("mobs.donkeys") or "mesh"
 mobs:register_mob("donkey", {
     type = "animal",
 
-    hp_max = 2,
-    armor = { fleshy = 200 },
+    hp_max = 15,
+    armor = {crumbly = 25, cracky = 25, choppy = 80, fleshy = 90},
     walk_velocity = 1,
 
     spawning_nodes = {"default:dirt_with_grass", "default:stone"},
@@ -14,7 +14,7 @@ mobs:register_mob("donkey", {
     max_spawn_count = 1,
     max_spawn_height = 31000,
 
-    damage = {water = 0, lava = 1, light = 0},
+    damage = {water = 5, lava = 8, light = 0},
 
     visual = "mesh",
     drawtype = "front",

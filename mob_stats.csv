@@ -1,5 +1,6 @@
 "Mob Name","HP/2 (Hearts)","Crumbly (Shovel)","Cracky (Pickaxe)","Choppy (Axe)","Fleshy (Sword)"
 Cow,9,15,25,80,90
+Donkey,7.5,25,25,80,90
 Rabbit,6,25,25,90,100
 Racoon,7,25,25,70,80
 Rat,5,100,100,100,100

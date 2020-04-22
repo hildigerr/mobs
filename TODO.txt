@@ -1,5 +1,6 @@
 --------------------------------------------------------------------------------
 --BUGS:
+--        donkey heading is sideways
 --HIGH PRIORITY:
 --        support more food, --check balance-- [cheese]
 --        add fresh meat, and remove rotten meat litter eventually:

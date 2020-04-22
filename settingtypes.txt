@@ -50,7 +50,7 @@ mobs.meat_timer_rot_cooking (Rot Cooking Timer) int 20 1 60
 mobs.cows (Cows) enum sprite sprite,disabled
 
 #   Donkeys can be drawn with a 3D mesh or be disabled.
-mobs.donkeys (Donkeys) enum disabled mesh,disabled
+mobs.donkeys (Donkeys) enum mesh mesh,disabled
 
 #   Rabbits can be drawn with a 3D mesh, a 2D sprite, or be disabled.
 mobs.rabbits (Rabbits) enum  mesh mesh,sprite,disabled
