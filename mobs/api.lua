@@ -441,7 +441,7 @@ function mobs:register_mob(name, def, disabled)
         end,
     })
 
-    if not disabled then
+    if not disabled and def.spawning_nodes then
         minetest.register_abm({
             nodenames = def.spawning_nodes,
             neighbors = {"air"},
