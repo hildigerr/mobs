@@ -67,9 +67,15 @@ There are also these additional setting options:
 |Stone Monster|8|1%|90%|10%|25%|
 |Tree Monster|8|0%|10%|80%|70%|
 
-## Miscellaneous ##
+## Drops ##
 
-### Meat ###
+### Carrots ###
+Carrots are included if not available from another mod. These were included in my_mobs v0.5 and supported: [TODO: re-test]
+ - **food**
+ - **farming_plus**
+ - **docfarming**
+
+### Meat ##
 Some tasty animals can be killed for raw meat. Raw meat can become rotten if it remains uncooked. Players should also be able to preserve it using VanessaE's [Home Decor](https://gitlab.com/VanessaE/homedecor_modpack) refridgerator. [TODO: re-test]
 
 You can purposefully overcook meat and use the result to make dye. Rotten meat cooks into *scorched stuff* as well, so it may seem like a player overcooked some meat if it becomes rotten while cooking unattended.
@@ -190,7 +196,10 @@ Launch projectiles at a target. `name` is the name of the projectile. `pos` and 
 The sourcecode (by PilzAdam), models (by Pavel_S), and other graphics (unless otherwise noted) were originally released under the *WTFPL* (see below).
 
 ### Cow Assets ###
-The cow texture was created by [rinoux](https://forum.minetest.net/memberlist.php?mode=viewprofile&u=1128). It was retrieved from the [mobf](https://wiki.minetest.net/Mods/MOB_Framework) mod by [sapier](https://forum.minetest.net/memberlist.php?mode=viewprofile&u=231). The cow's dry-up sound came from there too, which reports that the graphic is under WTFPL and the [sound](http://commons.wikimedia.org/wiki/Category:Mudchute_Park_and_Farm) was created by [Secretlondon](http://commons.wikimedia.org/wiki/User:Secretlondon).
+The 2D cow texture was created by [rinoux](https://forum.minetest.net/memberlist.php?mode=viewprofile&u=1128). It was retrieved from the [mobf](https://wiki.minetest.net/Mods/MOB_Framework) mod by [sapier](https://forum.minetest.net/memberlist.php?mode=viewprofile&u=231). The cow's dry-up sound came from there too, which reports that the graphic is under WTFPL and the [sound](http://commons.wikimedia.org/wiki/Category:Mudchute_Park_and_Farm) was created by [Secretlondon](http://commons.wikimedia.org/wiki/User:Secretlondon). The milk_[splash](http://www.youtube.com/watch?v=Z3GEcgwEMQo) sound effect, for when milking a cow, was originally added in my_mobs v0.2.
+
+### Racoon Assets ###
+The racoon was originally added in my_mobs v0.5. All that is know of the 2D sprite is that the original --[link](http://stephaniecome-ryker.com/blog/wp-content/uploads/2011/04/coon.jpg)-- is broken.
 
 ### Rodent Assets ###
 The rabbit and rat textures were acquired from cornernote's [critters](http://minetest.net/forum/viewtopic.php?id=3337) modpack. It's README.txt reports:
