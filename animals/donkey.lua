@@ -1,6 +1,6 @@
 local donkey_setting = minetest.settings:get("mobs.donkeys") or "mesh"
 
-mobs:register_mob("donkey", {
+donkey_def = {
     type = "animal",
 
     hp_max = 15,
@@ -41,5 +41,30 @@ mobs:register_mob("donkey", {
 
     drops = {},
 
-}, donkey_setting == "disabled")
+}
+
+mobs:register_mob("donkey", donkey_def, donkey_setting == "disabled")
+
+donkey_def.spawning_nodes = nil
+
+donkey_def.animation = {
+    speed_normal = 15,
+    stand_start = 90,
+    stand_end = 130,
+    walk_start = 135,
+    walk_end = 175,
+}
+
+mobs:register_mob("donkey_backpack_empty", donkey_def, donkey_setting == "disabled")
+
+donkey_def.animation = {
+    speed_normal = 15,
+    stand_start = 180,
+    stand_end = 220,
+    walk_start = 225,
+    walk_end = 265,
+}
+
+mobs:register_mob("donkey_backpack_full", donkey_def, donkey_setting == "disabled")
+
 
