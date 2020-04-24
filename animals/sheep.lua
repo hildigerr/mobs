@@ -51,6 +51,15 @@ mobs:register_mob("sheep", {
         },
     },
 
+    static_default = { food = 0, naked = false },
+    after_activate = function(self, dtime_s)
+        if self.static.naked then
+            self.object:set_properties({
+                textures = USE_SPRITES and {"mobs_sheep_naked.png", "mobs_sheep_naked.png"} or {"mobs_sheep_shaved.png"},
+            })
+        end
+    end,
+
     on_rightclick = function(self, clicker)
         local item = clicker:get_wielded_item()
         if item:get_name() == "farming:wheat" then
@@ -58,25 +67,23 @@ mobs:register_mob("sheep", {
             clicker:set_wielded_item(item)
             if not self.tamed then
                 self.tamed = true
-            elseif self.naked then
-                self.food = (self.food or 0) + 1
-                if self.food >= 8 then
-                    self.food = 0
-                    self.naked = false
+            elseif self.static.naked then
+                self.static.food = self.static.food + 1
+                if self.static.food >= 8 then
+                    self.static.food = 0
+                    self.static.naked = false
                     self.object:set_properties({
                         textures = USE_SPRITES and {"mobs_sheep.png", "mobs_sheep.png"} or {"mobs_sheep_mesh.png"},
-                        mesh = "mobs_sheep.x",
                     })
                 end
             end
             return
         end
-        if clicker:get_inventory() and not self.naked then
-            self.naked = true
+        if clicker:get_inventory() and not self.static.naked then
+            self.static.naked = true
             clicker:get_inventory():add_item("main", ItemStack("wool:white "..math.random(1,2)))
             self.object:set_properties({
                 textures = USE_SPRITES and {"mobs_sheep_naked.png", "mobs_sheep_naked.png"} or {"mobs_sheep_shaved.png"},
-                mesh = "mobs_sheep_shaved.x",
             })
         end
     end,

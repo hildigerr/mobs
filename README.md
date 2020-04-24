@@ -88,6 +88,7 @@ You can purposefully overcook meat and use the result to make dye. Rotten meat c
  - [ ] Fresh meat: "fresh meat" --> "raw meat" --> "cooked meat" | ("rotten meat" --> "")
  - [ ] Grazing and unprotected garden damage.
  - [ ] Knockback
+ - [ ] Limit the amount of stuff a racoon can hold.
  - [ ] NPCs: trading, minions, armies
  - [ ] Tanning and furs for crafting.
  - [ ] Taxedermy for dropped disabled mobs or as a craft.
@@ -108,7 +109,7 @@ The`def` parameter is a table with all the defining attributes of the mob. For t
  - **view_range** = integer indicating how far away the mob can see a player,
  - **walk_velocity** = the velocity when the mob is walking around,
  - **run_velocity** = the velocity when the mob is running,
-
+ - **static** = data that should be saved for a mob instance,
  - **spawning_nodes** = a table of nodes upon which the mob may spawn,
  - **max_spawn_light** = the maximum amount of light present for the mob to spawn,
  - **min_spawn_light** = the minimum amount of light present for the mob to spawn,
@@ -150,6 +151,9 @@ Mobs start out in the **stand**ing state. They will then start **walk**ing aroun
 
 ### Callbacks ###
 Besides the regular [entity](https://dev.minetest.net/LuaEntitySAO) callbacks, the mobs api adds some more that you may take advantage of. Additionally, there are helper functions availabe for assisting in the implementation of these callbacks.
+
+#### after_activate( self, dtime_s) ####
+When a mob is activated, it's **static** data is loaded. The `after_activate` callback will then be executed if provided. The `dtime_s` parameter is the time passed since the entity was unloaded, as passed throgh the `on_activate` function.
 
 #### attack( self, target ) ####
 Monsters should provide an attack method in order to inflict damage on players. The function receives two parameters, the `self` entity which is performing the attack and the `target` of the attack. The target will be a table with **player**, **pos**ition, and **dist**ance attributes. Return *true* if the attack was performed, or else *false*.

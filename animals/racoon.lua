@@ -36,6 +36,27 @@ mobs:register_mob("racoon", {
         },
     },
 
+    static_default = {
+        stolen = {},
+        aggrivated = false,
+    },
+
+    after_activate = function(self, dtime_s)
+        if self.static.aggrivated then
+            self.type = "monster"
+            self.attack = function(self, target)
+                return mobs:slap(self, target.player, {fleshy=2})
+            end
+            for _,item_name in ipairs(self.static.stolen) do
+                table.insert(self.drops, {
+                    name = item_name,
+                    chance = 1, min = 1, max = 1
+                })
+            end
+        end
+        mobs.barf("info", "racoon", "is a "..self.type, minetest.pos_to_string(self.object:get_pos()), "testing" )
+    end,
+
     on_rightclick = function(self, clicker)
         local item = clicker:get_wielded_item()
         local item_name = item:get_name()
@@ -43,6 +64,8 @@ mobs:register_mob("racoon", {
         item:take_item()
         clicker:set_wielded_item(item)
         if aggrivate then
+            self.static.aggrivated = true
+            table.insert(self.static.stolen, item_name)
             table.insert(self.drops, {
                 name = item_name,
                 chance = 1, min = 1, max = 1

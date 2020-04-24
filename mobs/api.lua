@@ -380,6 +380,10 @@ function mobs:register_mob(name, def, disabled)
             self.object:remove()
         end,
 
+        static_default = def.static_default,
+
+        after_activate = def.after_activate,
+
         on_activate = function(self, staticdata, dtime_s)
             self.object:set_armor_groups(self.armor)
             self.object:set_acceleration({x=0, y=-10, z=0})
@@ -387,18 +391,28 @@ function mobs:register_mob(name, def, disabled)
             self.object:set_velocity({x=0, y=self.object:get_velocity().y, z=0})
             self.object:set_yaw(math.random(1, 360)/180*math.pi)
             self.lifetimer = 600 - dtime_s
+            if self.static_default then
+                self.static = table.copy(def.static_default)
+            end
             if staticdata then
                 local tmp = minetest.deserialize(staticdata)
-                if tmp and tmp.lifetimer then
-                    self.lifetimer = tmp.lifetimer - dtime_s
-                end
-                if tmp and tmp.tamed then
-                    self.tamed = tmp.tamed
+                if tmp then
+                    if tmp.lifetimer then
+                        self.lifetimer = tmp.lifetimer - dtime_s
+                    end
+                    if tmp.tamed then
+                        self.tamed = tmp.tamed
+                    end
+                    if tmp.static then
+                        self.static = tmp.static
+                    end
                 end
             end
             if self.lifetimer <= 0 and not self.tamed then
                 mobs.barf("verbose", "Activation prevented", self.name, minetest.pos_to_string(self.object:get_pos()), "end of life" )
                 self.object:remove()
+            elseif self.after_activate then
+                self.after_activate(self, dtime_s)
             end
         end,
 
@@ -406,6 +420,7 @@ function mobs:register_mob(name, def, disabled)
             local tmp = {
                 lifetimer = self.lifetimer,
                 tamed = self.tamed,
+                static = self.static,
             }
             return minetest.serialize(tmp)
         end,
