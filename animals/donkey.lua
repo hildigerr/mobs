@@ -44,22 +44,41 @@ mobs:register_mob("donkey", {
     static_default = { bag = nil },
 
     after_activate = function(self, dtime_s)
-        if self.static.bag then
-            if self.static.bag == "empty" then
-                self.animation = {
+        if self.tamed then
+            self.animation = not self.static.bag and
+                 {
                     speed_normal = 15,
                     stand_start = 90,
                     stand_end = 130,
                     walk_start = 135,
                     walk_end = 175,
                 }
-            elseif self.static.bag == "full" then
-                self.animation = {
+            or
+                {
                     speed_normal = 15,
                     stand_start = 180,
                     stand_end = 220,
                     walk_start = 225,
                     walk_end = 265,
+                }
+        end
+    end,
+
+    on_rightclick = function(self, clicker)
+        local item = clicker:get_wielded_item()
+        local item_name = item:get_name()
+        if item_name == "mobs:carrot" or item_name == "default:apple" then
+            item:take_item()
+            clicker:set_wielded_item(item)
+            self.static.stubbornness = (self.static.stubbornness or math.random(8,20)) - 1
+            if self.static.stubbornness <= 0 and not self.tamed then
+                self.tamed = true
+                self.animation = {
+                    speed_normal = 15,
+                    stand_start = 90,
+                    stand_end = 130,
+                    walk_start = 135,
+                    walk_end = 175,
                 }
             end
         end

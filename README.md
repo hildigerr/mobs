@@ -36,7 +36,7 @@ There are also these additional setting options:
 ### Animals ###
  - [x] **Cows** are large beasts that can be milked--until they go dry. They are tasty when killed and cooked. They like grass.
  - [ ] **Chickens**
- - [x] **Donkeys** are large beasts that don't do much yet. [TODO: can be tamed and used to carry chests]
+ - [x] **Donkeys** are large, stubborn beasts that can be tamed [TODO: and used to carry chests]. They like apples and carrots.
  - [ ] **Pigs** and **Piglets**
  - [x] **Rabbits** are cute little critters that you can pick up. They are tasty when cooked. They like berries and carrots, but are shy and get spooked easy. They can be white, grey, or brown.
  - [x] **Racoons** are cute little beasts. They will take whatever you give them, but only appreciate things that are *eatable*.
