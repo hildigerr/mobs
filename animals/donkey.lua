@@ -69,18 +69,12 @@ mobs:register_mob("donkey", {
         local item_name = item:get_name()
         if item_name == "mobs:carrot" or item_name == "default:apple" then
             item:take_item()
-            clicker:set_wielded_item(item)
             self.static.stubbornness = (self.static.stubbornness or math.random(8,20)) - 1
-            if self.static.stubbornness <= 0 and not self.tamed then
+            if self.static.stubbornness <= 0 then
                 self.tamed = true
-                self.animation = {
-                    speed_normal = 15,
-                    stand_start = 90,
-                    stand_end = 130,
-                    walk_start = 135,
-                    walk_end = 175,
-                }
             end
         end
+        clicker:set_wielded_item(item)
+        self.after_activate(self, 0)
     end,
 }, donkey_setting == "disabled")
