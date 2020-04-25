@@ -95,8 +95,9 @@ mobs:register_mob("donkey", {
                 else
                     if item_name == "default:chest_locked" and not next(self.static.bag) then
                         item:take_item()
+                        clicker:set_wielded_item(item)
                         self.static.owner = clicker:get_player_name()
-                        -- TODO give player a "default:chest"
+                        item = ItemStack("default:chest")
                     else
                         -- TODO View Bag Content as inventory
                     end
