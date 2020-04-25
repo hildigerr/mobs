@@ -45,6 +45,9 @@ mobs:register_mob("donkey", {
 
     after_activate = function(self, dtime_s)
         if self.tamed then
+            if self.static.owner then
+                self.object:set_nametag_attributes({text = self.static.owner.."'s donkey"})
+            end
             self.animation = not self.static.bag and
                  {
                     speed_normal = 15,
@@ -72,6 +75,32 @@ mobs:register_mob("donkey", {
             self.static.stubbornness = (self.static.stubbornness or math.random(8,20)) - 1
             if self.static.stubbornness <= 0 then
                 self.tamed = true
+            end
+        end
+        if self.tamed then
+            if self.static.owner then
+                if self.static.owner == clicker:get_player_name() then
+                    -- TODO View Bag Content as Inventory
+                end
+            else
+                if not self.static.bag then
+                    if item_name == "default:chest_locked" then
+                        item:take_item()
+                        self.static.owner = clicker:get_player_name()
+                        self.static.bag = {}
+                    elseif item_name == "default:chest" then
+                        item:take_item()
+                        self.static.bag = {}
+                    end
+                else
+                    if item_name == "default:chest_locked" and not next(self.static.bag) then
+                        item:take_item()
+                        self.static.owner = clicker:get_player_name()
+                        -- TODO give player a "default:chest"
+                    else
+                        -- TODO View Bag Content as inventory
+                    end
+                end
             end
         end
         clicker:set_wielded_item(item)

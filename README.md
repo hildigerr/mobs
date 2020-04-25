@@ -36,7 +36,7 @@ There are also these additional setting options:
 ### Animals ###
  - [x] **Cows** are large beasts that can be milked--until they go dry. They are tasty when killed and cooked. They like grass.
  - [ ] **Chickens**
- - [x] **Donkeys** are large, stubborn beasts that can be tamed [TODO: and used to carry chests]. They like apples and carrots.
+ - [x] **Donkeys** are large, stubborn beasts that can be tamed and used to carry chests [TODO: enable inventory]. They like apples and carrots.
  - [ ] **Pigs** and **Piglets**
  - [x] **Rabbits** are cute little critters that you can pick up. They are tasty when cooked. They like berries and carrots, but are shy and get spooked easy. They can be white, grey, or brown.
  - [x] **Racoons** are cute little beasts. They will take whatever you give them, but only appreciate things that are *eatable*.
@@ -84,6 +84,7 @@ You can purposefully overcook meat and use the result to make dye. Rotten meat c
  - [ ] AI Helper function for mob to maintain distance sans fleeing.
  - [ ] Breeding tamed animals.
  - [ ] Cheeze and eggs!
+ - [ ] Donkeys with burdens become chests on death.
  - [ ] Extinction if overkilled.
  - [ ] Fresh meat: "fresh meat" --> "raw meat" --> "cooked meat" | ("rotten meat" --> "")
  - [ ] Grazing and unprotected garden damage.
