@@ -84,7 +84,7 @@ You can purposefully overcook meat and use the result to make dye. Rotten meat c
  - [ ] AI Helper function for mob to maintain distance sans fleeing.
  - [ ] Breeding tamed animals.
  - [ ] Cheeze and eggs!
- - [ ] Donkeys with burdens become chests on death.
+ - [X] Donkeys with burdens become chests on death.
  - [ ] Extinction if overkilled.
  - [ ] Fresh meat: "fresh meat" --> "raw meat" --> "cooked meat" | ("rotten meat" --> "")
  - [ ] Grazing and unprotected garden damage.
@@ -163,6 +163,9 @@ The mob entity has a a `self.timer` which should be checked to control how often
 
 #### follow( item ) ####
 The mob's optional `follow` callback is used to check if a player is wielding something the mob likes. The input `item` will be the wielded item's name. The function should return `true` if the mob is attracted to the item.
+
+#### on_death( self, hitter ) ####
+Mobs has it's own `on_death` callback, however a mob may supply one of it's own which will be executed first.
 
 #### try_jump( self ) ####
 *You don't need to provide a callback to handle mobs jumping.* However, you may. Or if you simply want to *prevent* a mob from jumping, use something like the following for your mob:

@@ -67,6 +67,13 @@ mobs:register_mob("donkey", {
         end
     end,
 
+    on_death = function(self, hitter)
+        if self.static.bag then
+            local pos = self.object:get_pos()
+            minetest.add_node(pos, {name = "default:chest"})
+        end
+    end,
+
     on_rightclick = function(self, clicker)
         local open_donkey_chest = function(self, clicker)
             minetest.sound_play("default_chest_open", {gain = 0.3,

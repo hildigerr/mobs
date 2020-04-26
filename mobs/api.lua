@@ -432,6 +432,9 @@ function mobs:register_mob(name, def, disabled)
         end,
 
         on_death = function(self, hitter)
+            if def.on_death then
+                def.on_death(self, hitter)
+            end
             if hitter and hitter:is_player() and hitter:get_inventory() then
                 if self.sounds and self.sounds.death then
                     minetest.sound_play(self.sounds.death, {oject = self.object})
