@@ -80,8 +80,7 @@ mobs:register_mob("donkey", {
             if self.static.stubbornness <= 0 then
                 self.tamed = true
             end
-        end
-        if self.tamed then
+        elseif self.tamed then
             if self.static.owner then
                 if self.static.owner == clicker:get_player_name() then
                     open_donkey_chest(self, clicker)
