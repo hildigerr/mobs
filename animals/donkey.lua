@@ -68,6 +68,10 @@ mobs:register_mob("donkey", {
     end,
 
     on_rightclick = function(self, clicker)
+        local open_donkey_chest = function(self, clicker)
+            minetest.sound_play("default_chest_open", {gain = 0.3,
+            pos = self.object:get_pos(), max_hear_distance = 10}, true)
+        end
         local item = clicker:get_wielded_item()
         local item_name = item:get_name()
         if item_name == "mobs:carrot" or item_name == "default:apple" then
@@ -80,7 +84,8 @@ mobs:register_mob("donkey", {
         if self.tamed then
             if self.static.owner then
                 if self.static.owner == clicker:get_player_name() then
-                    -- TODO View Bag Content as Inventory
+                    open_donkey_chest(self, clicker)
+                    return
                 end
             else
                 if not self.static.bag then
@@ -99,7 +104,8 @@ mobs:register_mob("donkey", {
                         self.static.owner = clicker:get_player_name()
                         item = ItemStack("default:chest")
                     else
-                        -- TODO View Bag Content as inventory
+                        open_donkey_chest(self, clicker)
+                        return
                     end
                 end
             end
