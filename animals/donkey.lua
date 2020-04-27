@@ -1,41 +1,43 @@
 local donkey_setting = minetest.settings:get("mobs.donkeys") or "mesh"
 
-minetest.create_detached_inventory("donkey")
-donkey_bags = {
-    inventory = minetest.get_inventory({type="detached", name="donkey"}),
-    listing = {},
-    freelist = {},
-    chars = {48,49,50,51,52,53,54,55,56,57,65,66,67,68,69,70},
-    add = function(bag)
-        local dname = table.remove(donkey_bags.freelist)
-        while not dname or donkey_bags.listing[dname] do
-            dname = "dkbg-"
-            for i = 1, 8 do
-                dname = dname..string.char(donkey_bags.chars[math.random(1,16)])
+if donkey_setting ~= "disabled" then
+    minetest.create_detached_inventory("donkey")
+    donkey_bags = {
+        inventory = minetest.get_inventory({type="detached", name="donkey"}),
+        listing = {},
+        freelist = {},
+        chars = {48,49,50,51,52,53,54,55,56,57,65,66,67,68,69,70},
+        add = function(bag)
+            local dname = table.remove(donkey_bags.freelist)
+            while not dname or donkey_bags.listing[dname] do
+                dname = "dkbg-"
+                for i = 1, 8 do
+                    dname = dname..string.char(donkey_bags.chars[math.random(1,16)])
+                end
+            end
+            mobs:barf("info", "donkey_bag added", "detached", dname)
+            donkey_bags.inventory:set_size(dname, 8*4)
+            local content = {}
+            for i,each in ipairs(bag) do
+                content[i] = ItemStack(each)
+            end
+            donkey_bags.inventory:set_list(dname, content)
+            donkey_bags.listing[dname] = bag
+            return dname
+        end
+    }
+
+    minetest.register_on_player_receive_fields(function(player, formname, fields)
+        local bagID, found = string.gsub(formname, "mobs:", "")
+        if found > 0 then
+            local bag = donkey_bags.inventory:get_list(bagID)
+            local store = donkey_bags.listing[bagID]
+            for each,item in ipairs(bag) do
+                store[each] = item:to_string()
             end
         end
-        mobs:barf("info", "donkey_bag added", "detached", dname)
-        donkey_bags.inventory:set_size(dname, 8*4)
-        local content = {}
-        for i,each in ipairs(bag) do
-            content[i] = ItemStack(each)
-        end
-        donkey_bags.inventory:set_list(dname, content)
-        donkey_bags.listing[dname] = bag
-        return dname
-    end
-}
-
-minetest.register_on_player_receive_fields(function(player, formname, fields)
-    local bagID, found = string.gsub(formname, "mobs:", "")
-    if found > 0 then
-        local bag = donkey_bags.inventory:get_list(bagID)
-        local store = donkey_bags.listing[bagID]
-        for each,item in ipairs(bag) do
-            store[each] = item:to_string()
-        end
-    end
-end)
+    end)
+end
 
 mobs:register_mob("donkey", {
     type = "animal",
@@ -80,7 +82,7 @@ mobs:register_mob("donkey", {
 
     static_default = { bag = nil },
 
-    after_activate = function(self, dtime_s)
+    after_activate = donkey_setting ~= "disabled" and function(self, dtime_s)
         if self.tamed then
             if self.static.owner then
                 self.object:set_nametag_attributes({text = self.static.owner.."'s donkey"})

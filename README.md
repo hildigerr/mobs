@@ -85,6 +85,7 @@ You can purposefully overcook meat and use the result to make dye. Rotten meat c
  - [ ] Breeding tamed animals.
  - [ ] Cheeze and eggs!
  - [X] Donkeys with burdens become chests on death.
+ - [ ] Disabled donkeys become chests.
  - [ ] Extinction if overkilled.
  - [ ] Fresh meat: "fresh meat" --> "raw meat" --> "cooked meat" | ("rotten meat" --> "")
  - [ ] Grazing and unprotected garden damage.
