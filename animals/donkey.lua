@@ -8,20 +8,34 @@ donkey_bags = {
     chars = {48,49,50,51,52,53,54,55,56,57,65,66,67,68,69,70},
     add = function(bag)
         local dname = table.remove(donkey_bags.freelist)
-        mobs:barf("info", "donkey_bags", dname, "pre")
         while not dname or donkey_bags.listing[dname] do
             dname = "dkbg-"
             for i = 1, 8 do
                 dname = dname..string.char(donkey_bags.chars[math.random(1,16)])
             end
         end
-        mobs:barf("info", "donkey_bags", dname, "post")
+        mobs:barf("info", "donkey_bag added", "detached", dname)
         donkey_bags.inventory:set_size(dname, 8*4)
-        -- TODO: set inventory
-        donkey_bags.listing[dname] = true
+        local content = {}
+        for i,each in ipairs(bag) do
+            content[i] = ItemStack(each)
+        end
+        donkey_bags.inventory:set_list(dname, content)
+        donkey_bags.listing[dname] = bag
         return dname
     end
 }
+
+minetest.register_on_player_receive_fields(function(player, formname, fields)
+    local bagID, found = string.gsub(formname, "mobs:", "")
+    if found > 0 then
+        local bag = donkey_bags.inventory:get_list(bagID)
+        local store = donkey_bags.listing[bagID]
+        for each,item in ipairs(bag) do
+            store[each] = item:to_string()
+        end
+    end
+end)
 
 mobs:register_mob("donkey", {
     type = "animal",
@@ -67,7 +81,6 @@ mobs:register_mob("donkey", {
     static_default = { bag = nil },
 
     after_activate = function(self, dtime_s)
-        mobs:barf("info", "donkey activate", self.static.bagID, tostring(self.static.stubbornness))
         if self.tamed then
             if self.static.owner then
                 self.object:set_nametag_attributes({text = self.static.owner.."'s donkey"})
@@ -100,7 +113,12 @@ mobs:register_mob("donkey", {
         if self.static.bag then
             local pos = self.object:get_pos()
             minetest.add_node(pos, {name = "default:chest"})
-            --TODO: move inventory from donkey to chest
+            local content = {}
+            for i,each in ipairs(self.static.bag) do
+                content[i] = ItemStack(each)
+            end
+            local inventory = minetest.get_inventory({type="node", pos=pos})
+            inventory:set_list("main", content)
             table.insert(donkey_bags.freelist, self.static.bagID)
             donkey_bags.listing[self.static.bagID] = false
         end
@@ -111,7 +129,7 @@ mobs:register_mob("donkey", {
             minetest.sound_play("default_chest_open", {gain = 0.3,
             pos = self.object:get_pos(), max_hear_distance = 10}, true)
             minetest.after(0.2, minetest.show_formspec, clicker:get_player_name(),
-                "mobs:donkey_bag", 
+                "mobs:"..self.static.bagID, 
                 "size[8,9;]" ..
                 "list[detached:donkey;"..self.static.bagID..";0,0;8,4;]" ..
                 "list[current_player;main;0,5;8,4;]"
