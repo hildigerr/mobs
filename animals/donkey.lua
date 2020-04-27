@@ -160,7 +160,7 @@ mobs:register_mob("donkey", {
                         self.static.bag = {}
                     end
                 else
-                    if item_name == "default:chest_locked" and not next(self.static.bag) then
+                    if item_name == "default:chest_locked" and donkey_bags.inventory:is_empty(self.static.bagID) then
                         item:take_item()
                         clicker:set_wielded_item(item)
                         self.static.owner = clicker:get_player_name()
