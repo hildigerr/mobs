@@ -1,17 +1,15 @@
-
+local swan_setting = minetest.settings:get("mobs.swans") or "disabled"
 
 -- <AspireMint> swan: 1-80 doing nothing ..(not finished)
 
-mobs:register_mob("mobs:swan", {
+mobs:register_mob("swan", {
     type = "animal",
 
-    hp_max = 2,
-    armor = 200,
+    hp_max = 12,
+    armor = {crumbly = 50, cracky = 50, choppy = 100, fleshy = 100},
     walk_velocity = 1,
 
-    water_damage = 0,
-    lava_damage = 1,
-    light_damage = 0,
+    damage = {fall = 0, water = 0, lava = 1, light = 0},
 
     visual = "mesh",
     drawtype = "front",
@@ -30,4 +28,4 @@ mobs:register_mob("mobs:swan", {
     makes_footstep_sound = false,
 
     drops = {},
-})
+}, donkey_setting == "disabled")
