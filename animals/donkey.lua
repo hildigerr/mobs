@@ -1,5 +1,28 @@
 local donkey_setting = minetest.settings:get("mobs.donkeys") or "mesh"
 
+minetest.create_detached_inventory("donkey")
+donkey_bags = {
+    inventory = minetest.get_inventory({type="detached", name="donkey"}),
+    listing = {},
+    freelist = {},
+    chars = {48,49,50,51,52,53,54,55,56,57,65,66,67,68,69,70},
+    add = function(bag)
+        local dname = table.remove(donkey_bags.freelist)
+        mobs:barf("info", "donkey_bags", dname, "pre")
+        while not dname or donkey_bags.listing[dname] do
+            dname = "dkbg-"
+            for i = 1, 8 do
+                dname = dname..string.char(donkey_bags.chars[math.random(1,16)])
+            end
+        end
+        mobs:barf("info", "donkey_bags", dname, "post")
+        donkey_bags.inventory:set_size(dname, 8*4)
+        -- TODO: set inventory
+        donkey_bags.listing[dname] = true
+        return dname
+    end
+}
+
 mobs:register_mob("donkey", {
     type = "animal",
 
@@ -44,9 +67,15 @@ mobs:register_mob("donkey", {
     static_default = { bag = nil },
 
     after_activate = function(self, dtime_s)
+        mobs:barf("info", "donkey activate", self.static.bagID, tostring(self.static.stubbornness))
         if self.tamed then
             if self.static.owner then
                 self.object:set_nametag_attributes({text = self.static.owner.."'s donkey"})
+            end
+            if self.static.bag then
+                if not self.static.bagID or not donkey_bags.listing[self.static.bagID] then
+                    self.static.bagID = donkey_bags.add(self.static.bag)
+                end
             end
             self.animation = not self.static.bag and
                  {
@@ -71,6 +100,9 @@ mobs:register_mob("donkey", {
         if self.static.bag then
             local pos = self.object:get_pos()
             minetest.add_node(pos, {name = "default:chest"})
+            --TODO: move inventory from donkey to chest
+            table.insert(donkey_bags.freelist, self.static.bagID)
+            donkey_bags.listing[self.static.bagID] = false
         end
     end,
 
@@ -78,6 +110,12 @@ mobs:register_mob("donkey", {
         local open_donkey_chest = function(self, clicker)
             minetest.sound_play("default_chest_open", {gain = 0.3,
             pos = self.object:get_pos(), max_hear_distance = 10}, true)
+            minetest.after(0.2, minetest.show_formspec, clicker:get_player_name(),
+                "mobs:donkey_bag", 
+                "size[8,9;]" ..
+                "list[detached:donkey;"..self.static.bagID..";0,0;8,4;]" ..
+                "list[current_player;main;0,5;8,4;]"
+            )
         end
         local item = clicker:get_wielded_item()
         local item_name = item:get_name()
