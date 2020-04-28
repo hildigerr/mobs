@@ -67,6 +67,9 @@ mobs.sheep (Sheep) enum  mesh mesh,sprite,disabled
 #   Swans can be drawn with a 3D mesh or be disabled.
 mobs.swans (Swans) enum mesh mesh,disabled
 
+#   Turtles can be drawn with a 3D mesh or be disabled.
+mobs.turtles (Turtles) enum disabled mesh,disabled
+
 [monsters]
 
 #	Dirt monsters can be drawn with a 3D mesh, a 2D sprite, or be disabled.
