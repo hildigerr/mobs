@@ -42,7 +42,7 @@ There are also these additional setting options:
  - [x] **Racoons** are cute little beasts. They will take whatever you give them, but only appreciate things that are *eatable*.
  - [x] **Rats** are cute little critters that you can pick up. They are tasty when cooked.
  - [x] **Sheep** produce wool--when well fed--that can be harvested. They are tasty when killed and cooked. They like wheat.
- - [ ] **Swans**
+ - [x] **Swans** are birds that float around on water.
 
 ### Monsters ###
  - [x] Dirt Monster
@@ -88,6 +88,7 @@ You can purposefully overcook meat and use the result to make dye. Rotten meat c
  - [X] Donkeys with burdens become chests on death.
  - [ ] Disabled donkeys become chests.
  - [ ] Extinction if overkilled.
+ - [ ] Flying
  - [ ] Fresh meat: "fresh meat" --> "raw meat" --> "cooked meat" | ("rotten meat" --> "")
  - [ ] Grazing and unprotected garden damage.
  - [ ] Knockback

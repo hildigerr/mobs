@@ -65,7 +65,7 @@ mobs.rats (Rats) enum  mesh mesh,sprite,disabled
 mobs.sheep (Sheep) enum  mesh mesh,sprite,disabled
 
 #   Swans can be drawn with a 3D mesh or be disabled.
-mobs.swans (Swans) enum disabled mesh,disabled
+mobs.swans (Swans) enum mesh mesh,disabled
 
 [monsters]
 

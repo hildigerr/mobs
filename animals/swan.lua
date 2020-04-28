@@ -1,4 +1,4 @@
-local swan_setting = minetest.settings:get("mobs.swans") or "disabled"
+local swan_setting = minetest.settings:get("mobs.swans") or "mesh"
 
 -- <AspireMint> swan: 1-80 doing nothing ..(not finished)
 
@@ -9,6 +9,13 @@ mobs:register_mob("swan", {
     hp_max = 12,
     armor = {crumbly = 50, cracky = 50, choppy = 100, fleshy = 100},
     walk_velocity = 1,
+
+    spawning_nodes = {"default:water_source"},
+    max_spawn_light = 20,
+    min_spawn_light = -1,
+    spawn_chance = 8000,
+    max_spawn_count = 1,
+    max_spawn_height = 31000,
 
     damage = {fall = 0, water = 0, lava = 1, light = 0},
 
