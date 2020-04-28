@@ -4,6 +4,7 @@ local swan_setting = minetest.settings:get("mobs.swans") or "disabled"
 
 mobs:register_mob("swan", {
     type = "animal",
+    floats = true,
 
     hp_max = 12,
     armor = {crumbly = 50, cracky = 50, choppy = 100, fleshy = 100},

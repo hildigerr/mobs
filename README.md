@@ -105,6 +105,7 @@ The`def` parameter is a table with all the defining attributes of the mob. For t
 ### Mob Attributes ###
 
  - **type** = "animal" or "monster",
+ - **floats** = true if the mob floats on water,
  - **armor** = the armor group table for percentages of damage caused by:
    - **crumbly** = shovels,
    - **cracky** = pickaxes,

@@ -6,6 +6,7 @@ function mobs:register_mob(name, def, disabled)
         physical = true,
         state = "stand",
         tamed = false,
+        floats = def.floats,
 
         hp_max = def.hp_max,
         armor = def.armor,
@@ -163,8 +164,14 @@ function mobs:register_mob(name, def, disabled)
                 local x = math.sin(yaw) * -2
                 local z = math.cos(yaw) * 2
                 self.object:set_acceleration({x=x, y=-10, z=z})
+                if self.floats and minetest.get_item_group(n.name, "water") ~= 0 then
+                    self.object:set_acceleration({x=x, y=0, z=z})
+                end
             else
                 self.object:set_acceleration({x=0, y=-10, z=0})
+                if self.floats and minetest.get_item_group(n.name, "water") ~= 0 then
+                    self.object:set_acceleration({x=0, y=10, z=0})
+                end
             end
 
             if self.damage.fall ~= 0 and self.object:get_velocity().y == 0 then
