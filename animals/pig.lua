@@ -1,20 +1,19 @@
+local pig_setting = minetest.settings:get("mobs.pigs") or "mesh"
 
-mobs:register_mob("mobs:pig", {
+mobs:register_mob("pig", {
     type = "animal",
 
-    hp_max = 5,
-    armor = 200,
+    hp_max = 15,
+    armor = {crumbly = 25, cracky = 25, choppy = 80, fleshy = 90},
     view_range = 5,
     walk_velocity = 1,
 
-    water_damage = 1,
-    lava_damage = 5,
-    light_damage = 0,
+    damage = {fall = 2, water = 5, lava = 8, light = 0},
 
     visual = "mesh",
     drawtype = "front",
     mesh = "mobs_pig.x",
-    textures = {"mobs_pig.png"},
+    textures = {"mobs_pig_mesh.png"},
     collisionbox = {-0.4, -0.01, -0.4, 0.4, 1, 0.4},
     animation = {
         speed_normal = 15,
@@ -38,4 +37,4 @@ mobs:register_mob("mobs:pig", {
         },
     },
 
-})
+}, pig_setting == "disabled")

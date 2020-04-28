@@ -52,6 +52,9 @@ mobs.cows (Cows) enum sprite sprite,disabled
 #   Donkeys can be drawn with a 3D mesh or be disabled.
 mobs.donkeys (Donkeys) enum mesh mesh,disabled
 
+#   Pigs can be drawn with a 3D mesh or be disabled.
+mobs.pigs (Pigs) enum disabled mesh,disabled
+
 #   Rabbits can be drawn with a 3D mesh, a 2D sprite, or be disabled.
 mobs.rabbits (Rabbits) enum  mesh mesh,sprite,disabled
 
